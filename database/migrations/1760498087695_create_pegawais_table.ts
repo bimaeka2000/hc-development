@@ -13,16 +13,12 @@ export default class extends BaseSchema {
       table.enu('jenis_kelamin', ['Laki-laki', 'Perempuan']).nullable()
       table.string('tempat_lahir', 100).nullable()
       table.date('tanggal_lahir').nullable()
-      table.integer('agama_id').unsigned().nullable()
-      table.integer('suku_id').unsigned().nullable()
       table.text('alamat').nullable()
       table.string('no_hp', 20).nullable()
       table.string('no_hp_darurat', 20).nullable()
       table.string('email_pribadi', 100).nullable()
       table.string('email_kantor', 100).nullable()
       table.enu('status_perkawinan', ['Lajang', 'Menikah', 'Cerai', 'Duda/Janda']).nullable()
-      table.integer('status_kepegawaian_id').unsigned().nullable()
-      table.integer('unit_kerja_id').unsigned().nullable()
       table.integer('nomor_urut').nullable()
       table.string('foto', 255).nullable()
       table.enu('status', ['aktif', 'nonaktif']).defaultTo('aktif')
@@ -32,7 +28,48 @@ export default class extends BaseSchema {
       table
         .timestamp('updated_at', { useTz: true })
         .defaultTo(this.now())
-      table.integer('role_id').unsigned().nullable().defaultTo(1)
+
+      // Foreign keys
+      table
+        .integer('agama_id')
+        .unsigned()
+        .references('id')
+        .inTable('agama')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+
+      table
+        .integer('suku_id')
+        .unsigned()
+        .references('id')
+        .inTable('suku')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+
+      table
+        .integer('status_kepegawaian_id')
+        .unsigned()
+        .references('id')
+        .inTable('status_kepegawaian')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+
+      table
+        .integer('unit_kerja_id')
+        .unsigned()
+        .references('id')
+        .inTable('unit_kerja')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+
+      table
+        .integer('role_id')
+        .unsigned()
+        .defaultTo(1)
+        .references('id')
+        .inTable('role')
+        .onDelete('SET NULL')
+        .onUpdate('CASCADE')
 
     })
   }
