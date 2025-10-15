@@ -1,0 +1,59 @@
+<nav id="sidebar" class="sidebar bg-dark text-white">
+    <div class="d-flex align-items-center p-3 border-bottom border-secondary">
+        <i class="bi bi-grid-1x2-fill fs-4 me-2 text-primary"></i>
+        <span class="fw-semibold fs-5">Sistem HC</span>
+        <button class="btn btn-sm btn-outline-light ms-auto d-lg-none" id="btnCloseSidebar"><i
+                class="bi bi-x-lg"></i></button>
+    </div>
+    {{-- #TODO Buat Logic ketika ganti route class active sesuai dengan route --}}
+    <div class="px-3 pt-3">
+        <div class="small text-uppercase opacity-75 mb-2">Navigasi Utama</div>
+        <ul class="nav nav-pills flex-column gap-1">
+            <li class="nav-item"><a class="nav-link text-white d-flex align-items-center active"
+                    href="{{route('/')}}"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
+            <li><a class="nav-link text-white d-flex align-items-center" href="#"><i class="bi bi-people me-2"></i>
+                    Users</a></li>
+            <li><a class="nav-link text-white d-flex align-items-center" href="{{route('/halaman/pegawai')}}"><i
+                        class="bi bi-person-vcard me-2"></i> Pegawai</a></li>
+            <li><a class="nav-link text-white d-flex align-items-center" href="#"><i
+                        class="bi bi-journal-bookmark me-2"></i> Penelitian</a></li>
+            <li><a class="nav-link text-white d-flex align-items-center" href="#"><i
+                        class="bi bi-hand-thumbs-up me-2"></i> Pengabdian</a></li>
+            <li class="nav-item">
+                <div class="d-flex align-items-center">
+                    <a class="nav-link text-white flex-grow-1 d-flex align-items-center"
+                        href="{{route('/halaman/cuti')}}"><i class="bi bi-calendar-check me-2"></i><span>Cuti</span></a>
+                    <button class="btn btn-sm btn-link text-white p-0 ms-1 nav-caret-btn" data-bs-toggle="collapse"
+                        data-bs-target="#collapse-cuti" aria-expanded="false" aria-controls="collapse-cuti"
+                        title="Tampilkan submenu"><i class="bi bi-chevron-down"></i></button>
+                </div>
+                <ul class="nav flex-column collapse ps-4 mt-1" id="collapse-cuti">
+                    <li><a class="nav-link text-white d-flex align-items-center" href="{{route('/halaman/sakit')}}"><i
+                                class="bi bi-emoji-dizzy me-2"></i> Pengajuan Sakit</a></li>
+                    <li><a class="nav-link text-white d-flex align-items-center" href="{{route('/halaman/izin')}}"><i
+                                class="bi bi-calendar-event me-2"></i> Pengajuan Izin</a></li>
+                </ul>
+            </li>
+        </ul>
+        <hr class="border-secondary">
+        <div class="small text-uppercase opacity-75 mb-2">Pengaturan</div>
+        <ul class="nav nav-pills flex-column gap-1 mb-4">
+            <li><a class="nav-link text-white d-flex align-items-center" href="#"><i class="bi bi-gear me-2"></i>
+                    Sistem</a></li>
+            <li><a class="nav-link text-white d-flex align-items-center" href="#"><i class="bi bi-shield-lock me-2"></i>
+                    Akses</a></li>
+            <li><a class="nav-link text-white d-flex align-items-center" id="logoutSidebar" href="#"><i
+                        class="bi bi-box-arrow-right me-2"></i> Keluar</a></li>
+        </ul>
+    </div>
+    <div class="p-3 border-top border-secondary small">
+        <div class="d-flex align-items-center">
+            <img src="https://ui-avatars.com/api/?name=Admin+HC&background=0D6EFD&color=fff" alt="avatar"
+                class="avatar me-2">
+            <div>
+                <div class="fw-semibold">Admin HC</div>
+                <div class="small opacity-75">admin@sistemhc.ac.id</div>
+            </div>
+        </div>
+    </div>
+</nav>

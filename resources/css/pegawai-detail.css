@@ -1,0 +1,11 @@
+/* Per-page styles for pegawai-detail.html */
+/* Avatar column aligns top in the new 3-column layout */
+.avatar-col { max-height: none; margin-top: 0; }
+.avatar-box { min-height: 220px; margin-top: 8px; border: 1px solid black; }
+#detAvatar { font-size: 2.4rem; }
+.alamat-val { max-width: 60%; }
+
+/* Improve spacing for two-column personal data on medium+ screens */
+@media (min-width: 768px) {
+	#bodyPribadi .list-group-item { padding-top: .5rem; padding-bottom: .5rem; }
+}
