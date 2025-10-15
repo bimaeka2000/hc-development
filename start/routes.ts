@@ -22,6 +22,9 @@ router
         router.get('/cuti', [PagesController, 'Cuti'])
         router.get('/sakit', [PagesController, 'Sakit'])
         router.get('/izin', [PagesController, 'Izin'])
+        router.get('/penelitian', [PagesController, 'Penelitian'])
+        router.get('/pengabdian', [PagesController, 'Pengabdian'])
+        router.get('/users', [PagesController, 'Users'])
     })
-    .prefix('halaman')
+    .prefix('dashboard')
 

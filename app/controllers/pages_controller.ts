@@ -7,7 +7,7 @@ export default class PagesController {
     }
 
     async PegawaiDetail({ view }: HttpContext) {
-        return view.render('dashboard/pegawai_detail')
+          return view.render('dashboard/pegawai_detail')
     }
 
     async Cuti({ view }: HttpContext) {
@@ -22,4 +22,15 @@ export default class PagesController {
         return view.render('dashboard/izin')
     }
 
+    async Penelitian({ view }: HttpContext) {
+        return view.render('dashboard/under-construction')
+    }
+
+    async Pengabdian({ view }: HttpContext) {
+        return view.render('dashboard/under-construction')
+    }
+
+    async Users({ view }: HttpContext) {
+        return view.render('dashboard/users')
+    }
 }
