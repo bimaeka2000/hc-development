@@ -220,7 +220,7 @@ html, body { height: 100%; }
 
 /* Cards layout utilities */
 .grid-cards { display:grid; gap:1rem; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); }
-.mini-section-title { font-size:.7rem; text-transform:uppercase; letter-spacing:.75px; font-weight:600; opacity:.7; margin:0 0 .35rem; }
+.mini-section-title { font-size:.75rem; text-transform:uppercase; letter-spacing:.75px; font-weight:700; opacity:.75; margin:0 0 .35rem; color: var(--bs-secondary-color); }
 
 /* Timeline / activity list */
 .activity-list { list-style:none; margin:0; padding:0; }
@@ -240,6 +240,34 @@ html, body { height: 100%; }
 /* Subtle shadow container */
 .panel-soft { border:1px solid var(--bs-border-color); border-radius:.85rem; background:var(--bs-body-bg); padding:1rem; }
 [data-bs-theme='dark'] .panel-soft { background:rgba(255,255,255,.04); }
+
+/* Glassmorphism card styling for bento items */
+.glass-card {
+  border:1px solid var(--bs-border-color);
+  border-radius:.85rem;
+  background: rgba(255,255,255,.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding:1rem;
+}
+[data-bs-theme='dark'] .glass-card {
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.08);
+}
+.glass-card.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(16,24,40,.14), 0 6px 16px rgba(16,24,40,.08);
+}
+
+/* Ensure list items inside glass cards are transparent */
+.glass-card .list-group-item {
+  background-color: transparent !important;
+}
+
+/* Optional gradient accent background per app theme */
+.glass-accent-primary {
+  background: linear-gradient(135deg, rgba(90,178,255,.18), rgba(255,255,255,.65));
+}
 
 /* Search highlight (optional future) */
 .highlight { background:linear-gradient(90deg,rgba(var(--bs-warning-rgb),.5),transparent); }
