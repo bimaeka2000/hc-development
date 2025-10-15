@@ -26,5 +26,5 @@ router
         router.get('/pengabdian', [PagesController, 'Pengabdian'])
         router.get('/users', [PagesController, 'Users'])
     })
-    .prefix('halaman')
+    .prefix('dashboard')
 

@@ -23,11 +23,11 @@ export default class PagesController {
     }
 
     async Penelitian({ view }: HttpContext) {
-        return view.render('dashboard/penelitian')
+        return view.render('dashboard/under-construction')
     }
 
     async Pengabdian({ view }: HttpContext) {
-        return view.render('dashboard/pengabdian')
+        return view.render('dashboard/under-construction')
     }
 
     async Users({ view }: HttpContext) {

@@ -1,0 +1,76 @@
+{{--
+	Reusable Card Component (Edge)
+	Usage: Include this component and pass HTML fragments or structured input props without changing styles.
+
+	Props
+	- cardClass   : string (default: 'card p-3') — applied to the outer wrapper. Keep your original classes.
+		- headerHtml  : string (raw HTML) — rendered at the top of the card.
+		- headerAvatarUrl : string — optional structured header avatar URL.
+		- headerName      : string — optional structured header display name.
+		- headerEmail     : string — optional structured header email text.
+	- divider     : boolean (default: false) — when true, renders a <hr> between header and body.
+	- bodyHtml    : string (raw HTML) — main content area inside the card (takes precedence over fields when provided).
+	- fields      : Array<{ label: string, value: string, type?: string, colClass?: string, labelClass?: string, inputClass?: string }>
+									Renders a Bootstrap grid of labeled inputs using the same styles as profile.html.
+	- rowClass    : string (default: 'row g-3') — wrapper row for fields.
+	- footerHtml  : string (raw HTML) — rendered at the bottom of the card.
+
+	Notes
+	- This component deliberately does NOT alter class names or structure you pass in.
+	- Rendered HTML uses @! to preserve exact markup/styles you provide.
+--}}
+
+@set('cardClass', (typeof cardClass !== 'undefined' && cardClass) ? cardClass : 'card p-3')
+@set('hasHeader', (typeof headerHtml !== 'undefined' && headerHtml))
+@set('hasHeaderProps', (typeof headerAvatarUrl !== 'undefined' || typeof headerName !== 'undefined' || typeof headerEmail !== 'undefined'))
+@set('hasBody', (typeof bodyHtml !== 'undefined' && bodyHtml))
+@set('hasFooter', (typeof footerHtml !== 'undefined' && footerHtml))
+@set('showDivider', (typeof divider !== 'undefined') ? !!divider : false)
+@set('hasFields', (typeof fields !== 'undefined' && fields && fields.length))
+@set('rowClass', (typeof rowClass !== 'undefined' && rowClass) ? rowClass : 'row g-3')
+
+<div class="{{ cardClass }}">
+	@if(hasHeader)
+		@!headerHtml
+	@elseif(hasHeaderProps)
+		<div class="d-flex align-items-center">
+			@if(typeof headerAvatarUrl !== 'undefined' && headerAvatarUrl)
+				<img src="{{ headerAvatarUrl }}" class="rounded-circle me-3" width="64" height="64" alt="avatar">
+			@endif
+			<div>
+				@if(typeof headerName !== 'undefined' && headerName)
+					<div class="fw-semibold">{{ headerName }}</div>
+				@endif
+				@if(typeof headerEmail !== 'undefined' && headerEmail)
+					<div class="text-secondary small">{{ headerEmail }}</div>
+				@endif
+			</div>
+		</div>
+	@endif
+
+	@if(showDivider)
+		<hr>
+	@endif
+
+		@if(hasBody)
+			@!bodyHtml
+		@elseif(hasFields)
+			<div class="{{ rowClass }}">
+				@each(field in fields)
+					@set('colClass', field.colClass ? field.colClass : 'col-md-6')
+					@set('labelClass', field.labelClass ? field.labelClass : 'form-label small')
+					@set('inputClass', field.inputClass ? field.inputClass : 'form-control')
+					@set('type', field.type ? field.type : 'text')
+					<div class="{{ colClass }}">
+						<label class="{{ labelClass }}">{{ field.label }}</label>
+						<input class="{{ inputClass }}" type="{{ type }}" value="{{ field.value }}" />
+					</div>
+				@endeach
+			</div>
+		@endif
+
+	@if(hasFooter)
+		@!footerHtml
+	@endif
+</div>
+
