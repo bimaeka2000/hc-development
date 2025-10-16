@@ -61,15 +61,11 @@
       disabilitas: dataKesehatanFisik.disabilitas ,
       catatanKesehatan: dataKesehatanFisik.catatan_kesehatan
       })
+
   </div>
 
-  <div class="bento-layout mb-2 mt-2">
-    @!component('dashboard/components/riwayat_kesehatan', {
-    jenisPenyakit: riwayatKesehatan.jenis_penyakit ,
-    keterangan: riwayatKesehatan.keterangan_penyakit ,
-    tanggalDiagnosa: riwayatKesehatan.tanggal_diagnosa,
-    statusSembuh: riwayatKesehatan.status_sembuh
-    })
+  {{--  <div class="bento-layout mb-2 mt-2">
+
     @!component('dashboard/components/dokumen', {
     dokumen: (findById.dokumen ),
     jenisDokumen: (findById.jenis_dokumen ),
@@ -77,7 +73,7 @@
     })
 
   </div>
-  {{-- <div class="bento-layout mb-2 mt-2">
+  <div class="bento-layout mb-2 mt-2">
 
     <div class="bento-layout mb-2 mt-2">
       @!component('dashboard/components/pendidikan', {
@@ -159,7 +155,7 @@
       @!component('dashboard/components/catatan', {
       catatan: (findById.catatan)
       })
-    </div> --}}
+    </div>  --}}
 
   </div>
   </main>
