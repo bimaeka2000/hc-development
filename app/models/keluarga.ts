@@ -1,26 +1,25 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class RiwayatKesehatan extends BaseModel {
-  static table = 'riwayat_kesehatan'
-
+export default class Kelurga extends BaseModel {
+  static table = 'keluarga'
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare id_pegawai: number
+  declare pegawai_id: number
 
   @column()
-  declare jenis_penyakit: string
+  declare nama_keluarga: string
 
   @column()
-  declare keterangan: string
+  declare hubungan: string
 
   @column()
-  declare tanggal_diagnosa: Date
+  declare tanggal_lahir: Date
 
   @column()
-  declare status_sembuh: string
+  declare pekerjaan: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

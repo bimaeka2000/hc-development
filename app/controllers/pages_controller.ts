@@ -1,5 +1,12 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Pegawai from '#models/pegawai'
+import Keluarga from '#models/keluarga'
+import Role from '#models/role'
+import UnitKerja from '#models/unit_kerja'
+import StatusKepegawaian from '#models/status_kepegawaian'
+import Dosen from '#models/dosen'
+import DataKesehatanFisik from '#models/data_kesehatan_fisik'
+import RiwayatKesehatan from '#models/riwayat_kesehatan'
 export default class PagesController {
 
     async Pegawai({ view }: HttpContext) {
@@ -8,8 +15,25 @@ export default class PagesController {
 
     async PegawaiDetail({ view }: HttpContext) {
 
-        const findById = await Pegawai.find(2)
-        return view.render('dashboard/pegawai_detail', { findById })
+        const pegawaiData = await Pegawai.find(5)
+        const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
+        const role = await Role.findBy('id', pegawaiData?.role_id)
+        const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
+        const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
+        const statusKepegawaian = await StatusKepegawaian.findBy('id', pegawaiData?.status_kepegawaian_id)
+        const dataKesehatanFisik = await DataKesehatanFisik.findBy('id_pegawai', pegawaiData?.id)
+        const riwayatKesehatan = await RiwayatKesehatan.findBy('id_pegawai', pegawaiData?.id)
+        return view.render('dashboard/pegawai_detail',
+            {
+                pegawaiData,
+                keluarga,
+                role,
+                unitKerja,
+                statusKepegawaian,
+                dosen,
+                dataKesehatanFisik,
+                riwayatKesehatan
+            })
     }
 
     async Cuti({ view }: HttpContext) {

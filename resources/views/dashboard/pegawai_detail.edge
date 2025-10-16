@@ -17,139 +17,149 @@
   <div class="main-wrapper d-flex flex-column min-vh-100">
     @include('components/header')
     <main class="flex-grow-1 p-3 p-lg-4">
-      @!component('dashboard/components/profil_data_pegawai', {
-      nama_lengkap: (findById.nama_lengkap ),
-      npy: (findById.npy ),
-      nik: (findById.nik ),
-      npwp: (findById.npwp ),
-      tempat_lahir: (findById.tempat_lahir ),
-      tanggal_lahir: (findById.tanggal_lahir ),
-      jenis_kelamin: (findById.jenis_kelamin)
+      @!component('dashboard/components/profil_data_pegawai',
+      {
+      nama_lengkap: pegawaiData.nama_lengkap,
+      npy: pegawaiData.npy ,
+      nik: pegawaiData.nik ,
+      npwp: pegawaiData.npwp ,
+      tempat_lahir: pegawaiData.tempat_lahir ,
+      tanggal_lahir: pegawaiData.tanggal_lahir ,
+      jenis_kelamin: pegawaiData.jenis_kelamin,
+      unitKerja : unitKerja.unit_kerja,
+      jabatan : role.nama_role,
+      statusKepegawaian : statusKepegawaian.status_kepegawaian
       })
 
       <div class="bento-layout mb-2 mt-2">
+        @if(pegawaiData.role_id === 5)
+
         @!component('dashboard/components/atribut_akademik', {
-          nidn: (findById.nidn ),
-          nuptk: (findById.nuptk ),
-          programStudi: (findById.program_studi ),
-          fakultas: (findById.fakultas ),
-          jenjang: (findById.jenjang)
+        nidn: dosen.nidn ,
+        nuptk: dosen.nuptk,
+        programStudi: dosen.program_studi,
+        fakultas: dosen.fakultas,
+        jenjang: dosen.jenjang
         })
+        @else
         @!component('dashboard/components/atribut_lain', {
-          jabatanPegawaiLain: (findById.jabatan_pegawai_lain)
+        jabatanPegawaiLain: unitKerja.unit_kerja
         })
+        @endif
+      </div>
 
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/keluarga', {
-          namaKeluarga: (findById.nama_keluarga ),
-          hubunganKeluarga: (findById.hubungan_keluarga)
-        })
-        @!component('dashboard/components/kesehatan_fisik', {
-          tinggi: (findById.tinggi ),
-          berat: (findById.berat ),
-          golonganDarah: (findById.golongan_darah ),
-          tekananDarah: (findById.tekanan_darah ),
-          alergi: (findById.alergi ),
-          disabilitas: (findById.disabilitas ),
-          catatanKesehatan: (findById.catatan_kesehatan)
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/riwayat_kesehatan', {
-          jenisPenyakit: (findById.jenis_penyakit ),
-          keterangan: (findById.keterangan_penyakit ),
-          tanggalDiagnosa: (findById.tanggal_diagnosa ),
-          statusSembuh: (findById.status_sembuh)
-        })
-        @!component('dashboard/components/dokumen', {
-          dokumen: (findById.dokumen ),
-          jenisDokumen: (findById.jenis_dokumen ),
-          statusDokumen: (findById.status_dokumen)
-        })
+      @!component('dashboard/components/keluarga', {
+      namaKeluarga: keluarga.nama_keluarga ,
+      hubunganKeluarga: keluarga.hubungan
+      })
+      @!component('dashboard/components/kesehatan_fisik', {
+      tinggi: dataKesehatanFisik.tinggi_cm ,
+      berat: dataKesehatanFisik.berat_kg ,
+      golonganDarah: dataKesehatanFisik.golongan_darah ,
+      tekananDarah: dataKesehatanFisik.tekanan_darah ,
+      alergi: dataKesehatanFisik.alergi ,
+      disabilitas: dataKesehatanFisik.disabilitas ,
+      catatanKesehatan: dataKesehatanFisik.catatan_kesehatan
+      })
+  </div>
 
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/pendidikan', {
-          jenjangPendidikan: (findById.jenjang_pendidikan ),
-          namaUniversitas: (findById.nama_universitas ),
-          tahunLulus: (findById.tahun_lulus)
-        })
-        @!component('dashboard/components/aktivitas', {
-          aktivitas: (findById.aktivitas ),
-          tanggalAktifitas: (findById.tanggal_aktivitas)
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/kuota_cuti', {
-          jenisCuti: (findById.jenis_cuti ),
-          jumlahCuti: (findById.jumlah_cuti)
-        })
-        @!component('dashboard/components/riwayat_cuti', {
-          jenisCuti: (findById.jenis_cuti ),
-          keteranganCuti: (findById.keterangan_cuti ),
-          durasiCuti: (findById.durasi_cuti)
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/pengajuan_cuti', {
-          jenisCuti: (findById.jenis_cuti ),
-          filePengajuan: (findById.file_pengajuan ),
-          tanggalPengajuan: (findById.tanggal_pengajuan)
-        })
-        @!component('dashboard/components/pengajuan_izin', {
-          jenisIzin: (findById.jenis_izin ),
-          filePengajuan: (findById.file_pengajuan ),
-          tanggalPengajuan: (findById.tanggal_pengajuan)
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/riwayat_gaji', {
-          periodeGaji: (findById.periode_gaji ),
-          jumlahGaji: (findById.jumlah_gaji)
-        })
-        @!component('dashboard/components/riwayat_kepangkatan', {
-          golonganRuangJabatan: (findById.golongan_ruang_jabatan ),
-          tmt: (findById.tmt)
-        })
+  <div class="bento-layout mb-2 mt-2">
+    @!component('dashboard/components/riwayat_kesehatan', {
+    jenisPenyakit: riwayatKesehatan.jenis_penyakit ,
+    keterangan: riwayatKesehatan.keterangan_penyakit ,
+    tanggalDiagnosa: riwayatKesehatan.tanggal_diagnosa,
+    statusSembuh: riwayatKesehatan.status_sembuh
+    })
+    @!component('dashboard/components/dokumen', {
+    dokumen: (findById.dokumen ),
+    jenisDokumen: (findById.jenis_dokumen ),
+    statusDokumen: (findById.status_dokumen)
+    })
 
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/pelatihan', {
-          pelatihan: (findById.pelatihan ),
-          tahunPelatihan: (findById.tahun_pelatihan)
-        })
-        @!component('dashboard/components/penghargaan', {
-          penghargaan: (findById.penghargaan ),
-          tahunPenghargaan: (findById.tahun_penghargaan)
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/penelitian', {
-          judulPenelitian: (findById.judul_penelitian ),
-          tahunPenelitian: (findById.tahun_penelitian)
-        })
-        @!component('dashboard/components/pengabdian', {
-          judulPengabdian: (findById.judul_pengabdian ),
-          tahunPengabdian: (findById.tahun_pengabdian)
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/publikasi', {
-          judulPublikasi: (findById.judul_publikasi ),
-          tahunPublikasi: (findById.tahun_publikasi)
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/ringkasan', {
-          jabatan: (findById.jabatan ),
-          unitKerja: (findById.unit_kerja_id ),
-          statusKepegawaian: (findById.status_kepegawaian)
-        })
-        @!component('dashboard/components/catatan', {
-          catatan: (findById.catatan)
-        })
-      </div>
+  </div>
+  {{-- <div class="bento-layout mb-2 mt-2">
+
+    <div class="bento-layout mb-2 mt-2">
+      @!component('dashboard/components/pendidikan', {
+      jenjangPendidikan: (findById.jenjang_pendidikan ),
+      namaUniversitas: (findById.nama_universitas ),
+      tahunLulus: (findById.tahun_lulus)
+      })
+      @!component('dashboard/components/aktivitas', {
+      aktivitas: (findById.aktivitas ),
+      tanggalAktifitas: (findById.tanggal_aktivitas)
+      })
+    </div>
+    <div class="bento-layout mb-2 mt-2">
+      @!component('dashboard/components/kuota_cuti', {
+      jenisCuti: (findById.jenis_cuti ),
+      jumlahCuti: (findById.jumlah_cuti)
+      })
+      @!component('dashboard/components/riwayat_cuti', {
+      jenisCuti: (findById.jenis_cuti ),
+      keteranganCuti: (findById.keterangan_cuti ),
+      durasiCuti: (findById.durasi_cuti)
+      })
+    </div>
+    <div class="bento-layout mb-2 mt-2">
+      @!component('dashboard/components/pengajuan_cuti', {
+      jenisCuti: (findById.jenis_cuti ),
+      filePengajuan: (findById.file_pengajuan ),
+      tanggalPengajuan: (findById.tanggal_pengajuan)
+      })
+      @!component('dashboard/components/pengajuan_izin', {
+      jenisIzin: (findById.jenis_izin ),
+      filePengajuan: (findById.file_pengajuan ),
+      tanggalPengajuan: (findById.tanggal_pengajuan)
+      })
+    </div>
+    <div class="bento-layout mb-2 mt-2">
+      @!component('dashboard/components/riwayat_gaji', {
+      periodeGaji: (findById.periode_gaji ),
+      jumlahGaji: (findById.jumlah_gaji)
+      })
+      @!component('dashboard/components/riwayat_kepangkatan', {
+      golonganRuangJabatan: (findById.golongan_ruang_jabatan ),
+      tmt: (findById.tmt)
+      })
+
+    </div>
+    <div class="bento-layout mb-2 mt-2">
+      @!component('dashboard/components/pelatihan', {
+      pelatihan: (findById.pelatihan ),
+      tahunPelatihan: (findById.tahun_pelatihan)
+      })
+      @!component('dashboard/components/penghargaan', {
+      penghargaan: (findById.penghargaan ),
+      tahunPenghargaan: (findById.tahun_penghargaan)
+      })
+    </div>
+    <div class="bento-layout mb-2 mt-2">
+      @!component('dashboard/components/penelitian', {
+      judulPenelitian: (findById.judul_penelitian ),
+      tahunPenelitian: (findById.tahun_penelitian)
+      })
+      @!component('dashboard/components/pengabdian', {
+      judulPengabdian: (findById.judul_pengabdian ),
+      tahunPengabdian: (findById.tahun_pengabdian)
+      })
+    </div>
+    <div class="bento-layout mb-2 mt-2">
+      @!component('dashboard/components/publikasi', {
+      judulPublikasi: (findById.judul_publikasi ),
+      tahunPublikasi: (findById.tahun_publikasi)
+      })
+    </div>
+    <div class="bento-layout mb-2 mt-2">
+      @!component('dashboard/components/ringkasan', {
+      jabatan: (findById.jabatan ),
+      unitKerja: (findById.unit_kerja_id ),
+      statusKepegawaian: (findById.status_kepegawaian)
+      })
+      @!component('dashboard/components/catatan', {
+      catatan: (findById.catatan)
+      })
+    </div> --}}
 
   </div>
   </main>
