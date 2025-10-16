@@ -17,63 +17,140 @@
   <div class="main-wrapper d-flex flex-column min-vh-100">
     @include('components/header')
     <main class="flex-grow-1 p-3 p-lg-4">
-      {{-- @include('dashboard/components/profil_data_pegawai') --}}
       @!component('dashboard/components/profil_data_pegawai', {
-      nama_lengkap: findById.nama_lengkap,
-      npy: findById.npy,
-      nik: findById.nik,
-      npwp: findById.npwp,
-      tempat_lahir: findById.tempat_lahir,
-      tanggal_lahir: findById.tanggal_lahir,
-      jenis_kelamin: findById.jenis_kelamin
+      nama_lengkap: (findById.nama_lengkap ),
+      npy: (findById.npy ),
+      nik: (findById.nik ),
+      npwp: (findById.npwp ),
+      tempat_lahir: (findById.tempat_lahir ),
+      tanggal_lahir: (findById.tanggal_lahir ),
+      jenis_kelamin: (findById.jenis_kelamin)
       })
 
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/atribut_akademik')
-        @include('dashboard/components/atribut_lain')
+        @!component('dashboard/components/atribut_akademik', {
+          nidn: (findById.nidn ),
+          nuptk: (findById.nuptk ),
+          programStudi: (findById.program_studi ),
+          fakultas: (findById.fakultas ),
+          jenjang: (findById.jenjang)
+        })
+        @!component('dashboard/components/atribut_lain', {
+          jabatanPegawaiLain: (findById.jabatan_pegawai_lain)
+        })
 
       </div>
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/keluarga')
-        @include('dashboard/components/kesehatan_fisik')
+        @!component('dashboard/components/keluarga', {
+          namaKeluarga: (findById.nama_keluarga ),
+          hubunganKeluarga: (findById.hubungan_keluarga)
+        })
+        @!component('dashboard/components/kesehatan_fisik', {
+          tinggi: (findById.tinggi ),
+          berat: (findById.berat ),
+          golonganDarah: (findById.golongan_darah ),
+          tekananDarah: (findById.tekanan_darah ),
+          alergi: (findById.alergi ),
+          disabilitas: (findById.disabilitas ),
+          catatanKesehatan: (findById.catatan_kesehatan)
+        })
       </div>
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/riwayat_kesehatan')
-        @include('dashboard/components/dokumen')
+        @!component('dashboard/components/riwayat_kesehatan', {
+          jenisPenyakit: (findById.jenis_penyakit ),
+          keterangan: (findById.keterangan_penyakit ),
+          tanggalDiagnosa: (findById.tanggal_diagnosa ),
+          statusSembuh: (findById.status_sembuh)
+        })
+        @!component('dashboard/components/dokumen', {
+          dokumen: (findById.dokumen ),
+          jenisDokumen: (findById.jenis_dokumen ),
+          statusDokumen: (findById.status_dokumen)
+        })
 
       </div>
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/pendidikan')
-        @include('dashboard/components/aktivitas')
+        @!component('dashboard/components/pendidikan', {
+          jenjangPendidikan: (findById.jenjang_pendidikan ),
+          namaUniversitas: (findById.nama_universitas ),
+          tahunLulus: (findById.tahun_lulus)
+        })
+        @!component('dashboard/components/aktivitas', {
+          aktivitas: (findById.aktivitas ),
+          tanggalAktifitas: (findById.tanggal_aktivitas)
+        })
       </div>
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/kuota_cuti')
-        @include('dashboard/components/riwayat_cuti')
+        @!component('dashboard/components/kuota_cuti', {
+          jenisCuti: (findById.jenis_cuti ),
+          jumlahCuti: (findById.jumlah_cuti)
+        })
+        @!component('dashboard/components/riwayat_cuti', {
+          jenisCuti: (findById.jenis_cuti ),
+          keteranganCuti: (findById.keterangan_cuti ),
+          durasiCuti: (findById.durasi_cuti)
+        })
       </div>
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/pengajuan_cuti')
-        @include('dashboard/components/pengajuan_izin')
+        @!component('dashboard/components/pengajuan_cuti', {
+          jenisCuti: (findById.jenis_cuti ),
+          filePengajuan: (findById.file_pengajuan ),
+          tanggalPengajuan: (findById.tanggal_pengajuan)
+        })
+        @!component('dashboard/components/pengajuan_izin', {
+          jenisIzin: (findById.jenis_izin ),
+          filePengajuan: (findById.file_pengajuan ),
+          tanggalPengajuan: (findById.tanggal_pengajuan)
+        })
       </div>
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/riwayat_gaji')
-        @include('dashboard/components/riwayat_kepangkatan')
+        @!component('dashboard/components/riwayat_gaji', {
+          periodeGaji: (findById.periode_gaji ),
+          jumlahGaji: (findById.jumlah_gaji)
+        })
+        @!component('dashboard/components/riwayat_kepangkatan', {
+          golonganRuangJabatan: (findById.golongan_ruang_jabatan ),
+          tmt: (findById.tmt)
+        })
 
       </div>
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/pelatihan')
-        @include('dashboard/components/penghargaan')
+        @!component('dashboard/components/pelatihan', {
+          pelatihan: (findById.pelatihan ),
+          tahunPelatihan: (findById.tahun_pelatihan)
+        })
+        @!component('dashboard/components/penghargaan', {
+          penghargaan: (findById.penghargaan ),
+          tahunPenghargaan: (findById.tahun_penghargaan)
+        })
       </div>
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/penelitian')
-        @include('dashboard/components/pengabdian')
+        @!component('dashboard/components/penelitian', {
+          judulPenelitian: (findById.judul_penelitian ),
+          tahunPenelitian: (findById.tahun_penelitian)
+        })
+        @!component('dashboard/components/pengabdian', {
+          judulPengabdian: (findById.judul_pengabdian ),
+          tahunPengabdian: (findById.tahun_pengabdian)
+        })
       </div>
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/publikasi')
+        @!component('dashboard/components/publikasi', {
+          judulPublikasi: (findById.judul_publikasi ),
+          tahunPublikasi: (findById.tahun_publikasi)
+        })
       </div>
       <div class="bento-layout mb-2 mt-2">
-        @include('dashboard/components/ringkasan')
-        @include('dashboard/components/catatan')
+        @!component('dashboard/components/ringkasan', {
+          jabatan: (findById.jabatan ),
+          unitKerja: (findById.unit_kerja ),
+          statusKepegawaian: (findById.status_kepegawaian)
+        })
+        @!component('dashboard/components/catatan', {
+          catatan: (findById.catatan)
+        })
       </div>
+
   </div>
   </main>
   @include('components/footer')

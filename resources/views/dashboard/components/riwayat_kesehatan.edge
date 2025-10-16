@@ -7,17 +7,10 @@
   <ul class="list-group list-group-flush small">
     <li class="list-group-item d-flex flex-column">
       <div class="fw-semibold d-flex align-items-center">
-        <i class="bi bi-activity me-2 text-primary"></i><span id="jenisPenyakit">[Jenis Penyakit]</span>
+        <i class="bi bi-activity me-2 text-primary"></i><span>{{ jenisPenyakit }}</span>
       </div>
-      <div class="text-secondary" id="keterangan">[Keterangan]</div>
-      <div class="activity-meta" id="tanggalDiagnosa">[Tanggal Diagnosa] • [Status Sembuh]</div>
-    </li>
-    <li class="list-group-item d-flex flex-column">
-      <div class="fw-semibold d-flex align-items-center">
-        <i class="bi bi-activity me-2 text-primary"></i><span id="jenisPenyakit">[Jenis Penyakit]</span>
-      </div>
-      <div class="text-secondary" id="keterangan">[Keterangan]</div>
-      <div class="activity-meta" id="tanggalDiagnosa">[Tanggal Diagnosa] • [Status Sembuh]</div>
+      <div class="text-secondary">{{ keterangan }}</div>
+      <div class="activity-meta">{{ tanggalDiagnosa }} • {{ statusSembuh }}</div>
     </li>
 
   </ul>

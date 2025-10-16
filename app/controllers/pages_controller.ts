@@ -8,7 +8,7 @@ export default class PagesController {
 
     async PegawaiDetail({ view }: HttpContext) {
 
-        const findById = await Pegawai.find(5)
+        const findById = await Pegawai.find(2)
         return view.render('dashboard/pegawai_detail', { findById })
     }
 
