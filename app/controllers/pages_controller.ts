@@ -15,7 +15,7 @@ export default class PagesController {
 
     async PegawaiDetail({ view }: HttpContext) {
 
-        const pegawaiData = await Pegawai.find(5)
+        const pegawaiData = await Pegawai.find(2)
         const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
         const role = await Role.findBy('id', pegawaiData?.role_id)
         const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
@@ -59,4 +59,27 @@ export default class PagesController {
     async Users({ view }: HttpContext) {
         return view.render('dashboard/users')
     }
+
+    async EditPage({ view, params, request }: HttpContext) {
+        const page = params.page || ''
+        if (!/^[a-z0-9_-]+$/i.test(page)) {
+            return view.render('dashboard/under-construction')
+        }
+
+        // If ?id= is provided, try to load the pegawai name for breadcrumb
+        const id = request.input('id')
+        let nama_lengkap = null
+        if (id) {
+            try {
+                const p = await Pegawai.find(id)
+                nama_lengkap = p?.nama_lengkap || null
+            } catch (e) {
+                // ignore
+            }
+        }
+
+        return view.render(`dashboard/edit/${page}`, { nama_lengkap })
+    }
 }
+
+
