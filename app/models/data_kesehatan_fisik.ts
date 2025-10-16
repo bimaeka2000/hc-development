@@ -20,6 +20,8 @@ export default class DataKesehatanFisik extends BaseModel {
   declare golongan_darah: string
 
   @column()
+  declare alergi: string
+  @column()
   declare tekanan_darah: string
 
   @column()

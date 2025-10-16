@@ -1,5 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
-
+import Pegawai from '#models/pegawai'
 export default class PagesController {
 
     async Pegawai({ view }: HttpContext) {
@@ -7,7 +7,9 @@ export default class PagesController {
     }
 
     async PegawaiDetail({ view }: HttpContext) {
-          return view.render('dashboard/pegawai_detail')
+
+        const findById = await Pegawai.find(5)
+        return view.render('dashboard/pegawai_detail', { findById })
     }
 
     async Cuti({ view }: HttpContext) {

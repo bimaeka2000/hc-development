@@ -9,7 +9,11 @@ export default class extends BaseSeeder {
         id_pegawai: 1,
         tinggi_cm: 100,
         berat_kg: 200,
-
+        golongan_darah: 'o',
+        tekanan_darah: '190',
+        alergi: 'tidak ada',
+        disabilitas: 'tidak',
+        catatan_kesehatan: 'sehat'
       }
     ])
   }
