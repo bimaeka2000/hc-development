@@ -15,7 +15,7 @@ export default class Pelatihan extends BaseModel {
   declare penyelenggara: string
 
   @column()
-  declare tahun: Date
+  declare tahun: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

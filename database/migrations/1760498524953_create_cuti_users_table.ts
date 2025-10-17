@@ -5,10 +5,14 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
-
-      table.timestamp('created_at')
-      table.timestamp('updated_at')
+      table.increments('id').primary()
+      table.integer('pegawai_id')
+      .unsigned()
+      .references('id')
+      .inTable('pegawai')
+      .onDelete('CASCADE')
+      table.string('jenis_cuti', 40).nullable()
+      table.string('jumlah_cuti', 40).nullable()
     })
   }
 

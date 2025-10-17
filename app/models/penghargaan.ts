@@ -15,8 +15,8 @@ export default class Penghargaan extends BaseModel {
   declare instansi: string
 
   @column()
-  declare tahun: Date
-
+  declare tahun: number
+  
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

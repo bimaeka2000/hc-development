@@ -5,6 +5,15 @@ export default class PengajuanIzin extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
+  @column()
+  declare user_id: number
+
+  @column()
+  declare alasan: string
+
+  @column()
+  declare file_pengajuan: string
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

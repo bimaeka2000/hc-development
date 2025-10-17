@@ -13,7 +13,7 @@ export default class extends BaseSchema {
         .inTable('pegawai')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
-      table.string('nuptk', 255).nullable()
+      table.integer('nuptk').nullable()
       table.string('jenjang', 50).nullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

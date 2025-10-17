@@ -12,10 +12,10 @@ export default class Pengabdian extends BaseModel {
   declare judul: string
 
   @column()
-  declare tahun_mulai: Date
+  declare tahun_mulai: number
 
   @column()
-  declare tahun_selesai: Date
+  declare tahun_selesai: number
 
   @column()
   declare dana: number

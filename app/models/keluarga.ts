@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon'
+
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Kelurga extends BaseModel {
@@ -21,9 +21,5 @@ export default class Kelurga extends BaseModel {
   @column()
   declare pekerjaan: string
 
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
+  
 }

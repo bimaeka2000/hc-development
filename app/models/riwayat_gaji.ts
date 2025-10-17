@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon'
+
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class RiwayatGaji extends BaseModel {
@@ -9,14 +9,10 @@ export default class RiwayatGaji extends BaseModel {
   declare pegawai_id: number
 
   @column()
-  declare gaji_pokok: string
+  declare gaji_pokok: number
 
   @column()
   declare tmt: Date
 
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
+  
 }
