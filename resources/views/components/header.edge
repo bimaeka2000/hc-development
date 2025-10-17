@@ -56,6 +56,26 @@
               return;
             }
 
+            // If we're on pegawai detail page, show Dashboard / Pegawai / Nama Pegawai
+            if (current === '/dashboard/pegawai-detail') {
+              try { list.innerHTML = ''; } catch (e) { /* ignore */ }
+              var dashHref2 = '{{ route('/') }}';
+              var pegawaiHref2 = '{{ route('/dashboard/pegawai') }}';
+              list.appendChild(makeLink(dashHref2, 'Dashboard'));
+              list.appendChild(makeLink(pegawaiHref2, 'Pegawai'));
+
+              // Prefer #namaLengkap (data-name), then #pagePersonName, else fallback label
+              var nameSource = document.getElementById('namaLengkap') || document.getElementById('pagePersonName');
+              var displayName = 'Nama Pegawai';
+              if (nameSource) {
+                var d1 = nameSource.getAttribute && nameSource.getAttribute('data-name');
+                if (d1) displayName = d1;
+                else if (nameSource.textContent) displayName = (nameSource.textContent || '').trim() || displayName;
+              }
+              list.appendChild(makeText(displayName, true));
+              return;
+            }
+
             // Default behavior: build from path segments
             try { list.innerHTML = ''; } catch (e) { /* ignore */ }
             var parts = current.split('/').filter(function (s) { return s; });
