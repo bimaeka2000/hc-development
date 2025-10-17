@@ -19,7 +19,7 @@
         <main class="flex-grow-1 p-3 p-lg-4">
             <div class="d-flex align-items-center mb-4">
                 <h5 class="mb-0">Data Pegawai</h5>
-                <span class="badge rounded-pill text-bg-primary ms-2" id="pegCount">4</span>
+                <span class="badge rounded-pill text-bg-primary ms-2" id="pegCount">{{ (pegawais && pegawais.length) ? pegawais.length : 0 }}</span>
                 <div class="ms-auto d-flex gap-2">
                     <button class="btn btn-sm btn-outline-secondary" id="pegRefresh" disabled><i
                             class="bi bi-arrow-repeat"></i></button>
@@ -42,19 +42,27 @@
                 <div class="toolbar-spacer"></div>
                 <button class="btn btn-sm btn-outline-secondary" id="pegReset" disabled>Reset</button>
             </div>
-            <div class="row g-3 mb-4" id="pegCards">
-                <div class="col-6 col-lg-3">
-                    <div class="kpi-card h-100">
-                      <a href="/dashboard/pegawai-detail" class="stretched-link" style="text-decoration:none;">
-                        <div class="kpi-icon kpi-accent-success mb-2"><i class="bi bi-person-vcard"></i></div>
-                        <div class="fw-semibold small mb-1">Dr. Andi Saputra</div>
-                        <div class="small text-secondary">19801212 200501 1 001</div>
-                        <div class="mt-2"><span class="badge text-bg-success">Aktif</span></div>
-                        <div class="mt-2 small text-secondary"><i class="bi bi-building me-1"></i>Teknik</div>
-                      </a>
-                    </div>
-                </div>
-            </div>
+                        <div class="row g-3 mb-4" id="pegCards">
+                @if(pegawais && pegawais.length > 0)
+                    @each(pegawai in pegawais)
+                                                <div class="col-6 col-lg-3">
+                                                        <div class="kpi-card h-100">
+                                                            <a href="/dashboard/pegawai-detail?id={{ pegawai.id }}" class="stretched-link" style="text-decoration:none;">
+                                                                <div class="kpi-icon kpi-accent-success mb-2"><i class="bi bi-person-vcard"></i></div>
+                                                                <div class="fw-semibold small mb-1">{{ pegawai.nama_lengkap || 'Nama Pegawai' }}</div>
+                                                                <div class="small text-secondary">{{ pegawai.npy || '' }}</div>
+                                                                <div class="mt-2"><span class="badge text-bg-{{ (pegawai.status === 'aktif') ? 'success' : 'secondary' }}">{{ pegawai.status || '—' }}</span></div>
+                                                                <div class="mt-2 small text-secondary"><i class="bi bi-building me-1"></i>{{ pegawai.unit_kerja || '' }}</div>
+                                                            </a>
+                                                        </div>
+                                                </div>
+                                        @endeach
+                                @else
+                                        <div class="col-12">
+                                                <div class="alert alert-info mb-0">Belum ada data pegawai.</div>
+                                        </div>
+                                @endif
+                        </div>
             <div class="card">
                 <div class="card-header d-flex align-items-center"><span class="fw-semibold small">Daftar Pegawai</span>
                     <div class="ms-auto d-flex gap-1"><button class="btn btn-sm btn-outline-secondary" id="pegExport"
@@ -73,15 +81,22 @@
                             </tr>
                         </thead>
                         <tbody id="pegTbody">
-                            <tr>
-                                <td>Dr. Andi Saputra</td>
-                                <td>19801212 200501 1 001</td>
-                                <td>Teknik</td>
-                                <td>Lektor</td>
-                                <td><span class="badge text-bg-success">Aktif</span></td>
-                                <td><a class="btn btn-sm btn-outline-primary" href="/dashboard/pegawai-detail"><i
-                                            class="bi bi-eye"></i></a></td>
-                            </tr>
+                            @if(pegawais && pegawais.length > 0)
+                                @each(pegawai in pegawais)
+                                    <tr>
+                                        <td>{{ pegawai.nama_lengkap || 'Nama Pegawai' }}</td>
+                                        <td>{{ pegawai.npy || '' }}</td>
+                                        <td>{{ pegawai.unit_kerja || '' }}</td>
+                                        <td>{{ pegawai.jabatan || '' }}</td>
+                                        <td><span class="badge text-bg-{{ (pegawai.status === 'aktif') ? 'success' : 'secondary' }}">{{ pegawai.status || '—' }}</span></td>
+                                        <td><a class="btn btn-sm btn-outline-primary" href="/dashboard/pegawai-detail?id={{ pegawai.id }}"><i class="bi bi-eye"></i></a></td>
+                                    </tr>
+                                @endeach
+                            @else
+                                <tr>
+                                    <td colspan="6" class="text-center small text-muted">Belum ada data pegawai.</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

@@ -10,30 +10,40 @@ import RiwayatKesehatan from '#models/riwayat_kesehatan'
 export default class PagesController {
 
     async Pegawai({ view }: HttpContext) {
-        return view.render('dashboard/pegawai')
+        // Load all pegawai for listing page
+        const pegawais = await Pegawai.query().orderBy('id', 'asc')
+        return view.render('dashboard/pegawai', { pegawais })
     }
 
-    async PegawaiDetail({ view }: HttpContext) {
+    async PegawaiDetail({ view, request }: HttpContext) {
+        // Prefer id from query string, else pick the first available pegawai
+        const idParam = request.input('id')
+        let pegawaiData = null as Pegawai | null
+        if (idParam) {
+            pegawaiData = await Pegawai.find(idParam)
+        } else {
+            pegawaiData = await Pegawai.first()
+        }
 
-        const pegawaiData = await Pegawai.find(2)
-        const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
-        const role = await Role.findBy('id', pegawaiData?.role_id)
-        const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
-        const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
-        const statusKepegawaian = await StatusKepegawaian.findBy('id', pegawaiData?.status_kepegawaian_id)
-        const dataKesehatanFisik = await DataKesehatanFisik.findBy('id_pegawai', pegawaiData?.id)
-        const riwayatKesehatan = await RiwayatKesehatan.findBy('id_pegawai', pegawaiData?.id)
-        return view.render('dashboard/pegawai_detail',
-            {
-                pegawaiData,
-                keluarga,
-                role,
-                unitKerja,
-                statusKepegawaian,
-                dosen,
-                dataKesehatanFisik,
-                riwayatKesehatan
-            })
+        // Safely load related data only if we have a pegawai
+        const keluarga = pegawaiData ? await Keluarga.findBy('pegawai_id', pegawaiData.id) : null
+        const role = pegawaiData && pegawaiData.role_id ? await Role.find(pegawaiData.role_id) : null
+        const dosen = pegawaiData ? await Dosen.findBy('pegawai_id', pegawaiData.id) : null
+        const unitKerja = pegawaiData && pegawaiData.unit_kerja_id ? await UnitKerja.find(pegawaiData.unit_kerja_id) : null
+        const statusKepegawaian = pegawaiData && pegawaiData.status_kepegawaian_id ? await StatusKepegawaian.find(pegawaiData.status_kepegawaian_id) : null
+        const dataKesehatanFisik = pegawaiData ? await DataKesehatanFisik.findBy('id_pegawai', pegawaiData.id) : null
+        const riwayatKesehatan = pegawaiData ? await RiwayatKesehatan.findBy('id_pegawai', pegawaiData.id) : null
+
+        return view.render('dashboard/pegawai_detail', {
+            pegawaiData,
+            keluarga,
+            role,
+            unitKerja,
+            statusKepegawaian,
+            dosen,
+            dataKesehatanFisik,
+            riwayatKesehatan,
+        })
     }
 
     async Cuti({ view }: HttpContext) {
