@@ -18,7 +18,9 @@
     @include('components/header')
 
     {{-- Hidden element so header breadcrumb can read the current pegawai name --}}
-    <div id="namaLengkap" data-name="{{ pegawaiData && pegawaiData.nama_lengkap ? pegawaiData.nama_lengkap : 'Nama Pegawai' }}" style="display:none"></div>
+    <div id="namaLengkap"
+      data-name="{{ pegawaiData && pegawaiData.nama_lengkap ? pegawaiData.nama_lengkap : 'Nama Pegawai' }}"
+      style="display:none"></div>
     <main class="flex-grow-1 p-3 p-lg-4">
       @!component('dashboard/components/profil_data_pegawai',
       {
@@ -31,7 +33,11 @@
       jenis_kelamin: pegawaiData.jenis_kelamin,
       unitKerja : unitKerja.unit_kerja,
       jabatan : role.nama_role,
-      statusKepegawaian : statusKepegawaian.status_kepegawaian
+      statusKepegawaian : statusKepegawaian.status_kepegawaian,
+      alamat : pegawaiData.alamat,
+      statusPerkawinan : pegawaiData.status_perkawinan,
+      suku : suku.suku,
+      agama : agama.agama
       })
 
       <div class="bento-layout mb-2 mt-2">

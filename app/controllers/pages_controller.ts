@@ -11,24 +11,21 @@ import DokumenPegawai from '#models/dokumen_pegawai'
 import JenisDokumen from '#models/jenis_dokumen'
 import RiwayatPendidikan from '#models/riwayat_pendidikan'
 import JenjangPendidikan from '#models/jenjang_pendidikan'
+import Suku from '#models/suku'
+import Agama from '#models/agama'
 export default class PagesController {
 
     async Pegawai({ view }: HttpContext) {
-<<<<<<< HEAD
 
         // looping semua data pegawai
-        const pegawai = Pegawai.all()
-        return view.render('dashboard/pegawai', { pegawai })
-=======
         // Load all pegawai for listing page
         const pegawais = await Pegawai.query().orderBy('id', 'asc')
         return view.render('dashboard/pegawai', { pegawais })
->>>>>>> 4d989fa928f3b5e13ccbf06ef14f52816e6f1cad
     }
 
     async PegawaiDetail({ view }: HttpContext) {
 
-const pegawaiData = await Pegawai.find(2)
+        const pegawaiData = await Pegawai.find(5)
         const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
         const role = await Role.findBy('id', pegawaiData?.role_id)
         const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
@@ -40,6 +37,8 @@ const pegawaiData = await Pegawai.find(2)
         const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
         const pendidikan = await RiwayatPendidikan.findBy('pegawai_id', pegawaiData?.id)
         const jenjangPendidikan = await JenjangPendidikan.findBy('id', pendidikan?.jenjang_id)
+        const suku = await Suku.findBy('id', pegawaiData?.suku_id)
+        const agama = await Agama.findBy('id', pegawaiData?.agama_id)
         return view.render('dashboard/pegawai_detail',
             {
                 pegawaiData,
@@ -53,7 +52,9 @@ const pegawaiData = await Pegawai.find(2)
                 jenjangPendidikan,
                 dokumen,
                 pendidikan,
-                jenisDokumen
+                jenisDokumen,
+                suku,
+                agama
             }
         )
     }
