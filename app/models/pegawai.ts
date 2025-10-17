@@ -67,6 +67,8 @@ export default class Pegawai extends BaseModel {
   @column()
   declare status: string
 
+  @column()
+  declare role_id: number
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

@@ -2,6 +2,8 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class RiwayatPendidikan extends BaseModel {
+  static table = 'riwayat_pendidikan'
+
   @column({ isPrimary: true })
   declare id: number
 
@@ -18,10 +20,10 @@ export default class RiwayatPendidikan extends BaseModel {
   declare jurusan: string
 
   @column()
-  declare tahun_masuk: Date
+  declare tahun_masuk: number
 
   @column()
-  declare tahun_lulus: Date
+  declare tahun_lulus: number
 
   @column()
   declare gelar: string

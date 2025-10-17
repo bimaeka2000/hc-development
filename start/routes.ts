@@ -25,6 +25,7 @@ router
         router.get('/penelitian', [PagesController, 'Penelitian'])
         router.get('/pengabdian', [PagesController, 'Pengabdian'])
         router.get('/users', [PagesController, 'Users'])
+    router.get('/edit/:page', [PagesController, 'EditPage']).as('dashboard.edit')
     })
     .prefix('dashboard')
 

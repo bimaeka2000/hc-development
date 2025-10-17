@@ -6,8 +6,24 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary() // Primary key
-      table.integer('pegawai_id').unsigned().nullable()
-      table.integer('jenis_dokumen_id').unsigned().nullable()
+
+      // Foreign keys
+      table
+        .integer('pegawai_id')
+        .unsigned()
+        .references('id')
+        .inTable('pegawai')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+
+      table
+        .integer('jenis_dokumen_id')
+        .unsigned()
+        .references('id')
+        .inTable('jenis_dokumen')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+
       table.string('nama_file', 255).nullable()
       table
         .timestamp('tanggal_upload', { useTz: true })
