@@ -28,7 +28,7 @@ export default class PagesController {
 
     async PegawaiDetail({ view }: HttpContext) {
 
-        const pegawaiData = await Pegawai.find(5)
+const pegawaiData = await Pegawai.find(2)
         const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
         const role = await Role.findBy('id', pegawaiData?.role_id)
         const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
@@ -50,11 +50,12 @@ export default class PagesController {
                 dosen,
                 dataKesehatanFisik,
                 riwayatKesehatan,
+                jenjangPendidikan,
                 dokumen,
-                jenisDokumen,
                 pendidikan,
-                jenjangPendidikan
-            })
+                jenisDokumen
+            }
+        )
     }
 
     async Cuti({ view }: HttpContext) {
