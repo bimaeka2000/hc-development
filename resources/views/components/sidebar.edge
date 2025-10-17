@@ -98,6 +98,15 @@
                 }
             }
 
+            // Special case: when on any /dashboard/edit/* page, force the Pegawai nav as active
+            if (!matched && current.startsWith('/dashboard/edit')) {
+                matched = links.find(a => {
+                    const href = a.getAttribute('href') || '';
+                    const hrefNormalized = normalize(href.replace(/\{\{\s*route\(|\)\s*\}\}/g, '').trim() || href);
+                    return hrefNormalized.includes('/dashboard/pegawai');
+                }) || null;
+            }
+
             if (matched) {
                 matched.classList.add('active');
                 matched.style.backgroundColor = '#0d6efd';
