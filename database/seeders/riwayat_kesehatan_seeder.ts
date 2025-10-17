@@ -6,7 +6,7 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     await RiwayatKesehatan.createMany([
       {
-        id_pegawai: 5,
+        id_pegawai: 2,
         jenis_penyakit: 'tidak ada',
         keterangan: 'kosong',
         tanggal_diagnosa: new Date('2015-10-23'),
