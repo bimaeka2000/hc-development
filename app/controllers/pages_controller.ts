@@ -14,16 +14,9 @@ import JenjangPendidikan from '#models/jenjang_pendidikan'
 export default class PagesController {
 
     async Pegawai({ view }: HttpContext) {
-<<<<<<< HEAD
-
-        // looping semua data pegawai
-        const pegawai = Pegawai.all()
-        return view.render('dashboard/pegawai', { pegawai })
-=======
         // Load all pegawai for listing page
         const pegawais = await Pegawai.query().orderBy('id', 'asc')
         return view.render('dashboard/pegawai', { pegawais })
->>>>>>> 4d989fa928f3b5e13ccbf06ef14f52816e6f1cad
     }
 
     async PegawaiDetail({ view }: HttpContext) {
