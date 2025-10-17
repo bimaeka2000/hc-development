@@ -6,7 +6,7 @@ export default class ProfilCardsController {
    * Display a list of resource
    */
   async index({ view }: HttpContext) {
-    return view.render('dashboard/edit/profil')
+    // return view.render('dashboard/edit/profil')
   }
 
   /**
@@ -23,14 +23,17 @@ export default class ProfilCardsController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) { }
+  async show({ view, params }: HttpContext) {
+    const pegawai = await Pegawai.findBy('id', 3)
+    return view.render('dashboard/edit/profil', { pegawai })
+
+  }
 
   /**
    * Edit individual record
    */
   async edit({ params }: HttpContext) {
     const data = Pegawai.findBy('id', params.id)
-
   }
 
   /**

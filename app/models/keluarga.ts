@@ -3,6 +3,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Kelurga extends BaseModel {
   static table = 'keluarga'
+
   @column({ isPrimary: true })
   declare id: number
 

@@ -4,9 +4,9 @@ export default class extends BaseSeeder {
   // #TODO Repair
   async run() {
     // Write your database queries inside the run method
-    DataKesehatanFisik.createMany([
+    await DataKesehatanFisik.createMany([
       {
-        id_pegawai: 1,
+        pegawai_id: 3,
         tinggi_cm: 100,
         berat_kg: 200,
         golongan_darah: 'o',

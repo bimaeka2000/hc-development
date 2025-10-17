@@ -98,8 +98,8 @@
                                         class="badge text-bg-{{ (pegawai.status === 'aktif') ? 'success' : 'secondary' }}">{{
                                         pegawai.status || '—' }}</span></td>
                                 <td><a class="btn btn-sm btn-outline-primary"
-                                        href="/dashboard/pegawai-detail?id={{ pegawai.id }}"><i
-                                            class="bi bi-eye"></i></a></td>
+                                        href="{{route('pegawai.show',{id:pegawai.id})}}"><i class="bi bi-eye"></i></a>
+                                </td>
                             </tr>
                             @endeach
                             @else

@@ -37,29 +37,29 @@ export default class PegawaisController {
    */
   async show({ view, params }: HttpContext) {
     const pegawaiData = await Pegawai.find(params.id)
-    const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
+    // const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
     const role = await Role.findBy('id', pegawaiData?.role_id)
     const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
     const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
     const statusKepegawaian = await StatusKepegawaian.findBy('id', pegawaiData?.status_kepegawaian_id)
-    const dataKesehatanFisik = await DataKesehatanFisik.findBy('id_pegawai', pegawaiData?.id)
+    const dataKesehatanFisik = await DataKesehatanFisik.findBy('pegawai_id', pegawaiData?.id)
     const riwayatKesehatan = await RiwayatKesehatan.findBy('id_pegawai', pegawaiData?.id)
     const dokumen = await DokumenPegawai.findBy('pegawai_id', pegawaiData?.id)
     const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
     const pendidikan = await RiwayatPendidikan.findBy('pegawai_id', pegawaiData?.id)
-    const jenjangPendidikan = await JenjangPendidikan.findBy('id', pendidikan?.jenjang_id)
+    // const jenjangPendidikan = await JenjangPendidikan.findBy('id', pendidikan?.jenjang_id)
     const suku = await Suku.findBy('id', pegawaiData?.suku_id)
     const agama = await Agama.findBy('id', pegawaiData?.agama_id)
     return view.render('dashboard/pegawai_detail', {
       pegawaiData,
-      keluarga,
+      // keluarga,
       role,
       unitKerja,
       statusKepegawaian,
       dosen,
       dataKesehatanFisik,
       riwayatKesehatan,
-      jenjangPendidikan,
+      // jenjangPendidikan,
       dokumen,
       pendidikan,
       jenisDokumen,

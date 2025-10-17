@@ -2,10 +2,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Role extends BaseModel {
   static table = 'role'
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
   @column({ isPrimary: true })
   declare id: number
 
