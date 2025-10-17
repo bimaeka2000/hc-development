@@ -7,6 +7,10 @@ import StatusKepegawaian from '#models/status_kepegawaian'
 import Dosen from '#models/dosen'
 import DataKesehatanFisik from '#models/data_kesehatan_fisik'
 import RiwayatKesehatan from '#models/riwayat_kesehatan'
+import DokumenPegawai from '#models/dokumen_pegawai'
+import JenisDokumen from '#models/jenis_dokumen'
+import RiwayatPendidikan from '#models/riwayat_pendidikan'
+import JenjangPendidikan from '#models/jenjang_pendidikan'
 export default class PagesController {
 
     async Pegawai({ view }: HttpContext) {
@@ -15,7 +19,7 @@ export default class PagesController {
 
     async PegawaiDetail({ view }: HttpContext) {
 
-        const pegawaiData = await Pegawai.find(2)
+        const pegawaiData = await Pegawai.find(5)
         const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
         const role = await Role.findBy('id', pegawaiData?.role_id)
         const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
@@ -23,6 +27,10 @@ export default class PagesController {
         const statusKepegawaian = await StatusKepegawaian.findBy('id', pegawaiData?.status_kepegawaian_id)
         const dataKesehatanFisik = await DataKesehatanFisik.findBy('id_pegawai', pegawaiData?.id)
         const riwayatKesehatan = await RiwayatKesehatan.findBy('id_pegawai', pegawaiData?.id)
+        const dokumen = await DokumenPegawai.findBy('pegawai_id', pegawaiData?.id)
+        const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
+        const pendidikan = await RiwayatPendidikan.findBy('pegawai_id', pegawaiData?.id)
+        const jenjangPendidikan = await JenjangPendidikan.findBy('id', pendidikan?.jenjang_id)
         return view.render('dashboard/pegawai_detail',
             {
                 pegawaiData,
@@ -32,7 +40,11 @@ export default class PagesController {
                 statusKepegawaian,
                 dosen,
                 dataKesehatanFisik,
-                riwayatKesehatan
+                riwayatKesehatan,
+                dokumen,
+                jenisDokumen,
+                pendidikan,
+                jenjangPendidikan
             })
     }
 
