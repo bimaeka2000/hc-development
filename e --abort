@@ -1,0 +1,18 @@
+[33mf1efa35[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/development[m[33m)[m HEAD@{0}: pull origin development --rebase (start): checkout f1efa353d98717f8748c4f34da821ac91284e0f3
+[33m81dbd3b[m[33m ([m[1;32mdaniel[m[33m)[m HEAD@{1}: commit: add full seeder and models done
+[33m66cae4c[m HEAD@{2}: commit (merge): resolve merge conflict in keluarga_seeder.ts
+[33mf49f8b8[m[33m ([m[1;31morigin/daniel[m[33m)[m HEAD@{3}: pull origin daniel --rebase (finish): returning to refs/heads/daniel
+[33mf49f8b8[m[33m ([m[1;31morigin/daniel[m[33m)[m HEAD@{4}: pull origin daniel --rebase (pick): added seeder.ts
+[33md7132c5[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/bima[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{5}: pull origin daniel --rebase (start): checkout d7132c599a56979baa8829fda121c034b846dac7
+[33mfd2152d[m HEAD@{6}: commit: added seeder.ts
+[33md960d78[m HEAD@{7}: checkout: moving from daniel to daniel
+[33md960d78[m HEAD@{8}: pull origin development: Fast-forward
+[33m2ce4dc9[m[33m ([m[1;32mdevelopment[m[33m)[m HEAD@{9}: checkout: moving from development to daniel
+[33m2ce4dc9[m[33m ([m[1;32mdevelopment[m[33m)[m HEAD@{10}: pull origin development: Fast-forward
+[33m5b6533e[m HEAD@{11}: pull origin development: Fast-forward
+[33md8ba2de[m HEAD@{12}: pull origin development: Fast-forward
+[33mdda5ac5[m HEAD@{13}: checkout: moving from development to development
+[33mdda5ac5[m HEAD@{14}: commit: add seeders folder
+[33m88e5c9d[m HEAD@{15}: commit: tes daniel
+[33meefb467[m HEAD@{16}: checkout: moving from main to development
+[33mde1e681[m[33m ([m[1;32mmain[m[33m)[m HEAD@{17}: clone: from https://github.com/bimaeka2000/hc-development.git

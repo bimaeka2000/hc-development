@@ -1,4 +1,3 @@
-import Kelurga from '#models/keluarga'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import Keluarga from '#models/keluarga'
 export default class extends BaseSeeder {
