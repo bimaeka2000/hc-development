@@ -31,7 +31,7 @@ export const http = defineConfig({
    */
   cookie: {
     domain: '',
-    path: '/',
+    path: '/auth/google/callback',
     maxAge: '2h',
     httpOnly: true,
     secure: app.inProduction,

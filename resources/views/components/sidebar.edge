@@ -10,8 +10,9 @@
         <div class="small text-uppercase opacity-75 mb-2">Navigasi Utama</div>
         <ul class="nav nav-pills flex-column gap-1">
             <li class="nav-item"><a class="nav-link text-white d-flex align-items-center active"
-                    href="{{route('/')}}"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
-            <li><a class="nav-link text-white d-flex align-items-center" href="{{route('/dashboard/users')}}"><i class="bi bi-people me-2"></i>
+                    href="{{route('/dashboard')}}"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
+            <li><a class="nav-link text-white d-flex align-items-center" href="{{route('/dashboard/users')}}"><i
+                        class="bi bi-people me-2"></i>
                     Users</a></li>
             <li><a class="nav-link text-white d-flex align-items-center" href="{{route('/dashboard/pegawai')}}"><i
                         class="bi bi-person-vcard me-2"></i> Pegawai</a></li>
@@ -22,7 +23,8 @@
             <li class="nav-item">
                 <div class="d-flex align-items-center">
                     <a class="nav-link text-white flex-grow-1 d-flex align-items-center"
-                        href="{{route('/dashboard/cuti')}}"><i class="bi bi-calendar-check me-2"></i><span>Cuti</span></a>
+                        href="{{route('/dashboard/cuti')}}"><i
+                            class="bi bi-calendar-check me-2"></i><span>Cuti</span></a>
                     <button class="btn btn-sm btn-link text-white p-0 ms-1 nav-caret-btn" data-bs-toggle="collapse"
                         data-bs-target="#collapse-cuti" aria-expanded="false" aria-controls="collapse-cuti"
                         title="Tampilkan submenu"><i class="bi bi-chevron-down"></i></button>
@@ -42,8 +44,12 @@
                     Sistem</a></li>
             <li><a class="nav-link text-white d-flex align-items-center" href="#"><i class="bi bi-shield-lock me-2"></i>
                     Akses</a></li>
-            <li><a class="nav-link text-white d-flex align-items-center" id="logoutSidebar" href="#"><i
-                        class="bi bi-box-arrow-right me-2"></i> Keluar</a></li>
+
+            <li>
+                <a class="nav-link text-white d-flex align-items-center" id="logoutSidebar"
+                    href="{{route('logout')}}"><i class="bi bi-box-arrow-right me-2"></i> Keluar</a>
+            </li>
+
         </ul>
     </div>
     <div class="p-3 border-top border-secondary small">
