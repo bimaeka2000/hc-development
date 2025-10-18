@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "hc",
   "version": "0.0.0",
@@ -75,3 +76,5 @@
   },
   "prettier": "@adonisjs/prettier-config"
 }
+=======
+>>>>>>> 0fef1fd ("Update Backend")

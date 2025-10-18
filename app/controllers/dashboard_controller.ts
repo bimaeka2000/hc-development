@@ -4,10 +4,22 @@ import User from '#models/user'
 import Pegawai from '#models/pegawai'
 import * as crypto from 'crypto';
 import Hash from '@adonisjs/core/services/hash'
+<<<<<<< HEAD
 
 export default class DashboardController {
 
     async checkUser({ view, response, session }: HttpContext) {
+=======
+<<<<<<< HEAD
+export default class DashboardController {
+    async checkUser({ view, request, response, session }: HttpContext) {
+=======
+
+export default class DashboardController {
+
+    async checkUser({ view, response, session }: HttpContext) {
+>>>>>>> e621cc5 ("Update Backend")
+>>>>>>> 0fef1fd ("Update Backend")
         const userGoogle = session.get('user_google')
         // let user = await User.findBy('email', userGoogle.email)
 
@@ -35,7 +47,15 @@ export default class DashboardController {
                 // buat baru
                 await User.create({
                     pegawai_id: pegawai.id, // dari hasil create Pegawai                    email: userGoogle.email,
+<<<<<<< HEAD
                     email: userGoogle.email,
+=======
+<<<<<<< HEAD
+                    email: userGoogle.email, // dari hasil create Pegawai                    email: userGoogle.email,
+=======
+                    email: userGoogle.email,
+>>>>>>> e621cc5 ("Update Backend")
+>>>>>>> 0fef1fd ("Update Backend")
                     name: userGoogle.name,
                     picture: userGoogle.picture,
                     password: hashed,
@@ -49,11 +69,26 @@ export default class DashboardController {
                 await user.useTransaction(trx).save()
             }
 
+<<<<<<< HEAD
             await trx.commit()
             // 🔁 Ambil ulang user supaya jadi instance model aktif
             user = await User.findByOrFail('email', userGoogle.email)
 
 
+=======
+<<<<<<< HEAD
+            // 🔁 Ambil ulang user supaya jadi instance model aktif
+            user = await User.findByOrFail('email', userGoogle.email)
+
+            await trx.commit()
+=======
+            await trx.commit()
+            // 🔁 Ambil ulang user supaya jadi instance model aktif
+            user = await User.findByOrFail('email', userGoogle.email)
+
+
+>>>>>>> e621cc5 ("Update Backend")
+>>>>>>> 0fef1fd ("Update Backend")
             await User.accessTokens.create(
                 user,
                 ['*'],

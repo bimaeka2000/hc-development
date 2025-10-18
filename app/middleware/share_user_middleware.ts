@@ -9,6 +9,13 @@ export default class ShareUserMiddleware {
     // Kirim user ke semua view Edge
     view.share({
       user: user || null,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> e621cc5 ("Update Backend")
+>>>>>>> 0fef1fd ("Update Backend")
     })
 
     await next()

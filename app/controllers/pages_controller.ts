@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 import type { HttpContext } from '@adonisjs/core/http'
+=======
+<<<<<<< HEAD
+  import type { HttpContext } from '@adonisjs/core/http'
+=======
+import type { HttpContext } from '@adonisjs/core/http'
+>>>>>>> e621cc5 ("Update Backend")
+>>>>>>> 0fef1fd ("Update Backend")
 import Pegawai from '#models/pegawai'
 import Keluarga from '#models/keluarga'
 import Role from '#models/role'
@@ -23,6 +31,27 @@ export default class PagesController {
         return view.render('dashboard/pegawai', { pegawais })
     }
 
+<<<<<<< HEAD
+    async PegawaiDetail({ view, session }: HttpContext) {
+=======
+<<<<<<< HEAD
+    async PegawaiDetail({ view }: HttpContext) {
+>>>>>>> 0fef1fd ("Update Backend")
+
+        const userGoogle = session.get('user_google')
+        const pegawaiData = await Pegawai.find('pegawai_id', userGoogle.id)
+        const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
+        const role = await Role.findBy('id', pegawaiData?.role_id)
+        const dosen = await Dosen.findBy('i', pegawaiData?.id)
+        const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
+        const statusKepegawaian = await StatusKepegawaian.findBy('id', pegawaiData?.status_kepegawaian_id)
+<<<<<<< HEAD
+        const dataKesehatanFisik = await DataKesehatanFisik.findBy('pegawai_id', pegawaiData?.id)
+        const riwayatKesehatan = await RiwayatKesehatan.findByOrFail('pegawai_id', pegawaiData?.id)
+=======
+        const dataKesehatanFisik = await DataKesehatanFisik.findBy('id_pegawai', pegawaiData?.id)
+        const riwayatKesehatan = await RiwayatKesehatan.findBy('id_pegawai', pegawaiData?.id)
+=======
     async PegawaiDetail({ view, session }: HttpContext) {
 
         const userGoogle = session.get('user_google')
@@ -34,6 +63,8 @@ export default class PagesController {
         const statusKepegawaian = await StatusKepegawaian.findBy('id', pegawaiData?.status_kepegawaian_id)
         const dataKesehatanFisik = await DataKesehatanFisik.findBy('pegawai_id', pegawaiData?.id)
         const riwayatKesehatan = await RiwayatKesehatan.findByOrFail('pegawai_id', pegawaiData?.id)
+>>>>>>> e621cc5 ("Update Backend")
+>>>>>>> 0fef1fd ("Update Backend")
         const dokumen = await DokumenPegawai.findBy('pegawai_id', pegawaiData?.id)
         const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
         const pendidikan = await RiwayatPendidikan.findBy('pegawai_id', pegawaiData?.id)

@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/*
+|--------------------------------------------------------------------------
+| Routes file
+|--------------------------------------------------------------------------
+|
+| The routes file is used for defining the HTTP routes.
+|
+*/
+
+=======
+>>>>>>> e621cc5 ("Update Backend")
+>>>>>>> 0fef1fd ("Update Backend")
 import router from '@adonisjs/core/services/router'
 import env from '#start/env'
 
@@ -10,6 +25,13 @@ const AuthController = () => import('#controllers/auth_controller')
 const DashboardController = () => import('#controllers/dashboard_controller')
 
 router.get('/', async ({ view }) => {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> e621cc5 ("Update Backend")
+>>>>>>> 0fef1fd ("Update Backend")
     return view.render('login')
 })
 
@@ -19,7 +41,15 @@ router.get('/', async ({ view }) => {
 //     return view.render('sso/login', { clientIdSso, redirectUri })
 // })
 
+<<<<<<< HEAD
 // #NOTE SSO Goolgle OAuth2 
+=======
+<<<<<<< HEAD
+// #NOTE SSO Goolgle OAuth2
+=======
+// #NOTE SSO Goolgle OAuth2 
+>>>>>>> e621cc5 ("Update Backend")
+>>>>>>> 0fef1fd ("Update Backend")
 router.get('/auth/google/redirect', [AuthController, 'redirectToGoogle']).as('google.redirect')
 router.get('/auth/google/callback', [AuthController, 'googleCallback'])
 
