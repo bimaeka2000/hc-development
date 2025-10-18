@@ -1,0 +1,5 @@
+#TODO Daniel :
+[] isi semua data seeder
+
+#TODO Jasswant :
+[] buat page cuti

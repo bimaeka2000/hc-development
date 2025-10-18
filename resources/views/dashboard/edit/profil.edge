@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Profil & Data Pegawai — Sistem HC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <meta name="theme-color" content="#5ab2ff" />
+  @vite(['resources/css/styles.css'])
+
+</head>
+
+<body class="bg-body-secondary theme-light-blue" data-bs-theme="light">
+  @include('components/sidebar')
+  <div class="main-wrapper d-flex flex-column min-vh-100">
+    @include('components/header')
+
+    <main class="flex-grow-1 p-3 p-lg-4">
+      <div class="bento-layout">
+  <div class="row g-3 align-items-stretch">
+          <div class="col-lg-4 col-md-12 d-flex">
+              <div class="d-flex flex-fill align-items-center justify-content-center position-relative">
+                <div id="avatar" class="rounded-3 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center overflow-hidden"
+                  style="width:517px;height:99.5%;max-width:517px;aspect-ratio:1/1;cursor:pointer;user-select:none;margin:auto;">
+                  <img id="avatar-img" src="" alt="avatar" class="w-100 h-100 object-fit-cover d-none" style="display:block;object-fit:cover;" />
+                  <div id="avatar-initials" class="d-flex align-items-center justify-content-center w-100 h-100" style="font-size:2rem;">PG</div>
+                  <div id="avatar-overlay" class="d-none position-absolute top-0 start-0 w-100 h-100 rounded-3 d-flex align-items-center justify-content-center"
+                    style="background:rgba(0,0,0,0.28);">
+                    <i class="bi bi-pencil-fill text-white" style="font-size:1.25rem;"></i>
+                  </div>
+                </div>
+                <input id="avatar-input" type="file" accept="image/*" class="d-none">
+              </div>
+          </div>
+          <div class="col-lg-8 col-md-12 d-flex">
+            <div class="panel-soft glass-card card-hover h-100 w-100">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-person-badge me-2 text-primary"></i>
+                <div class="mini-section-title mb-0">Data Pribadi</div>
+              </div>
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label form-label-sm">Nama Lengkap</label><input
+                    class="form-control form-control-sm" type="text"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">NPY/NIP</label><input
+                    class="form-control form-control-sm" type="text"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">NIK</label><input
+                    class="form-control form-control-sm" type="text"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">NPWP</label><input
+                    class="form-control form-control-sm" type="text"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">Tempat Lahir</label><input
+                    class="form-control form-control-sm" type="text"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">Tanggal Lahir</label><input
+                    class="form-control form-control-sm" type="date"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">Jenis Kelamin</label><select
+                    class="form-select form-select-sm">
+                    <option>Laki-laki</option>
+                    <option>Perempuan</option>
+                  </select></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">Agama</label><input
+                    class="form-control form-control-sm" type="text"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">Suku</label><input
+                    class="form-control form-control-sm" type="text"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">Email Pribadi</label><input
+                    class="form-control form-control-sm" type="email"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">Email Kantor</label><input
+                    class="form-control form-control-sm" type="email"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">No HP</label><input
+                    class="form-control form-control-sm" type="text"></div>
+                <div class="col-md-6"><label class="form-label form-label-sm">No HP Darurat</label><input
+                    class="form-control form-control-sm" type="text"></div>
+                <div class="col-12"><label class="form-label form-label-sm">Alamat</label><textarea
+                    class="form-control form-control-sm" rows="2"></textarea></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-soft glass-card card-hover lg-span-12">
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-briefcase me-2 text-primary"></i>
+            <div class="mini-section-title mb-0">Data Kepegawaian</div>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-4"><label class="form-label form-label-sm">Unit Kerja</label><input
+                class="form-control form-control-sm" type="text"></div>
+            <div class="col-md-4"><label class="form-label form-label-sm">Jabatan</label><input
+                class="form-control form-control-sm" type="text"></div>
+            <div class="col-md-4"><label class="form-label form-label-sm">Status Kepegawaian</label><select
+                class="form-select form-select-sm">
+                <option>Aktif</option>
+                <option>Kontrak</option>
+                <option>Cuti</option>
+              </select></div>
+            <div class="col-md-4"><label class="form-label form-label-sm">Masa Kerja (th)</label><input
+                class="form-control form-control-sm" type="number" min="0"></div>
+            <div class="col-md-4"><label class="form-label form-label-sm">Nomor Urut</label><input
+                class="form-control form-control-sm" type="text"></div>
+          </div>
+        </div>
+        <div class="lg-span-12 d-flex gap-2">
+          <button class="btn btn-primary btn-sm"><i class="bi bi-save"></i> Simpan</button>
+          <a class="btn btn-outline-secondary btn-sm" href="#" onclick="history.back(); return false;"><i
+              class="bi bi-arrow-left"></i> Batal</a>
+        </div>
+      </div>
+    </main>
+    @include('components/footer')
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    /* Avatar overlay styles */
+    #avatar:hover #avatar-overlay { display: flex !important; }
+    #avatar-overlay { transition: opacity 150ms ease-in-out; opacity: 1; }
+    /* Larger avatar on desktop, responsive on small screens */
+    @media (max-width: 767.98px) {
+      #avatar { width: 120px !important; height: 120px !important; }
+    }
+  </style>
+  <script>
+    (function(){
+      const avatar = document.getElementById('avatar');
+      const input = document.getElementById('avatar-input');
+      const btn = document.getElementById('avatar-btn');
+
+      // Make avatar and button open the file chooser
+      if(avatar) avatar.addEventListener('click', () => input && input.click());
+      if(btn) btn.addEventListener('click', () => input && input.click());
+
+      // Preview selected image inside the avatar box instead of alerting
+      const avatarImg = document.getElementById('avatar-img');
+      const avatarInitials = document.getElementById('avatar-initials');
+      if(input) input.addEventListener('change', function(e){
+        const file = e.target.files && e.target.files[0];
+        if(!file) return;
+        if(file.type && file.type.startsWith('image/')){
+          const reader = new FileReader();
+          reader.onload = function(ev){
+            if(avatarImg){
+              avatarImg.src = ev.target.result;
+              avatarImg.classList.remove('d-none');
+              avatarImg.style.display = 'block';
+            }
+            if(avatarInitials) avatarInitials.classList.add('d-none');
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    })();
+  </script>
+
+</body>
+
+</html>
