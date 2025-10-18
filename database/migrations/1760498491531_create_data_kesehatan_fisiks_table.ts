@@ -6,7 +6,16 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary() // Primary key
-      table.integer('id_pegawai').unsigned().nullable()
+
+      // Foreign keys
+      table
+        .integer('pegawai_id')
+        .unsigned()
+        .references('id')
+        .inTable('pegawai')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+
       table.integer('tinggi_cm').nullable()
       table.integer('berat_kg').nullable()
       table.string('golongan_darah', 5).nullable()

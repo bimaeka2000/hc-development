@@ -1,82 +1,13 @@
 <nav class="top-navbar navbar navbar-expand-lg sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ route('/') }}"><i class="bi bi-grid-1x2 text-primary"></i> Sistem HC</a>
+    <a class="navbar-brand" href="{{ route('/dashboard') }}"><i class="bi bi-grid-1x2 text-primary"></i> Sistem HC</a>
     <div class="ms-auto d-flex align-items-center gap-3">
       <nav aria-label="breadcrumb" class="top-breadcrumb small">
         <ol class="breadcrumb mb-0" id="appBreadcrumb">
         </ol>
       </nav>
       <div id="pagePersonName" data-name="{{ nama_lengkap || 'Nama Pegawai' }}" style="display:none"></div>
-      <script>
-        (function () {
-          try {
-            var list = document.getElementById('appBreadcrumb');
-            if (!list) return;
 
-            // Helper to create li (link or text)
-            var makeLink = function (href, text) {
-              var li = document.createElement('li');
-              li.className = 'breadcrumb-item';
-              var a = document.createElement('a');
-              a.href = href;
-              a.textContent = text;
-              li.appendChild(a);
-              return li;
-            };
-
-            var makeText = function (text, active) {
-              var li = document.createElement('li');
-              li.className = 'breadcrumb-item';
-              if (active) {
-                li.classList.add('active');
-                li.setAttribute('aria-current', 'page');
-              }
-              li.textContent = text;
-              return li;
-            };
-
-            var raw = (window.location.pathname || '/');
-            var clean = raw.split('?')[0].split('#')[0];
-            var current = clean.replace(/\/$/, '');
-
-            // If we're on an edit page, show Dashboard / Pegawai / Nama Pegawai / Edit
-            if (current.startsWith('/dashboard/edit')) {
-              // Dashboard -> route('/'), Pegawai -> /dashboard/pegawai
-              try { list.innerHTML = ''; } catch (e) { /* ignore */ }
-              // Dashboard link (use server route helper output)
-              var dashHref = '{{ route('/') }}';
-              var pegawaiHref = '{{ route('/dashboard/pegawai') }}';
-              list.appendChild(makeLink(dashHref, 'Dashboard'));
-              list.appendChild(makeLink(pegawaiHref, 'Pegawai'));
-
-              var personEl = document.getElementById('pagePersonName');
-              var personName = personEl ? personEl.getAttribute('data-name') : 'Nama Pegawai';
-              list.appendChild(makeText(personName, false));
-              list.appendChild(makeText('Edit', true));
-              return;
-            }
-
-            // Default behavior: build from path segments
-            try { list.innerHTML = ''; } catch (e) { /* ignore */ }
-            var parts = current.split('/').filter(function (s) { return s; });
-            var accum = '';
-            parts.forEach(function (seg, i) {
-              var li;
-              var label = seg.replace(/[-_]+/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
-              accum += '/' + seg;
-              if (i < parts.length - 1) {
-                li = makeLink(accum, label);
-              } else {
-                li = makeText(label, true);
-              }
-              list.appendChild(li);
-            });
-
-          } catch (e) {
-            console.error('Breadcrumb build error:', e);
-          }
-        })();
-      </script>
     </div>
   </div>
 </nav>
