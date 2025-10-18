@@ -5,7 +5,7 @@ export default class extends BaseSeeder {
   async run() {
     // Write your database queries inside the run method
 
-    await Kelurga.createMany([
+    await Keluarga.createMany([
       {
         pegawai_id: 1,
         nama_keluarga: 'John Doe',

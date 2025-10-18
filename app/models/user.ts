@@ -28,16 +28,20 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare id: number
 
   @column()
-  declare pegawaiId: number | null
+  declare pegawai_id: number | null
 
   @column()
-  declare fullName: string | null
+  declare username: string 
 
   @column()
-  declare email: string
+  declare email_pribadi: string
 
   @column({ serializeAs: null })
   declare password: string
+
+  @column()
+  declare otp: string
+
 
   @column()
   declare role: 'superadmin' | 'admin' | 'pegawai' | null

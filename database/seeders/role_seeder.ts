@@ -5,47 +5,17 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     await Role.createMany([
       {
-<<<<<<< Updated upstream
         nama_role: 'admin',
-        status: 'aktif'
+        status: 'aktif',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       {
         nama_role: 'pegawai',
-        status: 'aktif'
-      },
-      {
-        nama_role: 'atasan',
-        status: 'aktif'
-      },
-      {
-        nama_role: 'hrd',
-        status: 'aktif'
-      },
-      {
-=======
->>>>>>> Stashed changes
-        nama_role: 'dosen',
-        status: 'aktif'
-      },
-      {
-<<<<<<< Updated upstream
-        nama_role: 'guru',
-        status: 'aktif'
-      },
-      {
-        nama_role: 'superadmin',
-        status: 'aktif'
-      },
-=======
-        nama_role: 'staff',
-        status: 'aktif'
-      },
-      {
-        nama_role: 'guru',
-        status: 'aktif'
-      },
-
->>>>>>> Stashed changes
+        status: 'aktif',
+        created_at: new Date(),
+        updated_at: new Date()
+      }
     ])
   }
 }

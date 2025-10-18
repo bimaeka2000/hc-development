@@ -1,16 +1,18 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import User from '#models/user'
-import hash from '@adonisjs/core/services/hash'
+
 
 export default class extends BaseSeeder {
   async run() {
     // Write your database queries inside the run method
     await User.createMany([
       {
-        fullName: 'Admin User',
-        email: 'bimaekaputra@satyaterrabhinneka.ac.id',
+        pegawai_id: 1,
+        username: 'bimaekaputra',
+        email_pribadi: 'bimaekaputra@satyaterrabhinneka.ac.id',
         password: 'bimaeka2000',
-        role: 'superadmin',
+        otp: '123456',
+        role: 'superadmin'
       }
     ])
   }
