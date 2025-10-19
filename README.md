@@ -1,7 +1,3 @@
-# hc-development
+# setelah clone, pull 
 
-# jass-update
-
-# tes daniel
-
-# test branch jasswant
+bash setup-project.sh
