@@ -1,0 +1,19 @@
+<div class="panel-soft glass-card card-hover">
+  <div class="d-flex align-items-center mb-2">
+    <i class="bi bi-mortarboard me-2 text-primary"></i>
+    <div class="mini-section-title mb-0">
+      Pendidikan
+    </div>
+    <a href="edit/pendidikan" class="btn btn-sm btn-outline-primary ms-auto">      <i class="bi bi-pencil"></i>Edit</a>
+  </div>
+  {{-- #TODO looping data --}}
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <i class="bi bi-mortarboard me-2 text-primary"></i>        <span class="fw-semibold me-2">{{ jenjangPendidikan }}</span>        <span class="text-secondary small" id="namaUniversitas">{{ namaUniversitas }}</span>
+      </div>
+      <span class="badge text-bg-light text-secondary">{{ tahunLulus }}</span>
+    </li>
+
+  </ul>
+</div>
