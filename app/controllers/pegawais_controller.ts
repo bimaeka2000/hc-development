@@ -25,12 +25,12 @@ export default class PegawaisController {
   /**
    * Display form to create a new record
    */
-  async create({}: HttpContext) {}
+  async create({ }: HttpContext) { }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request }: HttpContext) { }
 
   /**
    * Show individual record
@@ -40,7 +40,6 @@ export default class PegawaisController {
     const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
     const role = await Role.findBy('id', pegawaiData?.role_id)
     const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
-    // const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
     const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
     const statusKepegawaian = await StatusKepegawaian.findBy(
       'id',
@@ -74,15 +73,15 @@ export default class PegawaisController {
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  async edit({ params }: HttpContext) { }
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ params, request }: HttpContext) { }
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params }: HttpContext) { }
 }

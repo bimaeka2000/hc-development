@@ -71,6 +71,7 @@ export default class PagesController {
   }
 
   async Penelitian({ view }: HttpContext) {
+
     return view.render('dashboard/under-construction')
   }
 
@@ -78,7 +79,7 @@ export default class PagesController {
     return view.render('dashboard/under-construction')
   }
 
-  async Users({ view }: HttpContext) {
+  async Users({ view, session }: HttpContext) {
     return view.render('dashboard/users')
   }
 

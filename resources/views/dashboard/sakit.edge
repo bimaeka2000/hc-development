@@ -1,182 +1,162 @@
-<!DOCTYPE html>
-<html lang="id">
+@layout.layout({title:'Sakit'})
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      Dashboard HC
-    </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <meta name="theme-color" content="#5ab2ff" />
-    @vite(['resources/css/styles.css'])
-
-  </head>
-
-  <body class="bg-body-secondary theme-light-blue" data-bs-theme="light">
-    @include('components/sidebar')
-    <div class="main-wrapper d-flex flex-column min-vh-100">
-      @include('components/header')
-
-      <main class="flex-grow-1 p-3 p-lg-4">
-        <div class="tab-content">
-          <div class="tab-pane fade show active" id="tab-sakit" role="tabpanel" aria-labelledby="tab-sakit-btn">
-            <div class="d-flex flex-wrap align-items-center mb-4 gap-2">
-              <h5 class="mb-0">
-                Pengajuan Sakit
-              </h5>
-              <span class="badge rounded-pill text-bg-primary" id="sakitCount">0</span>
-              <div class="ms-auto d-flex gap-2">
-                <button class="btn btn-sm btn-outline-secondary" id="sakitRefresh">                  <i class="bi bi-arrow-repeat"></i></button>
+@slot('meta')
+<meta name="description" content="Dashboard page for Human Capital Management System" />
+@endslot
+<main class="flex-grow-1 p-3 p-lg-4">
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="tab-sakit" role="tabpanel" aria-labelledby="tab-sakit-btn">
+      <div class="d-flex flex-wrap align-items-center mb-4 gap-2">
+        <h5 class="mb-0">
+          Pengajuan Sakit
+        </h5>
+        <span class="badge rounded-pill text-bg-primary" id="sakitCount">0</span>
+        <div class="ms-auto d-flex gap-2">
+          <button class="btn btn-sm btn-outline-secondary" id="sakitRefresh"> <i
+              class="bi bi-arrow-repeat"></i></button>
+        </div>
+      </div>
+      <div class="kpi-row mb-3">
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-accent-primary">
+            <i class="bi bi-calendar-event"></i>
+          </div>
+          <div class="kpi-label">
+            Aktif Bulan Ini
+          </div>
+          <div class="kpi-value" id="sakitAktifBulan">
+            0
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-accent-warning">
+            <i class="bi bi-hourglass-split"></i>
+          </div>
+          <div class="kpi-label">
+            Menunggu
+          </div>
+          <div class="kpi-value" id="sakitMenunggu">
+            0
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-accent-success">
+            <i class="bi bi-check2-circle"></i>
+          </div>
+          <div class="kpi-label">
+            Disetujui
+          </div>
+          <div class="kpi-value" id="sakitDisetujui">
+            0
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-accent-danger">
+            <i class="bi bi-x-circle"></i>
+          </div>
+          <div class="kpi-label">
+            Ditolak
+          </div>
+          <div class="kpi-value" id="sakitDitolak">
+            0
+          </div>
+        </div>
+      </div>
+      <div class="filter-toolbar small mb-3">
+        <input id="sakitSearch" class="form-control form-control-sm" placeholder="Cari nama" />
+        <select id="sakitStatus" class="form-select form-select-sm">
+          <option value="">
+            Semua Status
+          </option>
+          <option>
+            Menunggu
+          </option>
+          <option>
+            Disetujui
+          </option>
+          <option>
+            Ditolak
+          </option>
+        </select>
+        <input type="month" id="sakitBulan" class="form-control form-control-sm" style="max-width:150px" />
+        <div class="toolbar-spacer">
+        </div>
+        <button id="sakitReset" class="btn btn-sm btn-outline-secondary">Reset</button>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-header d-flex align-items-center">
+              <span class="fw-semibold small">Tabel
+                Pengajuan</span> <button class="btn btn-sm btn-outline-secondary ms-auto" id="sakitExport"> <i
+                  class="bi bi-download"></i></button>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-sm table-hover table-sticky-head mb-0" id="sakitTable">
+                <thead>
+                  <tr>
+                    <th>
+                      Nama
+                    </th>
+                    <th>
+                      Mulai
+                    </th>
+                    <th>
+                      Selesai
+                    </th>
+                    <th>
+                      Durasi
+                    </th>
+                    <th>
+                      Status
+                    </th>
+                    <th>
+                      Aksi
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="sakitTbody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel-soft">
+            <div class="mini-section-title">
+              Timeline Aktivitas
+            </div>
+            <ul class="activity-list small" id="sakitAktivitas">
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="panel-soft mb-4">
+            <div class="mini-section-title">
+              Distribusi Status
+            </div>
+            <div class="progress progress-thin mb-2">
+              <div class="progress-bar bg-warning" id="barSakitMenunggu" style="width:0%">
               </div>
             </div>
-            <div class="kpi-row mb-3">
-              <div class="kpi-card">
-                <div class="kpi-icon kpi-accent-primary">
-                  <i class="bi bi-calendar-event"></i>
-                </div>
-                <div class="kpi-label">
-                  Aktif Bulan Ini
-                </div>
-                <div class="kpi-value" id="sakitAktifBulan">
-                  0
-                </div>
-              </div>
-              <div class="kpi-card">
-                <div class="kpi-icon kpi-accent-warning">
-                  <i class="bi bi-hourglass-split"></i>
-                </div>
-                <div class="kpi-label">
-                  Menunggu
-                </div>
-                <div class="kpi-value" id="sakitMenunggu">
-                  0
-                </div>
-              </div>
-              <div class="kpi-card">
-                <div class="kpi-icon kpi-accent-success">
-                  <i class="bi bi-check2-circle"></i>
-                </div>
-                <div class="kpi-label">
-                  Disetujui
-                </div>
-                <div class="kpi-value" id="sakitDisetujui">
-                  0
-                </div>
-              </div>
-              <div class="kpi-card">
-                <div class="kpi-icon kpi-accent-danger">
-                  <i class="bi bi-x-circle"></i>
-                </div>
-                <div class="kpi-label">
-                  Ditolak
-                </div>
-                <div class="kpi-value" id="sakitDitolak">
-                  0
-                </div>
+            <div class="progress progress-thin mb-2">
+              <div class="progress-bar bg-success" id="barSakitDisetujui" style="width:0%">
               </div>
             </div>
-            <div class="filter-toolbar small mb-3">
-              <input id="sakitSearch" class="form-control form-control-sm" placeholder="Cari nama" />
-              <select id="sakitStatus" class="form-select form-select-sm">
-                <option value="">
-                  Semua Status
-                </option>
-                <option>
-                  Menunggu
-                </option>
-                <option>
-                  Disetujui
-                </option>
-                <option>
-                  Ditolak
-                </option>
-              </select>
-              <input type="month" id="sakitBulan" class="form-control form-control-sm" style="max-width:150px" />
-              <div class="toolbar-spacer">
-              </div>
-              <button id="sakitReset" class="btn btn-sm btn-outline-secondary">Reset</button>
-            </div>
-            <div class="row g-4">
-              <div class="col-lg-8">
-                <div class="card mb-4">
-                  <div class="card-header d-flex align-items-center">
-                    <span class="fw-semibold small">Tabel
-                      Pengajuan</span>                    <button class="btn btn-sm btn-outline-secondary ms-auto" id="sakitExport">                      <i class="bi bi-download"></i></button>
-                  </div>
-                  <div class="table-responsive">
-                    <table class="table table-sm table-hover table-sticky-head mb-0" id="sakitTable">
-                      <thead>
-                        <tr>
-                          <th>
-                            Nama
-                          </th>
-                          <th>
-                            Mulai
-                          </th>
-                          <th>
-                            Selesai
-                          </th>
-                          <th>
-                            Durasi
-                          </th>
-                          <th>
-                            Status
-                          </th>
-                          <th>
-                            Aksi
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody id="sakitTbody">
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="panel-soft">
-                  <div class="mini-section-title">
-                    Timeline Aktivitas
-                  </div>
-                  <ul class="activity-list small" id="sakitAktivitas">
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="panel-soft mb-4">
-                  <div class="mini-section-title">
-                    Distribusi Status
-                  </div>
-                  <div class="progress progress-thin mb-2">
-                    <div class="progress-bar bg-warning" id="barSakitMenunggu" style="width:0%">
-                    </div>
-                  </div>
-                  <div class="progress progress-thin mb-2">
-                    <div class="progress-bar bg-success" id="barSakitDisetujui" style="width:0%">
-                    </div>
-                  </div>
-                  <div class="progress progress-thin">
-                    <div class="progress-bar bg-danger" id="barSakitDitolak" style="width:0%">
-                    </div>
-                  </div>
-                </div>
-                <div class="panel-soft">
-                  <div class="mini-section-title">
-                    Riwayat Terbaru
-                  </div>
-                  <ul class="history-list" id="sakitHistory">
-                  </ul>
-                </div>
+            <div class="progress progress-thin">
+              <div class="progress-bar bg-danger" id="barSakitDitolak" style="width:0%">
               </div>
             </div>
           </div>
+          <div class="panel-soft">
+            <div class="mini-section-title">
+              Riwayat Terbaru
+            </div>
+            <ul class="history-list" id="sakitHistory">
+            </ul>
+          </div>
         </div>
-      </main>
-      @include('components/footer')
+      </div>
     </div>
-  </body>
-
-</html>
+  </div>
+</main>
+@endslot
+@end

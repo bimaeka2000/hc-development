@@ -38,6 +38,8 @@ router.use([
   () => import('@adonisjs/shield/shield_middleware'),
   () => import('@adonisjs/auth/initialize_auth_middleware'),
   () => import('#middleware/share_user_middleware'),
+  () => import('#middleware/admin_page_middleware'),
+  () => import('#middleware/share_role_middleware')
 ])
 
 /**
@@ -47,4 +49,5 @@ router.use([
 export const middleware = router.named({
   auth: () => import('#middleware/auth_middleware'),
   shareUser: () => import('#middleware/share_user_middleware'),
+  shareRole: () => import('#middleware/share_role_middleware'),
 })

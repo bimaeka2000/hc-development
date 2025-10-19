@@ -5,10 +5,10 @@ import Pegawai from '#models/pegawai'
 import * as crypto from 'node:crypto'
 import Hash from '@adonisjs/core/services/hash'
 export default class DashboardController {
-  async checkUser({ view, response, session }: HttpContext) {
+  async checkUser({ response, session, auth, request }: HttpContext) {
+
     const userGoogle = session.get('user_google')
-    // let user = await User.findBy('email', userGoogle.email)
-    // saat membuat user dari Google payload
+
     const generated = crypto.randomBytes(16).toString('hex') // random 32-char string
     const hashed = await Hash.make(generated)
 
@@ -19,12 +19,14 @@ export default class DashboardController {
     try {
       // Cek user
       let user = await User.query({ client: trx }).where('email', userGoogle.email).first()
+
       if (!user) {
         // 1️⃣ Buat pegawai baru
+
         let pegawai = await Pegawai.create(
           {
             nama_lengkap: userGoogle.name,
-            role_id: 2, // default pegawai
+            role_id: 2,
           },
           { client: trx }
         )
@@ -32,11 +34,12 @@ export default class DashboardController {
         // buat baru
         await User.create(
           {
-            pegawai_id: pegawai.id, // dari hasil create Pegawai                    email: userGoogle.email,
+            pegawai_id: pegawai.id,
             email: userGoogle.email,
             name: userGoogle.name,
             picture: userGoogle.picture,
             password: hashed,
+            role: 'admin',
           },
           { client: trx }
         )
@@ -52,10 +55,11 @@ export default class DashboardController {
       user = await User.findByOrFail('email', userGoogle.email)
 
       await User.accessTokens.create(user, ['*'], {
-        name: 'google-oauth2-token',
+        name: 'bearer-token',
         expiresIn: '30 days',
       })
-      return view.render('layouts/dashboard', { user })
+
+      return response.redirect().toRoute('dashboard.index')
     } catch (error) {
       await trx.rollback()
       console.error(error)
@@ -64,5 +68,13 @@ export default class DashboardController {
         error: error.message,
       })
     }
+  }
+  async index({ view, session }: HttpContext) {
+
+    const userGoogle = session.get('user_google')
+    const email = userGoogle?.email
+    const user = await User.findBy('email', email)
+
+    return view.render('layouts/dashboard', { user })
   }
 }

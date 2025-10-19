@@ -1,0 +1,67 @@
+<nav id="sidebar" class="sidebar bg-dark text-white">
+    <div class="d-flex align-items-center p-3 border-bottom border-secondary">
+        <i class="bi bi-grid-1x2-fill fs-4 me-2 text-primary"></i>
+        <span class="fw-semibold fs-5">Sistem HC</span>
+        <button class="btn btn-sm btn-outline-light ms-auto d-lg-none" id="btnCloseSidebar"> <i
+                class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="px-3 pt-3">
+        <div class="small text-uppercase opacity-75 mb-2">
+            Navigasi Utama
+        </div>
+        <ul class="nav nav-pills flex-column gap-1">
+            <li class="nav-item">
+                <a class="nav-link text-white d-flex align-items-center active" href="{{ route('/dashboard') }}"> <i
+                        class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+            </li>
+            <li>
+                <a class="nav-link text-white d-flex align-items-center" href="{{ route('/dashboard/users') }}"> <i
+                        class="bi bi-people me-2"></i>
+                    Users</a>
+            </li>
+            <li>
+                <a class="nav-link text-white d-flex align-items-center" href="{{ route('/dashboard/penelitian') }}"> <i
+                        class="bi bi-journal-bookmark me-2"></i>Penelitian</a>
+            </li>
+            <li>
+                <a class="nav-link text-white d-flex align-items-center" href="{{ route('/dashboard/pengabdian') }}"> <i
+                        class="bi bi-hand-thumbs-up me-2"></i>Pengabdian</a>
+            </li>
+
+        </ul>
+        <hr class="border-secondary" />
+        <div class="small text-uppercase opacity-75 mb-2">
+            Pengaturan
+        </div>
+        <ul class="nav nav-pills flex-column gap-1 mb-4">
+            <li>
+                <a class="nav-link text-white d-flex align-items-center" href="#"> <i class="bi bi-gear me-2"></i>
+                    Sistem</a>
+            </li>
+            <li>
+                <a class="nav-link text-white d-flex align-items-center" href="#"> <i
+                        class="bi bi-shield-lock me-2"></i>
+                    Akses</a>
+            </li>
+
+            <li>
+                <a class="nav-link text-white d-flex align-items-center" id="logoutSidebar"
+                    href="{{ route('logout') }}"> <i class="bi bi-box-arrow-right me-2"></i>Keluar</a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="p-3 border-top border-secondary small">
+        <div class="d-flex align-items-center">
+            <img src="{{user.picture}}"" alt=" avatar" class="avatar me-2" />
+            <div>
+                <div class="fw-semibold">
+                    {{ user.name }}
+                </div>
+                <div class="small opacity-75">
+                    {{ user.email }}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

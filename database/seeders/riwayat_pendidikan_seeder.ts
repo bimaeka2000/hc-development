@@ -6,7 +6,7 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     await RiwayatPendidikan.createMany([
       {
-        pegawai_id: 1,
+        pegawai_id: 2,
         jenjang_id: 1,
         nama_instansi: 'Universitas Sumatera Utara',
         jurusan: 'PGSD',

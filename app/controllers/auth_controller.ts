@@ -46,7 +46,7 @@ export default class AuthController {
 
     if (!payload?.email) return response.badRequest({ error: 'Email tidak ditemukan di Google' })
     //    #NOTE Simpan informasi user di session atau database sesuai kebutuhan aplikasi Anda
-    response.cookie('user', payload, {
+    response.cookie('user', payload.email, {
       httpOnly: false,
       sameSite: 'lax',
       path: '/',
@@ -60,6 +60,6 @@ export default class AuthController {
     //     tokens,
     // })
 
-    return response.redirect('/dashboard')
+    return response.redirect('/checkuser')
   }
 }
