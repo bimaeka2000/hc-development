@@ -950,8 +950,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (photoEditWrap) photoEditWrap.classList.remove('d-none')
     }
     // If scope is header only, don't alter tables/lists
-    if (scope === 'header') return
-    // Content scope: make kepeg & pribadi editable
+    if (scope === 'header') return // Content scope: make kepeg & pribadi editable
     ;['pfKepegLeft', 'pfKepegRight', 'pfPribadiLeft', 'pfPribadiRight'].forEach((id) => {
       const tbody = document.getElementById(id)
       if (!tbody) return

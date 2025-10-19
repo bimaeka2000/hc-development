@@ -25,12 +25,12 @@ export default class PegawaisController {
   /**
    * Display form to create a new record
    */
-  async create({ }: HttpContext) { }
+  async create({}: HttpContext) {}
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) { }
+  async store({ request }: HttpContext) {}
 
   /**
    * Show individual record
@@ -40,31 +40,7 @@ export default class PegawaisController {
     const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
     const role = await Role.findBy('id', pegawaiData?.role_id)
     const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
-<<<<<<< HEAD
-<<<<<<< HEAD
     // const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
-=======
-<<<<<<< HEAD
-    const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
->>>>>>> 0fef1fd ("Update Backend")
-    const statusKepegawaian = await StatusKepegawaian.findBy('id', pegawaiData?.status_kepegawaian_id)
-    const dataKesehatanFisik = await DataKesehatanFisik.findBy('pegawai_id', pegawaiData?.id)
-    const riwayatKesehatan = await RiwayatKesehatan.findBy('pegawai_id', pegawaiData?.id)
-    const dokumen = await DokumenPegawai.findBy('pegawai_id', pegawaiData?.id)
-<<<<<<< HEAD
-    // const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
-=======
-    const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
-=======
-    // const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
-    const statusKepegawaian = await StatusKepegawaian.findBy('id', pegawaiData?.status_kepegawaian_id)
-    const dataKesehatanFisik = await DataKesehatanFisik.findBy('pegawai_id', pegawaiData?.id)
-    const riwayatKesehatan = await RiwayatKesehatan.findBy('pegawai_id', pegawaiData?.id)
-    const dokumen = await DokumenPegawai.findBy('pegawai_id', pegawaiData?.id)
-    // const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
->>>>>>> e621cc5 ("Update Backend")
->>>>>>> 0fef1fd ("Update Backend")
-=======
     const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
     const statusKepegawaian = await StatusKepegawaian.findBy(
       'id',
@@ -74,7 +50,6 @@ export default class PegawaisController {
     const riwayatKesehatan = await RiwayatKesehatan.findBy('pegawai_id', pegawaiData?.id)
     const dokumen = await DokumenPegawai.findBy('pegawai_id', pegawaiData?.id)
     const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
->>>>>>> f3dd996 (update untuk push ke backup)
     const pendidikan = await RiwayatPendidikan.findBy('pegawai_id', pegawaiData?.id)
     const jenjangPendidikan = await JenjangPendidikan.findBy('id', pendidikan?.jenjang_id)
     const suku = await Suku.findBy('id', pegawaiData?.suku_id)
@@ -91,16 +66,6 @@ export default class PegawaisController {
       jenisDokumen,
       dokumen,
       pendidikan,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-      jenisDokumen,
-=======
->>>>>>> e621cc5 ("Update Backend")
->>>>>>> 0fef1fd ("Update Backend")
-=======
->>>>>>> f3dd996 (update untuk push ke backup)
       suku,
       agama,
     })
@@ -109,15 +74,15 @@ export default class PegawaisController {
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) { }
+  async edit({ params }: HttpContext) {}
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) { }
+  async update({ params, request }: HttpContext) {}
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) { }
+  async destroy({ params }: HttpContext) {}
 }

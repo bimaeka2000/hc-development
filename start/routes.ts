@@ -1,23 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
-=======
->>>>>>> e621cc5 ("Update Backend")
->>>>>>> 0fef1fd ("Update Backend")
-=======
->>>>>>> f3dd996 (update untuk push ke backup)
 import router from '@adonisjs/core/services/router'
-import env from '#start/env'
 
 import { middleware } from './kernel.js'
 const PagesController = () => import('#controllers/pages_controller')
@@ -28,39 +9,10 @@ const AuthController = () => import('#controllers/auth_controller')
 const DashboardController = () => import('#controllers/dashboard_controller')
 
 router.get('/', async ({ view }) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> e621cc5 ("Update Backend")
->>>>>>> 0fef1fd ("Update Backend")
-    return view.render('login')
-=======
   return view.render('login')
->>>>>>> f3dd996 (update untuk push ke backup)
 })
 
-// router.get('/', async ({ view }) => {
-//     const clientIdSso = env.get('CLIENT_ID_SSO')
-//     const redirectUri = env.get('REDIRECT_URI_SSO')
-//     return view.render('sso/login', { clientIdSso, redirectUri })
-// })
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-// #NOTE SSO Goolgle OAuth2 
-=======
-<<<<<<< HEAD
 // #NOTE SSO Goolgle OAuth2
-=======
-// #NOTE SSO Goolgle OAuth2 
->>>>>>> e621cc5 ("Update Backend")
->>>>>>> 0fef1fd ("Update Backend")
-=======
-// #NOTE SSO Goolgle OAuth2
->>>>>>> f3dd996 (update untuk push ke backup)
 router.get('/auth/google/redirect', [AuthController, 'redirectToGoogle']).as('google.redirect')
 router.get('/auth/google/callback', [AuthController, 'googleCallback'])
 

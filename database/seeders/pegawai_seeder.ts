@@ -5,13 +5,6 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     await Pegawai.createMany([
       {
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-=======
->>>>>>> f3dd996 (update untuk push ke backup)
         npy: '102391289182',
         nik: '312541241212',
         npwp: '312312312132',
@@ -30,17 +23,8 @@ export default class extends BaseSeeder {
         status_kepegawaian_id: 1,
         unit_kerja_id: 1,
         foto: '',
-<<<<<<< HEAD
-        status: 'aktif'
-=======
-
->>>>>>> e621cc5 ("Update Backend")
->>>>>>> 0fef1fd ("Update Backend")
-      }
-=======
         status: 'aktif',
       },
->>>>>>> f3dd996 (update untuk push ke backup)
     ])
   }
 }
