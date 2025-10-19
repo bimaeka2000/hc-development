@@ -21,8 +21,7 @@ export default class extends BaseSchema {
         .references('id')
         .inTable('suku')
         .onDelete('CASCADE')
-        .onUpdate('CASCADE')
-        .nullable
+        .onUpdate('CASCADE').nullable
 
       table
         .integer('status_kepegawaian_id')
@@ -49,7 +48,6 @@ export default class extends BaseSchema {
         .onDelete('SET NULL')
         .onUpdate('CASCADE')
 
-
       table.string('npy', 20).nullable()
       table.string('nik', 20).nullable()
       table.string('npwp', 25).nullable()
@@ -66,13 +64,8 @@ export default class extends BaseSchema {
       table.integer('nomor_urut').nullable()
       table.string('foto', 255).nullable()
       table.enu('status', ['aktif', 'nonaktif']).defaultTo('aktif')
-      table
-        .timestamp('created_at', { useTz: true })
-        .defaultTo(this.now())
-      table
-        .timestamp('updated_at', { useTz: true })
-        .defaultTo(this.now())
-
+      table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updated_at', { useTz: true }).defaultTo(this.now())
     })
   }
 

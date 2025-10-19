@@ -1,13 +1,27 @@
 /* Per-page styles for pegawai-detail.html */
 /* Avatar column aligns top in the new 3-column layout */
-.avatar-col { max-height: none; margin-top: 0; }
-.avatar-box { min-height: 220px; margin-top: 8px; border: 1px solid black; }
-#detAvatar { font-size: 2.4rem; }
-.alamat-val { max-width: 60%; }
+.avatar-col {
+  max-height: none;
+  margin-top: 0;
+}
+.avatar-box {
+  min-height: 220px;
+  margin-top: 8px;
+  border: 1px solid black;
+}
+#detAvatar {
+  font-size: 2.4rem;
+}
+.alamat-val {
+  max-width: 60%;
+}
 
 /* Improve spacing for two-column personal data on medium+ screens */
 @media (min-width: 768px) {
-	#bodyPribadi .list-group-item { padding-top: .5rem; padding-bottom: .5rem; }
+  #bodyPribadi .list-group-item {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
 }
 
 /* =============================================================
@@ -17,22 +31,35 @@
 	 - Utility classes: .lg-span-[1..12]
 	 ============================================================= */
 .bento-layout {
-	display: grid;
-	gap: 1rem;
-	grid-template-columns: repeat(12, 1fr);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(12, 1fr);
 }
 
-
 /* Mobile-first default: stack items full-width */
-.bento-layout > * { grid-column: span 12; }
+.bento-layout > * {
+  grid-column: span 12;
+}
 
 @media (min-width: 992px) {
-	.bento-layout > * { grid-column: span 4; } /* sensible default if no utility is provided */
-	.bento-layout > .lg-span-1 { grid-column: span 1; }
-	.bento-layout > .lg-span-2 { grid-column: span 2; }
-	.bento-layout > .lg-span-3 { grid-column: span 3; }
-	.bento-layout > .lg-span-4 { grid-column: span 4; }
-  .bento-layout > .lg-span-5 { grid-column: span 5; }
+  .bento-layout > * {
+    grid-column: span 4;
+  } /* sensible default if no utility is provided */
+  .bento-layout > .lg-span-1 {
+    grid-column: span 1;
+  }
+  .bento-layout > .lg-span-2 {
+    grid-column: span 2;
+  }
+  .bento-layout > .lg-span-3 {
+    grid-column: span 3;
+  }
+  .bento-layout > .lg-span-4 {
+    grid-column: span 4;
+  }
+  .bento-layout > .lg-span-5 {
+    grid-column: span 5;
+  }
 
   /* Auto-fill rows: items share space evenly per row (2 cards => 1/2 each, 3 => 1/3, etc).
      Adjust --bento-min to control minimum card width. */
@@ -42,14 +69,30 @@
   }
 
   /* Reset default span so items use 1 track by default; lg-span-* utilities still work */
-  .bento-layout > * { grid-column: auto; }
-	.bento-layout > .lg-span-6 { grid-column: span 6; }
-	.bento-layout > .lg-span-7 { grid-column: span 7; }
-	.bento-layout > .lg-span-8 { grid-column: span 8; }
-	.bento-layout > .lg-span-9 { grid-column: span 9; }
-	.bento-layout > .lg-span-10 { grid-column: span 10; }
-	.bento-layout > .lg-span-11 { grid-column: span 11; }
-	.bento-layout > .lg-span-12 { grid-column: span 12; }
+  .bento-layout > * {
+    grid-column: auto;
+  }
+  .bento-layout > .lg-span-6 {
+    grid-column: span 6;
+  }
+  .bento-layout > .lg-span-7 {
+    grid-column: span 7;
+  }
+  .bento-layout > .lg-span-8 {
+    grid-column: span 8;
+  }
+  .bento-layout > .lg-span-9 {
+    grid-column: span 9;
+  }
+  .bento-layout > .lg-span-10 {
+    grid-column: span 10;
+  }
+  .bento-layout > .lg-span-11 {
+    grid-column: span 11;
+  }
+  .bento-layout > .lg-span-12 {
+    grid-column: span 12;
+  }
 }
 
 /* Optional: row-span helpers if needed later (requires consistent row sizing)
@@ -57,5 +100,3 @@
 .bento-layout > .lg-row-span-2 { grid-row: span 2; }
 .bento-layout > .lg-row-span-3 { grid-row: span 3; }
 */
-
-

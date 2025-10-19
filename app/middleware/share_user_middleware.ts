@@ -10,16 +10,16 @@ export default class ShareUserMiddleware {
     view.share({
       user: user || null,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 
 =======
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+>>>>>>> f3dd996 (update untuk push ke backup)
     })
-
     await next()
   }
-
-
 }

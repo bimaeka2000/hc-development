@@ -5,19 +5,19 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     await Suku.createMany([
       {
-        suku: 'Jawa'
+        suku: 'Jawa',
       },
       {
-        suku: 'Sunda'
+        suku: 'Sunda',
       },
       {
-        suku: 'Batak'
+        suku: 'Batak',
       },
       {
-        suku: 'Minang'
+        suku: 'Minang',
       },
       {
-        suku: 'Bugis'
+        suku: 'Bugis',
       },
     ])
   }

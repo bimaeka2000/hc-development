@@ -10,8 +10,8 @@ export default class extends BaseSeeder {
         jenis_penyakit: 'tidak ada',
         keterangan: 'kosong',
         tanggal_diagnosa: new Date('2015-10-23'),
-        status_sembuh: 'sembuh'
-      }
+        status_sembuh: 'sembuh',
+      },
     ])
   }
 }

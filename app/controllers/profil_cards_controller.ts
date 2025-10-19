@@ -12,13 +12,12 @@ export default class ProfilCardsController {
   /**
    * Display form to create a new record
    */
-  async create({ }: HttpContext) {
-  }
+  async create({}: HttpContext) {}
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) { }
+  async store({ request }: HttpContext) {}
 
   /**
    * Show individual record
@@ -26,7 +25,6 @@ export default class ProfilCardsController {
   async show({ view, params }: HttpContext) {
     const pegawai = await Pegawai.findBy('id', 3)
     return view.render('dashboard/edit/profil', { pegawai })
-
   }
 
   /**
@@ -40,12 +38,12 @@ export default class ProfilCardsController {
    * Handle form submission for the edit action
    */
   async update({ params, request }: HttpContext) {
-    const data = request.all();
+    const data = request.all()
     console.log(data)
     const pegawai = Pegawai.findBy('id', params.id)
   }
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) { }
+  async destroy({ params }: HttpContext) {}
 }

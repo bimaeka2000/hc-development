@@ -8,5 +8,4 @@ export default class JenjangPendidikan extends BaseModel {
 
   @column()
   declare jenjang_pendidikan: string
-
 }

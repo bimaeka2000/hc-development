@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 /*
@@ -13,6 +14,8 @@
 =======
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+>>>>>>> f3dd996 (update untuk push ke backup)
 import router from '@adonisjs/core/services/router'
 import env from '#start/env'
 
@@ -26,6 +29,7 @@ const DashboardController = () => import('#controllers/dashboard_controller')
 
 router.get('/', async ({ view }) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 
@@ -33,6 +37,9 @@ router.get('/', async ({ view }) => {
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
     return view.render('login')
+=======
+  return view.render('login')
+>>>>>>> f3dd996 (update untuk push ke backup)
 })
 
 // router.get('/', async ({ view }) => {
@@ -42,6 +49,7 @@ router.get('/', async ({ view }) => {
 // })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // #NOTE SSO Goolgle OAuth2 
 =======
 <<<<<<< HEAD
@@ -50,31 +58,30 @@ router.get('/', async ({ view }) => {
 // #NOTE SSO Goolgle OAuth2 
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+// #NOTE SSO Goolgle OAuth2
+>>>>>>> f3dd996 (update untuk push ke backup)
 router.get('/auth/google/redirect', [AuthController, 'redirectToGoogle']).as('google.redirect')
 router.get('/auth/google/callback', [AuthController, 'googleCallback'])
 
-
 router.get('/logout', [SessionController, 'logOut']).as('logout')
 router.post('session', [SessionController, 'store'])
-router.delete('destroy', [SessionController, 'destroy'])
-    .use(middleware.auth({ guards: ['api'] }))
+router.delete('destroy', [SessionController, 'destroy']).use(middleware.auth({ guards: ['api'] }))
 
-
-router.get('/dashboard', [DashboardController, 'checkUser'])
-    .as('dashboard.index')
+router.get('/dashboard', [DashboardController, 'checkUser']).as('dashboard.index')
 
 router
-    .group(() => {
-        router.resource('/pegawai', PegawaisController)
-        // router.get('/pegawai-detail/:id', [PagesController, 'PegawaiDetail'])
-        router.resource('/edit/profil', ProfilCardsController)
-        router.get('/cuti', [PagesController, 'Cuti'])
-        router.get('/sakit', [PagesController, 'Sakit'])
-        router.get('/izin', [PagesController, 'Izin'])
-        router.get('/penelitian', [PagesController, 'Penelitian'])
-        router.get('/pengabdian', [PagesController, 'Pengabdian'])
-        router.get('/users', [PagesController, 'Users'])
-        router.get('/edit/:page', [PagesController, 'EditPage']).as('dashboard.edit')
-    })
-    .prefix('dashboard')
-    .use(middleware.shareUser())
+  .group(() => {
+    router.resource('/pegawai', PegawaisController)
+    // router.get('/pegawai-detail/:id', [PagesController, 'PegawaiDetail'])
+    router.resource('/edit/profil', ProfilCardsController)
+    router.get('/cuti', [PagesController, 'Cuti'])
+    router.get('/sakit', [PagesController, 'Sakit'])
+    router.get('/izin', [PagesController, 'Izin'])
+    router.get('/penelitian', [PagesController, 'Penelitian'])
+    router.get('/pengabdian', [PagesController, 'Pengabdian'])
+    router.get('/users', [PagesController, 'Users'])
+    router.get('/edit/:page', [PagesController, 'EditPage']).as('dashboard.edit')
+  })
+  .prefix('dashboard')
+  .use(middleware.shareUser())

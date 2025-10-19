@@ -5,16 +5,16 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     await UnitKerja.createMany([
       {
-        unit_kerja: "SD"
+        unit_kerja: 'SD',
       },
       {
-        unit_kerja: "SMP"
+        unit_kerja: 'SMP',
       },
       {
-        unit_kerja: "SMA"
+        unit_kerja: 'SMA',
       },
       {
-        unit_kerja: "Universitas"
+        unit_kerja: 'Universitas',
       },
     ])
   }

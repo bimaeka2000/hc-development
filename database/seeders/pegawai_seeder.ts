@@ -6,9 +6,12 @@ export default class extends BaseSeeder {
     await Pegawai.createMany([
       {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> f3dd996 (update untuk push ke backup)
         npy: '102391289182',
         nik: '312541241212',
         npwp: '312312312132',
@@ -19,20 +22,25 @@ export default class extends BaseSeeder {
         agama_id: 1,
         suku_id: 1,
         alamat: 'Kota Medan',
-        no_hp: "08312375123",
-        no_hp_darurat: "08213112312",
+        no_hp: '08312375123',
+        no_hp_darurat: '08213112312',
         email_pribadi: 'pribadi@gmail.com',
         email_kantor: 'kantor@gmail.com',
         status_perkawinan: 'Lajang',
         status_kepegawaian_id: 1,
         unit_kerja_id: 1,
         foto: '',
+<<<<<<< HEAD
         status: 'aktif'
 =======
 
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
       }
+=======
+        status: 'aktif',
+      },
+>>>>>>> f3dd996 (update untuk push ke backup)
     ])
   }
 }

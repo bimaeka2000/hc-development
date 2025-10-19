@@ -8,6 +8,4 @@ export default class JenisDokumen extends BaseModel {
 
   @column()
   declare jenis_dokumen: string
-
-
 }

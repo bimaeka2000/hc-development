@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f3dd996 (update untuk push ke backup)
 {
   "name": "hc",
   "version": "0.0.0",
@@ -8,11 +11,24 @@
   "scripts": {
     "start": "node bin/server.js",
     "build": "node ace build",
+<<<<<<< HEAD
     "dev": "node ace serve --hmr",
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
+=======
+    "dev": "node ace serve --watch",
+    "dev:front": "bun run vite",
+    "build:front": "bun run vite build",
+    "lint": "bun run eslint .",
+    "lint:fix": "bun run eslint . --fix",
+    "build:all": "node ace build && bun run vite build",
+    "format": "bun run prettier --write .",
+    "typecheck": "bun run tsc --noEmit",
+    "test": "node ace test",
+    "prepare": "bun install"
+>>>>>>> f3dd996 (update untuk push ke backup)
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
@@ -75,6 +91,10 @@
     ]
   },
   "prettier": "@adonisjs/prettier-config"
+<<<<<<< HEAD
 }
 =======
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+}
+>>>>>>> f3dd996 (update untuk push ke backup)

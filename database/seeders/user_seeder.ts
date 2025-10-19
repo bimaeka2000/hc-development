@@ -10,7 +10,7 @@ export default class extends BaseSeeder {
         email: 'bimaekaputra@satyaterrabhinneka.ac.id',
         password: 'bimaeka2000',
         role: 'superadmin',
-      }
+      },
     ])
   }
 }

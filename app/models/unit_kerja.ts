@@ -9,5 +9,4 @@ export default class UnitKerja extends BaseModel {
 
   @column()
   declare unit_kerja: string
-
 }

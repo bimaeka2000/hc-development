@@ -1,24 +1,26 @@
 <div class="panel-soft glass-card card-hover">
   <div class="d-flex align-items-center mb-2">
     <i class="bi bi-files me-2 text-primary"></i>
-    <div class="mini-section-title mb-0">Dokumen</div>
-    <a href="edit/dokumen" class="btn btn-sm btn-outline-primary ms-auto"><i class="bi bi-pencil"></i> Edit</a>
+    <div class="mini-section-title mb-0">
+      Dokumen
+    </div>
+    <a href="edit/dokumen" class="btn btn-sm btn-outline-primary ms-auto">      <i class="bi bi-pencil"></i>Edit</a>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item d-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center">
-        <i class="bi bi-file-earmark-text me-2 text-primary"></i><span class="fw-semibold me-2">{{dokumen}}</span>
-        <span class="badge text-bg-light text-secondary">{{jenisDokumen}}
+        <i class="bi bi-file-earmark-text me-2 text-primary"></i>        <span class="fw-semibold me-2">{{ dokumen }}</span>
+        <span class="badge text-bg-light text-secondary">{{ jenisDokumen }}
         </span>
 
         {{-- #NOTE perbaiki untuk looping data --}}
       </div>
       @if(statusDokumen !== undefined)
-      <span class="badge text-bg-success">{{statusDokumen}}</span>
+        <span class="badge text-bg-success">{{ statusDokumen }}</span>
       @else
-      <span class="badge text-bg-success">Proses</span>
+        <span class="badge text-bg-success">Proses</span>
       @endif
-
+      
     </li>
   </ul>
 </div>

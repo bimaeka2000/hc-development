@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import type { HttpContext } from '@adonisjs/core/http'
 =======
 <<<<<<< HEAD
@@ -7,6 +8,9 @@ import type { HttpContext } from '@adonisjs/core/http'
 import type { HttpContext } from '@adonisjs/core/http'
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+import type { HttpContext } from '@adonisjs/core/http'
+>>>>>>> f3dd996 (update untuk push ke backup)
 import Pegawai from '#models/pegawai'
 import Keluarga from '#models/keluarga'
 import Role from '#models/role'
@@ -22,15 +26,81 @@ import JenjangPendidikan from '#models/jenjang_pendidikan'
 import Suku from '#models/suku'
 import Agama from '#models/agama'
 export default class PagesController {
+  async Pegawai({ view }: HttpContext) {
+    // looping semua data pegawai
+    // Load all pegawai for listing page
+    const pegawais = await Pegawai.query().orderBy('id', 'asc')
+    return view.render('dashboard/pegawai', { pegawais })
+  }
 
-    async Pegawai({ view }: HttpContext) {
+  async PegawaiDetail({ view, session }: HttpContext) {
+    const userGoogle = session.get('user_google')
+    const pegawaiData = await Pegawai.find('pegawai_id', userGoogle.id)
+    const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
+    const role = await Role.findBy('id', pegawaiData?.role_id)
+    const dosen = await Dosen.findBy('i', pegawaiData?.id)
+    const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
+    const statusKepegawaian = await StatusKepegawaian.findBy(
+      'id',
+      pegawaiData?.status_kepegawaian_id
+    )
+    const dataKesehatanFisik = await DataKesehatanFisik.findBy('pegawai_id', pegawaiData?.id)
+    const riwayatKesehatan = await RiwayatKesehatan.findByOrFail('pegawai_id', pegawaiData?.id)
+    const dokumen = await DokumenPegawai.findBy('pegawai_id', pegawaiData?.id)
+    const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
+    const pendidikan = await RiwayatPendidikan.findBy('pegawai_id', pegawaiData?.id)
+    const jenjangPendidikan = await JenjangPendidikan.findBy('id', pendidikan?.jenjang_id)
+    const suku = await Suku.findBy('id', pegawaiData?.suku_id)
+    const agama = await Agama.findBy('id', pegawaiData?.agama_id)
+    return view.render('dashboard/pegawai_detail', {
+      pegawaiData,
+      keluarga,
+      role,
+      unitKerja,
+      statusKepegawaian,
+      dosen,
+      dataKesehatanFisik,
+      riwayatKesehatan,
+      jenjangPendidikan,
+      dokumen,
+      pendidikan,
+      jenisDokumen,
+      suku,
+      agama,
+    })
+  }
 
-        // looping semua data pegawai
-        // Load all pegawai for listing page
-        const pegawais = await Pegawai.query().orderBy('id', 'asc')
-        return view.render('dashboard/pegawai', { pegawais })
+  async Cuti({ view }: HttpContext) {
+    return view.render('dashboard/cuti')
+  }
+
+  async Sakit({ view }: HttpContext) {
+    return view.render('dashboard/sakit')
+  }
+
+  async Izin({ view }: HttpContext) {
+    return view.render('dashboard/izin')
+  }
+
+  async Penelitian({ view }: HttpContext) {
+    return view.render('dashboard/under-construction')
+  }
+
+  async Pengabdian({ view }: HttpContext) {
+    return view.render('dashboard/under-construction')
+  }
+
+  async Users({ view }: HttpContext) {
+    return view.render('dashboard/users')
+  }
+
+  async EditPage({ view, params, request }: HttpContext) {
+    const page = params.page || ''
+    if (!/^[a-z0-9_-]+$/i.test(page)) {
+      return view.render('dashboard/under-construction')
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     async PegawaiDetail({ view, session }: HttpContext) {
 =======
@@ -89,52 +159,20 @@ export default class PagesController {
                 agama
             }
         )
+=======
+    // If ?id= is provided, try to load the pegawai name for breadcrumb
+    const id = request.input('id')
+    let namaLengkap = null
+    if (id) {
+      try {
+        const p = await Pegawai.find(id)
+        namaLengkap = p?.nama_lengkap || null
+      } catch (e) {
+        // ignore
+      }
+>>>>>>> f3dd996 (update untuk push ke backup)
     }
 
-    async Cuti({ view }: HttpContext) {
-        return view.render('dashboard/cuti')
-    }
-
-    async Sakit({ view }: HttpContext) {
-        return view.render('dashboard/sakit')
-    }
-
-    async Izin({ view }: HttpContext) {
-        return view.render('dashboard/izin')
-    }
-
-    async Penelitian({ view }: HttpContext) {
-        return view.render('dashboard/under-construction')
-    }
-
-    async Pengabdian({ view }: HttpContext) {
-        return view.render('dashboard/under-construction')
-    }
-
-    async Users({ view }: HttpContext) {
-        return view.render('dashboard/users')
-    }
-
-    async EditPage({ view, params, request }: HttpContext) {
-        const page = params.page || ''
-        if (!/^[a-z0-9_-]+$/i.test(page)) {
-            return view.render('dashboard/under-construction')
-        }
-
-        // If ?id= is provided, try to load the pegawai name for breadcrumb
-        const id = request.input('id')
-        let nama_lengkap = null
-        if (id) {
-            try {
-                const p = await Pegawai.find(id)
-                nama_lengkap = p?.nama_lengkap || null
-            } catch (e) {
-                // ignore
-            }
-        }
-
-        return view.render(`dashboard/edit/${page}`, { nama_lengkap })
-    }
+    return view.render(`dashboard/edit/${page}`, { namaLengkap })
+  }
 }
-
-

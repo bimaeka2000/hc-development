@@ -9,6 +9,7 @@ export default class RiwayatKesehatan extends BaseModel {
 
   @column()
 <<<<<<< HEAD
+<<<<<<< HEAD
   declare pegawai_id: number
 =======
 <<<<<<< HEAD
@@ -17,6 +18,9 @@ export default class RiwayatKesehatan extends BaseModel {
   declare pegawai_id: number
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+  declare pegawai_id: number
+>>>>>>> f3dd996 (update untuk push ke backup)
 
   @column()
   declare jenis_penyakit: string

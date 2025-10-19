@@ -6,27 +6,31 @@ export default class extends BaseSeeder {
     await Role.createMany([
       {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+>>>>>>> f3dd996 (update untuk push ke backup)
         nama_role: 'admin',
-        status: 'aktif'
+        status: 'aktif',
       },
       {
         nama_role: 'pegawai',
-        status: 'aktif'
+        status: 'aktif',
       },
       {
         nama_role: 'atasan',
-        status: 'aktif'
+        status: 'aktif',
       },
       {
         nama_role: 'hrd',
-        status: 'aktif'
+        status: 'aktif',
       },
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
@@ -60,6 +64,8 @@ export default class extends BaseSeeder {
 
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+>>>>>>> f3dd996 (update untuk push ke backup)
     ])
   }
 }

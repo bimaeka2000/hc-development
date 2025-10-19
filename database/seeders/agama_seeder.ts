@@ -21,7 +21,7 @@ export default class extends BaseSeeder {
       },
       {
         agama: 'Konghucu',
-      }
+      },
     ])
   }
 }

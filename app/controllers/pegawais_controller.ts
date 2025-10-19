@@ -37,9 +37,10 @@ export default class PegawaisController {
    */
   async show({ view, params }: HttpContext) {
     const pegawaiData = await Pegawai.find(params.id)
-    // const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
+    const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
     const role = await Role.findBy('id', pegawaiData?.role_id)
     const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
+<<<<<<< HEAD
 <<<<<<< HEAD
     // const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
 =======
@@ -63,22 +64,34 @@ export default class PegawaisController {
     // const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+    const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
+    const statusKepegawaian = await StatusKepegawaian.findBy(
+      'id',
+      pegawaiData?.status_kepegawaian_id
+    )
+    const dataKesehatanFisik = await DataKesehatanFisik.findBy('pegawai_id', pegawaiData?.id)
+    const riwayatKesehatan = await RiwayatKesehatan.findBy('pegawai_id', pegawaiData?.id)
+    const dokumen = await DokumenPegawai.findBy('pegawai_id', pegawaiData?.id)
+    const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
+>>>>>>> f3dd996 (update untuk push ke backup)
     const pendidikan = await RiwayatPendidikan.findBy('pegawai_id', pegawaiData?.id)
-    // const jenjangPendidikan = await JenjangPendidikan.findBy('id', pendidikan?.jenjang_id)
+    const jenjangPendidikan = await JenjangPendidikan.findBy('id', pendidikan?.jenjang_id)
     const suku = await Suku.findBy('id', pegawaiData?.suku_id)
     const agama = await Agama.findBy('id', pegawaiData?.agama_id)
     return view.render('dashboard/pegawai_detail', {
       pegawaiData,
-      // keluarga,
+      keluarga,
       role,
       unitKerja,
       statusKepegawaian,
       dosen,
       dataKesehatanFisik,
       riwayatKesehatan,
-      // jenjangPendidikan,
+      jenisDokumen,
       dokumen,
       pendidikan,
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -86,8 +99,10 @@ export default class PegawaisController {
 =======
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+>>>>>>> f3dd996 (update untuk push ke backup)
       suku,
-      agama
+      agama,
     })
   }
 

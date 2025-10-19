@@ -11,15 +11,11 @@ export default class extends BaseSchema {
       table.string('nama_role', 50).notNullable()
 
       // Status enum: Aktif / Nonaktif
-      table
-        .enum('status', ['Aktif', 'Nonaktif'])
-        .defaultTo('Aktif')
+      table.enum('status', ['Aktif', 'Nonaktif']).defaultTo('Aktif')
 
       // Waktu dibuat dan diperbarui
       table.dateTime('dibuat_pada').defaultTo(this.now())
-      table
-        .dateTime('diperbarui_pada')
-        .defaultTo(this.now())
+      table.dateTime('diperbarui_pada').defaultTo(this.now())
     })
   }
 

@@ -7,6 +7,7 @@ export default class extends BaseSeeder {
     await DataKesehatanFisik.createMany([
       {
 <<<<<<< HEAD
+<<<<<<< HEAD
         pegawai_id: 1,
 =======
 <<<<<<< HEAD
@@ -15,14 +16,17 @@ export default class extends BaseSeeder {
         pegawai_id: 1,
 >>>>>>> e621cc5 ("Update Backend")
 >>>>>>> 0fef1fd ("Update Backend")
+=======
+        pegawai_id: 1,
+>>>>>>> f3dd996 (update untuk push ke backup)
         tinggi_cm: 100,
         berat_kg: 200,
         golongan_darah: 'o',
         tekanan_darah: '190',
         alergi: 'tidak ada',
         disabilitas: 'tidak',
-        catatan_kesehatan: 'sehat'
-      }
+        catatan_kesehatan: 'sehat',
+      },
     ])
   }
 }

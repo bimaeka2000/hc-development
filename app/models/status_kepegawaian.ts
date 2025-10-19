@@ -9,5 +9,4 @@ export default class StatusKepegawaian extends BaseModel {
 
   @column()
   declare status_kepegawaian: string
-
 }
