@@ -5,7 +5,7 @@ import Pegawai from '#models/pegawai'
 import * as crypto from 'node:crypto'
 import Hash from '@adonisjs/core/services/hash'
 export default class DashboardController {
-  async checkUser({ response, session, auth, request }: HttpContext) {
+  async checkUser({ response, session }: HttpContext) {
     const userGoogle = session.get('user_google')
 
     const generated = crypto.randomBytes(16).toString('hex') // random 32-char string

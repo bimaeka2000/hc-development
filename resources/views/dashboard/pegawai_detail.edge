@@ -1,4 +1,5 @@
 @layout.layout({title:'Pegawai Detail'})
+  @vite(['resources/css/pegawai-detail.css'])
 
   @slot('meta')
     <meta name="description" content="Dashboard page for Human Capital Management System" />
@@ -73,9 +74,9 @@
 
       <div class="bento-layout mb-2 mt-2">
         @!component('dashboard/components/dokumen', {
-        dokumen: dokumen.nama_file ,
-        jenisDokumen: jenisDokumen.jenis_dokumen ,
-        statusDokumen: dokumen.status_dokumen
+        dokumen: dokumen?.nama_file || "Belum Ada Data" ,
+        jenisDokumen: jenisDokumen?.jenis_dokumen || "Belum Ada Data" ,
+        statusDokumen: dokumen?.status_dokumen || "Belum Ada Data"
         })
         @!component('dashboard/components/pendidikan', {
         jenjangPendidikan: jenjangPendidikan ? jenjangPendidikan.jenjang_pendidikan : "Belum Ada Data",

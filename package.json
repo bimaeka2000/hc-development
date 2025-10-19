@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node bin/server.js",
     "build": "node ace build",
-    "dev": "node ace serve --watch",
+    "dev": "node ace serve --hmr",
     "dev:front": "bun run vite",
     "build:front": "bun run vite build",
     "lint": "bun run eslint .",

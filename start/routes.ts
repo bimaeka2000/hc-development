@@ -38,4 +38,3 @@ router
     router.get('/edit/:page', [PagesController, 'EditPage']).as('dashboard.edit')
   })
   .prefix('dashboard')
-  .use(middleware.shareUser())

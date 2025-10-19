@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
+import JenjangPendidikan from './jenjang_pendidikan.js'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class RiwayatPendidikan extends BaseModel {
   static table = 'riwayat_pendidikan'
@@ -7,8 +9,11 @@ export default class RiwayatPendidikan extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
-  declare pegawai_id: number
+  @column({ columnName: 'pegawai_id' })
+  declare pegawaiId: number
+
+  @belongsTo(() => JenjangPendidikan, { foreignKey: 'jenjang_id' })
+  declare jenjangPendidikan: BelongsTo<typeof this.jenjangPendidikan>
 
   @column()
   declare jenjang_id: number

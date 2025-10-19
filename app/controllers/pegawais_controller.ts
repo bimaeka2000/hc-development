@@ -1,18 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Pegawai from '#models/pegawai'
-import Keluarga from '#models/keluarga'
-import Role from '#models/role'
-import UnitKerja from '#models/unit_kerja'
-import StatusKepegawaian from '#models/status_kepegawaian'
-import Dosen from '#models/dosen'
-import DataKesehatanFisik from '#models/data_kesehatan_fisik'
-import RiwayatKesehatan from '#models/riwayat_kesehatan'
-import DokumenPegawai from '#models/dokumen_pegawai'
-import JenisDokumen from '#models/jenis_dokumen'
-import RiwayatPendidikan from '#models/riwayat_pendidikan'
-import JenjangPendidikan from '#models/jenjang_pendidikan'
-import Suku from '#models/suku'
-import Agama from '#models/agama'
+
 export default class PegawaisController {
   /**
    * Display a list of resource
@@ -36,37 +24,25 @@ export default class PegawaisController {
    * Show individual record
    */
   async show({ view, params }: HttpContext) {
-    const pegawaiData = await Pegawai.find(params.id)
-    const keluarga = await Keluarga.findBy('pegawai_id', pegawaiData?.id)
-    const role = await Role.findBy('id', pegawaiData?.role_id)
-    const dosen = await Dosen.findBy('pegawai_id', pegawaiData?.id)
-    const unitKerja = await UnitKerja.findBy('id', pegawaiData?.unit_kerja_id)
-    const statusKepegawaian = await StatusKepegawaian.findBy(
-      'id',
-      pegawaiData?.status_kepegawaian_id
-    )
-    const dataKesehatanFisik = await DataKesehatanFisik.findBy('pegawai_id', pegawaiData?.id)
-    const riwayatKesehatan = await RiwayatKesehatan.findBy('pegawai_id', pegawaiData?.id)
-    const dokumen = await DokumenPegawai.findBy('pegawai_id', pegawaiData?.id)
-    const jenisDokumen = await JenisDokumen.findBy('id', dokumen?.jenis_dokumen_id)
-    const pendidikan = await RiwayatPendidikan.findBy('pegawai_id', pegawaiData?.id)
-    const jenjangPendidikan = await JenjangPendidikan.findBy('id', pendidikan?.jenjang_id)
-    const suku = await Suku.findBy('id', pegawaiData?.suku_id)
-    const agama = await Agama.findBy('id', pegawaiData?.agama_id)
+    const pegawaiData = await Pegawai.query()
+      .where('id', params.id)
+      .preload('keluarga')
+      .preload('role')
+      .preload('dosen')
+      .preload('dataKesehatanFisik')
+      .preload('riwayatKesehatan')
+      .preload('dokumen', (query) => {
+        query.preload('jenisDokumen')
+      })
+      .preload('pendidikan', (query) => {
+        query.preload('jenjangPendidikan')
+      })
+      .preload('suku')
+      .preload('agama')
+      .firstOrFail()
+
     return view.render('dashboard/pegawai_detail', {
       pegawaiData,
-      keluarga,
-      role,
-      unitKerja,
-      statusKepegawaian,
-      dosen,
-      dataKesehatanFisik,
-      riwayatKesehatan,
-      jenisDokumen,
-      dokumen,
-      pendidikan,
-      suku,
-      agama,
     })
   }
 

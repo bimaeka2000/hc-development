@@ -7,7 +7,7 @@ export default class Dosen extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
+  @column({ columnName: 'pegawai_id' })
   declare pegawai_id: number
 
   @column()

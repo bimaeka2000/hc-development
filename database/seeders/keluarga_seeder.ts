@@ -5,7 +5,7 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     await Keluarga.createMany([
       {
-        pegawai_id: 1,
+        pegawai_id: 4,
         nama_keluarga: 'siti',
         hubungan: 'istri',
         tanggal_lahir: new Date(2000 - 30 - 20),

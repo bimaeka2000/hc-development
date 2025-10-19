@@ -1,5 +1,17 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import type { BelongsTo, Has, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasOne, belongsTo } from '@adonisjs/lucid/orm'
+import Role from '#models/role'
+import Keluarga from '#models/keluarga'
+import Dosen from '#models/dosen'
+import UnitKerja from '#models/unit_kerja'
+import StatusKepegawaian from '#models/status_kepegawaian'
+import DataKesehatanFisik from '#models/data_kesehatan_fisik'
+import RiwayatKesehatan from '#models/riwayat_kesehatan'
+import DokumenPegawai from '#models/dokumen_pegawai'
+import RiwayatPendidikan from '#models/riwayat_pendidikan'
+import Suku from '#models/suku'
+import Agama from '#models/agama'
 
 export default class Pegawai extends BaseModel {
   static table = 'pegawai'
@@ -69,9 +81,46 @@ export default class Pegawai extends BaseModel {
 
   @column()
   declare role_id: number
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasOne(() => Keluarga, {
+    foreignKey: 'pegawai_id',
+  })
+  declare keluarga: HasOne<typeof Keluarga>
+
+  @belongsTo(() => Role, {
+    foreignKey: 'role_id',
+  })
+  declare role: BelongsTo<typeof Role>
+
+  @hasOne(() => Dosen, {
+    foreignKey: 'pegawai_id',
+  })
+  declare dosen: HasOne<typeof Dosen>
+
+  @belongsTo(() => StatusKepegawaian)
+  declare statusKepegawaian: BelongsTo<typeof StatusKepegawaian>
+
+  @hasOne(() => DataKesehatanFisik)
+  declare dataKesehatanFisik: HasOne<typeof DataKesehatanFisik>
+
+  @hasOne(() => RiwayatKesehatan)
+  declare riwayatKesehatan: HasOne<typeof RiwayatKesehatan>
+
+  @hasOne(() => DokumenPegawai)
+  declare dokumen: HasOne<typeof DokumenPegawai>
+
+  @hasOne(() => RiwayatPendidikan)
+  declare pendidikan: HasOne<typeof RiwayatPendidikan>
+
+  @belongsTo(() => Suku, { foreignKey: 'id' })
+  declare suku: BelongsTo<typeof Suku>
+
+  @belongsTo(() => Agama, { foreignKey: 'id' })
+  declare agama: BelongsTo<typeof Agama>
 }

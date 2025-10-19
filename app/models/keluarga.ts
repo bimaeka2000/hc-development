@@ -1,13 +1,12 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
-
-export default class Kelurga extends BaseModel {
+import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
+export default class Keluarga extends BaseModel {
   static table = 'keluarga'
 
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
+  @column({ columnName: 'pegawai_id' })
   declare pegawai_id: number
 
   @column()

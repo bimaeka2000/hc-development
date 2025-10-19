@@ -1,5 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasOne, belongsTo, hasMany } from '@adonisjs/lucid/orm'
+
+import type { BelongsTo, HasOne } from '@adonisjs/lucid/types/relations'
+import Pegawai from './pegawai.js'
 
 export default class DataKesehatanFisik extends BaseModel {
   static table = 'data_kesehatan_fisik'
@@ -7,8 +10,8 @@ export default class DataKesehatanFisik extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
-  declare pegawai_id: number
+  @column({ columnName: 'pegawai_id' })
+  declare pegawaiId: number
 
   @column()
   declare tinggi_cm: number

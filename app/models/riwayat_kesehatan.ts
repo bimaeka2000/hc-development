@@ -7,8 +7,8 @@ export default class RiwayatKesehatan extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
-  declare pegawai_id: number
+  @column({ columnName: 'pegawai_id' })
+  declare pegawaiId: number
 
   @column()
   declare jenis_penyakit: string
