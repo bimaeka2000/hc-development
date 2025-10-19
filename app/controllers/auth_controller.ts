@@ -22,7 +22,6 @@ export default class AuthController {
       ],
       hd: 'satyaterrabhinneka.ac.id', // opsional, hanya izinkan domain ini
     })
-
     return response.redirect(url)
   }
 
@@ -54,12 +53,6 @@ export default class AuthController {
     })
 
     await session.put('user_google', payload)
-    // response.json({
-    //     message: 'Login Google berhasil!',
-    //     user: user,
-    //     tokens,
-    // })
-
     return response.redirect('/checkuser')
   }
 }

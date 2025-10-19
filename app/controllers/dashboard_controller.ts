@@ -6,7 +6,6 @@ import * as crypto from 'node:crypto'
 import Hash from '@adonisjs/core/services/hash'
 export default class DashboardController {
   async checkUser({ response, session, auth, request }: HttpContext) {
-
     const userGoogle = session.get('user_google')
 
     const generated = crypto.randomBytes(16).toString('hex') // random 32-char string
@@ -70,7 +69,6 @@ export default class DashboardController {
     }
   }
   async index({ view, session }: HttpContext) {
-
     const userGoogle = session.get('user_google')
     const email = userGoogle?.email
     const user = await User.findBy('email', email)

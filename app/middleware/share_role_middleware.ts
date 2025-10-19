@@ -12,9 +12,7 @@ export default class ShareRoleMiddleware {
 
       if (userGoogle?.email) {
         // Ambil user dari database berdasarkan email
-        userRole = await User.query()
-          .where('email', userGoogle.email)
-          .first()
+        userRole = await User.query().where('email', userGoogle.email).first()
       }
     } catch (error) {
       console.error('❌ Middleware ShareUser error:', error)

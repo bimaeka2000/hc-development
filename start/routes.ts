@@ -12,7 +12,6 @@ router.get('/', async ({ view }) => {
   return view.render('login')
 })
 
-
 // #NOTE SSO Goolgle OAuth2
 router.get('/auth/google/redirect', [AuthController, 'redirectToGoogle']).as('google.redirect')
 router.get('/auth/google/callback', [AuthController, 'googleCallback'])
@@ -23,8 +22,7 @@ router.post('session', [SessionController, 'store'])
 router.delete('destroy', [SessionController, 'destroy'])
 
 router.get('/checkuser', [DashboardController, 'checkUser'])
-router.get('/dashboard', [DashboardController, 'index'])
-  .as('dashboard.index')
+router.get('/dashboard', [DashboardController, 'index']).as('dashboard.index')
 
 router
   .group(() => {
@@ -41,4 +39,3 @@ router
   })
   .prefix('dashboard')
   .use(middleware.shareUser())
-

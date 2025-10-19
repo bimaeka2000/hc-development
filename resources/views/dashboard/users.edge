@@ -1,84 +1,84 @@
 @layout.layout({title:'Users'})
 
-@slot('meta')
-<meta name="description" content="Dashboard page for Human Capital Management System" />
-@endslot
+  @slot('meta')
+    <meta name="description" content="Dashboard page for Human Capital Management System" />
+  @endslot
+  
+  @slot('main')
+    <main class="flex-grow-1 p-3 p-lg-4">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="panel-soft mb-3" style="max-width:550px; min-height:293px;">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-person-circle me-2 text-primary"></i>
+              <div class="mini-section-title mb-0">
+                Informasi Akun
+              </div>
+            </div>
+            <div class="row g-2 px-4">
+              <div class="col-12">
+                <div class="small text-muted">
+                  Nama Lengkap
+                </div>
+                <div>
+                  {{ user?.name || '—' }}
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="small text-muted">
+                  Email
+                </div>
+                <div>
+                  {{ user?.email || '—' }}
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="small text-muted">
+                  Username
+                </div>
+                <div>
+                  {{ user?.username || '—' }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="panel-soft mb-3">
+            <div class="mini-section-title">
+              Edit Username
+            </div>
+            <form method="POST" action="/dashboard/users/update-username" class="row g-2">
+              <div class="col-md-8">
+                <label class="form-label form-label-sm">Username Baru</label>
+                <input name="username" class="form-control form-control-sm" type="text" required />
+              </div>
+              <div class="col-md-4 d-flex align-items-end">
+                <button class="btn btn-primary btn-sm w-100" type="submit">Simpan Username</button>
+              </div>
+            </form>
+          </div>
 
-@slot('main')
-<main class="flex-grow-1 p-3 p-lg-4">
-  <div class="row">
-    <div class="col-lg-4">
-      <div class="panel-soft mb-3" style="max-width:550px; min-height:293px;">
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-person-circle me-2 text-primary"></i>
-          <div class="mini-section-title mb-0">
-            Informasi Akun
-          </div>
-        </div>
-        <div class="row g-2 px-4">
-          <div class="col-12">
-            <div class="small text-muted">
-              Nama Lengkap
+          <div class="panel-soft mb-3">
+            <div class="mini-section-title">
+              Edit Password
             </div>
-            <div>
-              {{ user?.name || '—' }}
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="small text-muted">
-              Email
-            </div>
-            <div>
-              {{ user?.email || '—' }}
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="small text-muted">
-              Username
-            </div>
-            <div>
-              {{ user?.username || '—' }}
-            </div>
+            <form method="POST" action="/dashboard/users/update-password" class="row g-2">
+              <div class="col-md-6">
+                <label class="form-label form-label-sm">Password Baru</label>
+                <input name="password" class="form-control form-control-sm" type="password" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label form-label-sm">Konfirmasi Password</label>
+                <input name="password_confirm" class="form-control form-control-sm" type="password" required />
+              </div>
+              <div class="col-12 d-flex justify-content-end">
+                <button class="btn btn-primary btn-sm" type="submit">Simpan Password</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-8">
-      <div class="panel-soft mb-3">
-        <div class="mini-section-title">
-          Edit Username
-        </div>
-        <form method="POST" action="/dashboard/users/update-username" class="row g-2">
-          <div class="col-md-8">
-            <label class="form-label form-label-sm">Username Baru</label>
-            <input name="username" class="form-control form-control-sm" type="text" required />
-          </div>
-          <div class="col-md-4 d-flex align-items-end">
-            <button class="btn btn-primary btn-sm w-100" type="submit">Simpan Username</button>
-          </div>
-        </form>
-      </div>
-
-      <div class="panel-soft mb-3">
-        <div class="mini-section-title">
-          Edit Password
-        </div>
-        <form method="POST" action="/dashboard/users/update-password" class="row g-2">
-          <div class="col-md-6">
-            <label class="form-label form-label-sm">Password Baru</label>
-            <input name="password" class="form-control form-control-sm" type="password" required />
-          </div>
-          <div class="col-md-6">
-            <label class="form-label form-label-sm">Konfirmasi Password</label>
-            <input name="password_confirm" class="form-control form-control-sm" type="password" required />
-          </div>
-          <div class="col-12 d-flex justify-content-end">
-            <button class="btn btn-primary btn-sm" type="submit">Simpan Password</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</main>
-@endslot
+    </main>
+  @endslot
 @end

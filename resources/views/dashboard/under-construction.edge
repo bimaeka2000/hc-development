@@ -1,32 +1,32 @@
 @layout.layout({title:'Dashboard'})
 
-@slot('meta')
-<meta name="description" content="Dashboard page for Human Capital Management System" />
-@endslot
-
-@pushOnceTo('style-underconstruction')
-<style>
-  .uc-card {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-</style>
-@end
-@slot('main')
-<main class="flex-grow-1 p-3 p-lg-4">
-  <div class="panel-soft glass-card card-hover p-4 uc-card text-center">
-    <div class="display-6 text-primary mb-2">
-      <i class="bi bi-tools"></i>
-    </div>
-    <h4 class="fw-bold mb-2" id="ucTitle">
-      Halaman dalam Pengembangan
-    </h4>
-    <p class="text-secondary mb-3" id="ucDesc">
-      Kami sedang menyiapkan fitur ini. Silakan kembali lagi nanti.
-    </p>
-    <span class="badge text-bg-warning" id="ucBadge"> <i class="bi bi-cone-striped me-1"></i>Under
+  @slot('meta')
+    <meta name="description" content="Dashboard page for Human Capital Management System" />
+  @endslot
+  
+  @pushOnceTo('style-underconstruction')
+    <style>
+      .uc-card {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+    </style>
+  @end
+  @slot('main')
+    <main class="flex-grow-1 p-3 p-lg-4">
+      <div class="panel-soft glass-card card-hover p-4 uc-card text-center">
+        <div class="display-6 text-primary mb-2">
+          <i class="bi bi-tools"></i>
+        </div>
+        <h4 class="fw-bold mb-2" id="ucTitle">
+          Halaman dalam Pengembangan
+        </h4>
+        <p class="text-secondary mb-3" id="ucDesc">
+          Kami sedang menyiapkan fitur ini. Silakan kembali lagi nanti.
+        </p>
+        <span class="badge text-bg-warning" id="ucBadge">          <i class="bi bi-cone-striped me-1"></i>Under
       Construction</span>
-  </div>
-</main>
-@endslot
+      </div>
+    </main>
+  @endslot
 @end

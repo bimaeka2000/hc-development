@@ -71,7 +71,6 @@ export default class PagesController {
   }
 
   async Penelitian({ view }: HttpContext) {
-
     return view.render('dashboard/under-construction')
   }
 

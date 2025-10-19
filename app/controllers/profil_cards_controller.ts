@@ -39,7 +39,6 @@ export default class ProfilCardsController {
    */
   async update({ params, request }: HttpContext) {
     const data = request.all()
-    console.log(data)
     const pegawai = Pegawai.findBy('id', params.id)
   }
   /**
