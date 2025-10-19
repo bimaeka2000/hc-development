@@ -45,39 +45,7 @@ export default class AuthController {
     const payload = ticket.getPayload()
 
     if (!payload?.email) return response.badRequest({ error: 'Email tidak ditemukan di Google' })
-
-    // Ambil data user dari Google
-    // const userData = {
-    //     email: payload?.email,
-    //     name: payload?.name,
-    //     picture: payload?.picture,
-    // }
-
-    //  Simpan atau ambil user
-    // const user = await User.firstOrCreate(
-    //     { email: payload.email },
-    //     {
-    //         name: payload.name,
-    //         picture: payload.picture,
-    //     }
-    // )
-
-    // NOTE Buat access token untuk user
-    // const accessToken = await User.accessTokens.create(
-    //     user,
-    //     ['*'],
-    //     {
-    //         name: 'google-login',
-    //         expiresIn: '30 days'
-    //     }
-    // )
-    // (contoh) simpan user atau login otomatis
-    // const user = await User.firstOrCreate({ email: userData.email }, userData)
-    // await auth.login(user)
-
-    // 🍪 Simpan token di cookie agar bisa digunakan di Edge
-    // ⬇️ Access token string diambil dari value.release()
-    //    #NOTE tidak jadi pakai cookie
+    //    #NOTE Simpan informasi user di session atau database sesuai kebutuhan aplikasi Anda
     response.cookie('user', payload, {
       httpOnly: false,
       sameSite: 'lax',

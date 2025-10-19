@@ -17,6 +17,7 @@ router.get('/auth/google/redirect', [AuthController, 'redirectToGoogle']).as('go
 router.get('/auth/google/callback', [AuthController, 'googleCallback'])
 
 router.get('/logout', [SessionController, 'logOut']).as('logout')
+// #NOTE Session routes
 router.post('session', [SessionController, 'store'])
 router.delete('destroy', [SessionController, 'destroy']).use(middleware.auth({ guards: ['api'] }))
 

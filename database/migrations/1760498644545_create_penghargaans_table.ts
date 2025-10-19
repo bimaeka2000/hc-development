@@ -3,7 +3,6 @@ import { BaseSchema } from '@adonisjs/lucid/schema'
 export default class extends BaseSchema {
   protected tableName = 'penghargaan'
 
-  // #TODO ubat nama tabel itu tanpa s
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()

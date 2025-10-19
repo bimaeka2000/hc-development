@@ -55,8 +55,6 @@ export default class DashboardController {
         name: 'google-oauth2-token',
         expiresIn: '30 days',
       })
-
-      // #TODO tampilkan alert selamat datang telah login di dashboard hc
       return view.render('layouts/dashboard', { user })
     } catch (error) {
       await trx.rollback()
