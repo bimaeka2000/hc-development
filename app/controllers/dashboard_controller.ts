@@ -25,7 +25,6 @@ export default class DashboardController {
         let pegawai = await Pegawai.create(
           {
             nama_lengkap: userGoogle.name,
-            role_id: 2,
           },
           { client: trx }
         )

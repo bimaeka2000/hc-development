@@ -16,12 +16,12 @@ export default class ProfilsController {
   /**
    * Display form to create a new record
    */
-  async create({}: HttpContext) {}
+  async create({ }: HttpContext) { }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request }: HttpContext) { }
 
   /**
    * Show individual record
@@ -46,7 +46,7 @@ export default class ProfilsController {
         .firstOrFail()
       return response
         .status(200)
-        .json(ApiResponse.success('Detail profil berhasil diambil', profil))
+        .json(ApiResponse.success('Detail profil berhasil diambil dari tabel Pegawai', profil))
     } catch (error) {
       if (error.code === 'E_ROW_NOT_FOUND') {
         return response.status(404).json(ApiResponse.error('Profil tidak ditemukan', 404))
@@ -59,15 +59,15 @@ export default class ProfilsController {
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  async edit({ params }: HttpContext) { }
 
   /**
    * Handle form submission for the edit action
    */
-  async update({}: HttpContext) {}
+  async update({ }: HttpContext) { }
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params }: HttpContext) { }
 }

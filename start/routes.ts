@@ -15,6 +15,10 @@ router.get('/', async ({ view }) => {
   return view.render('login')
 })
 
+router.get('/welcome', async ({ view }) => {
+  return view.render('welcome')
+})
+
 // #NOTE SSO Goolgle OAuth2
 router.get('/auth/google/redirect', [AuthController, 'redirectToGoogle']).as('google.redirect')
 router.get('/auth/google/callback', [AuthController, 'googleCallback'])
@@ -39,7 +43,7 @@ router
         router.get('/users', [PagesController, 'Users'])
         router.get('/edit/:page', [PagesController, 'EditPage']).as('dashboard.edit')
         // #NOTE tambah semua web controller disini
-        router.resource('web/profil', ProfilsControllerWeb)
+        router.resource('/profil', ProfilsControllerWeb)
       })
       .prefix('dashboard')
   })
@@ -50,10 +54,9 @@ router
 
 router
   .group(() => {
-    router.resource('profil', ProfilsControllerApi)
+    router.resource('/v1/profil', ProfilsControllerApi)
   })
-
-  .prefix('/api/v1')
+  .prefix('/api')
   .use(middleware.authApi()) // JSON 403 kalau belum login
 
 router.get('*', async ({ request, view, response }) => {

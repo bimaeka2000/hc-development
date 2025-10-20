@@ -118,9 +118,9 @@ export default class Pegawai extends BaseModel {
   @hasOne(() => RiwayatPendidikan)
   declare pendidikan: HasOne<typeof RiwayatPendidikan>
 
-  @belongsTo(() => Suku, { foreignKey: 'id' })
+  @belongsTo(() => Suku, { foreignKey: 'suku_id' })
   declare suku: BelongsTo<typeof Suku>
 
-  @belongsTo(() => Agama, { foreignKey: 'id' })
+  @belongsTo(() => Agama, { foreignKey: 'agama_id' })
   declare agama: BelongsTo<typeof Agama>
 }

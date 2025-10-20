@@ -7,23 +7,19 @@
       <div class="mini-section-title mb-0">
         Profil & Data Pegawai
       </div>
-      <a href="{{ route('edit_profil.show',{id: id}) }}" class="btn btn-sm btn-outline-primary ms-auto">        <i class="bi bi-pencil"></i>Edit</a>
+      <a href="{{ route('profil.show',{id: id}) }}" class="btn btn-sm btn-outline-primary ms-auto"> <i
+          class="bi bi-pencil"></i>Edit</a>
     </div>
     <div class="row g-3 align-items-stretch">
-      <div
-        class="col-lg-2 d-flex flex-column avatar-col"
-        style="height: 400px;margin-top: 1.4rem;width: 343px;"
-      >
+      <div class="col-lg-2 d-flex flex-column avatar-col" style="height: 400px;margin-top: 1.4rem;width: 343px;">
         <div class="position-relative w-100 flex-grow-1 rounded-3 overflow-hidden avatar-box">
-          <div
-            id="detAvatar"
-            class="w-100 h-100 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary fw-semibold"
-          >
+          <div id="detAvatar"
+            class="w-100 h-100 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary fw-semibold">
             <i class="bi bi-person-circle" style="font-size:3rem"></i>
           </div>
         </div>
         <div class="mt-2" id="detFotoAlert">
-          <span class="badge text-bg-warning">            <i class="bi bi-exclamation-triangle me-1"></i>Lengkapi Foto</span>
+          <span class="badge text-bg-warning"> <i class="bi bi-exclamation-triangle me-1"></i>Lengkapi Foto</span>
         </div>
       </div>
       <div class="col-lg-9">
