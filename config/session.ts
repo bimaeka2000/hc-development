@@ -10,7 +10,7 @@ const sessionConfig = defineConfig({
    * When set to true, the session id cookie will be deleted
    * once the user closes the browser.
    */
-  clearWithBrowser: false,
+  clearWithBrowser: true,
 
   /**
    * Define how long to keep the session data alive without
@@ -26,9 +26,9 @@ const sessionConfig = defineConfig({
     path: '/',
     httpOnly: true,
     secure: app.inProduction,
-    sameSite: 'lax',
+    secure: false, // <== penting kalau belum pakai HTTPS
+    sameSite: false, // <== ubah dari 'lax' ke false kalau pakai cross-origin  },
   },
-
   /**
    * The store to use. Make sure to validate the environment
    * variable in order to infer the store name without any

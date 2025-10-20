@@ -26,6 +26,7 @@ export default class SessionController {
 
   async logOut({ auth, response }: HttpContext) {
     this.destroy
+    await auth.use('web').logout()
     return response.redirect('/')
   }
 }

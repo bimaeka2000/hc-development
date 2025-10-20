@@ -5,7 +5,7 @@ import Pegawai from '#models/pegawai'
 import * as crypto from 'node:crypto'
 import Hash from '@adonisjs/core/services/hash'
 export default class DashboardController {
-  async checkUser({ response, session }: HttpContext) {
+  async checkUser({ request, response, session, auth }: HttpContext) {
     const userGoogle = session.get('user_google')
 
     const generated = crypto.randomBytes(16).toString('hex') // random 32-char string
@@ -58,10 +58,19 @@ export default class DashboardController {
         expiresIn: '30 days',
       })
 
-      return response.redirect().toRoute('dashboard.index')
+      await auth.use('web').login(user)
+
+      // await auth.use('web').login(
+      //   user,
+      //   /**
+      //    * Generate token when "remember_me" input exists
+      //    */
+      //   !!request.input('remember_me')
+      // )
+
+      await response.redirect().toRoute('dashboard.index')
     } catch (error) {
       await trx.rollback()
-      console.error(error)
       return response.badRequest({
         message: 'Gagal membuat data',
         error: error.message,
