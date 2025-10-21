@@ -1,5 +1,4 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import Keluarga from '#models/keluarga'
 
 export default class KeluargaCardsController {
   /**
@@ -20,8 +19,7 @@ export default class KeluargaCardsController {
   /**
    * Show individual record
    */
-  async show({ params, response, view }: HttpContext) {
-  }
+  async show({ params }: HttpContext) {}
 
   /**
    * Edit individual record
