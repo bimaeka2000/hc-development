@@ -112,7 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Click outside to close (mobile)
   document.addEventListener('click', (e) => {
     if (window.innerWidth < 992 && sidebar.classList.contains('show')) {
-      if (!sidebar.contains(e.target) && !btnToggleSidebar.contains(e.target)) {
+      const clickedOutsideSidebar = !sidebar.contains(e.target)
+      const clickedToggle = btnToggleSidebar && btnToggleSidebar.contains && btnToggleSidebar.contains(e.target)
+      if (clickedOutsideSidebar && !clickedToggle) {
         sidebar.classList.remove('show')
       }
     }
@@ -331,15 +333,25 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('Chart init skipped:', e.message)
   }
 
-  // Auto highlight current page link in sidebar (by matching filename)
+  // Legacy auto-highlight (filename-based). Do not override manual/server-side active classes.
   if (sidebar) {
-    const current = location.pathname.split('/').pop()
-    ;[...sidebar.querySelectorAll('a.nav-link[href]')].forEach((a) => {
-      const href = a.getAttribute('href')
-      if (!href) return
-      if (href === current) a.classList.add('active')
-      else if (a.classList.contains('active') && href !== current) a.classList.remove('active')
-    })
+    // If any link already has an active class (set by server or our manual mapping), leave it alone.
+    if (!sidebar.querySelector('a.nav-link.active')) {
+      const currentFilename = location.pathname.split('/').pop()
+      ;[...sidebar.querySelectorAll('a.nav-link[href]')].forEach((a) => {
+        const href = a.getAttribute('href')
+        if (!href) return
+        try {
+          // Compare filename portion of the href to current filename
+          const url = new URL(href, location.origin)
+          const hrefFile = url.pathname.split('/').pop()
+          if (hrefFile && hrefFile === currentFilename) a.classList.add('active')
+        } catch (e) {
+          // fallback for non-URL hrefs
+          if (href === currentFilename) a.classList.add('active')
+        }
+      })
+    }
   }
 
   // ================== Dynamic Breadcrumb ==================
