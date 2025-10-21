@@ -7,7 +7,7 @@ import { Redirect, type HttpContext } from '@adonisjs/core/http'
 import Pegawai from '#models/pegawai'
 
 export default class ProfilsController {
-  private url = 'http://localhost:3000'
+  private url = 'http://localhost:3000/'
   /**
    * Display a list of resource
    */

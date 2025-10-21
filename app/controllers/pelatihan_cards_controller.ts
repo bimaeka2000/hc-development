@@ -1,6 +1,7 @@
+import Pelatihan from '#models/pelatihan'
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class AtributLainCardsController {
+export default class PelatihanCardsController {
   /**
    * Display a list of resource
    */
@@ -20,7 +21,12 @@ export default class AtributLainCardsController {
    * Show individual record
    */
   async show({ params, view }: HttpContext) {
+    const id = params.id_dosen
+    const dataPelatihan = Pelatihan.query()
+      .where('pegawai_id', id)
+      .firstOrFail()
 
+    return view.render('dashboard/edit/pelatihan')
   }
 
   /**

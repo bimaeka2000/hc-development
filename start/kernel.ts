@@ -32,13 +32,14 @@ server.use([
  * The router middleware stack runs middleware on all the HTTP
  * requests with a registered route.
  */
+// #NOTE Komen untuk share user karna kebutuhan development
 router.use([
   () => import('@adonisjs/core/bodyparser_middleware'),
   () => import('@adonisjs/session/session_middleware'),
   () => import('@adonisjs/shield/shield_middleware'),
   () => import('@adonisjs/auth/initialize_auth_middleware'),
-  () => import('#middleware/share_user_middleware'),
-  () => import('#middleware/share_role_middleware'),
+  // () => import('#middleware/share_user_middleware'),
+  // () => import('#middleware/share_role_middleware'),
 ])
 
 /**

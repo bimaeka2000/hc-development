@@ -16,7 +16,7 @@ export default class ProfilCardsController {
   /**
    * Display form to create a new record
    */
-  async create({}: HttpContext) {}
+  async create({ }: HttpContext) { }
 
   /**
    * Handle form submission for the create action
@@ -28,8 +28,8 @@ export default class ProfilCardsController {
   /**
    * Show individual record
    */
-  async show({ view, request, response }: HttpContext) {
-    const id = request.param('id')
+  async show({ view, params }: HttpContext) {
+    const id = params.id
     let suku = await Suku.all()
     let agama = await Agama.all()
     let unitKerja = await UnitKerja.all()
@@ -62,7 +62,7 @@ export default class ProfilCardsController {
   /**
    * Edit individual record
    */
-  async edit({}: HttpContext) {}
+  async edit({ }: HttpContext) { }
 
   /**
    * Handle form submission for the edit action
@@ -73,5 +73,5 @@ export default class ProfilCardsController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params }: HttpContext) { }
 }
