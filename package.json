@@ -15,8 +15,7 @@
     "build:all": "node ace build && bun run vite build",
     "format": "bun run prettier --write .",
     "typecheck": "bun run tsc --noEmit",
-    "test": "node ace test",
-    "prepare": "bun install"
+    "test": "node ace test"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
