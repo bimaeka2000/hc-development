@@ -7,9 +7,19 @@
     </div>
   </div>
   <ul class="list-group list-group-flush small">
-    <li class="list-group-item d-flex align-items-center justify-content-between">
-      <span id="judulPublikasi">{{ judulPublikasi }}</span>
-      <span class="badge text-bg-light text-secondary" id="tahunPublikasi">{{ tahunPublikasi }}</span>
-    </li>
+    @if(items && items.length > 0)
+      @each(item in items)
+        <li class="list-group-item d-flex align-items-center justify-content-between">
+          <span>{{ item.judul || 'Belum Ada Judul' }}</span>
+          <span class="badge text-bg-light text-secondary">
+            {{ item.tahun || 'Belum Ada Tahun' }}
+      </span>
+        </li>
+      @end
+    @else
+      <li class="list-group-item text-center text-muted">
+        Belum Ada Data Penelitian
+      </li>
+    @endif
   </ul>
 </div>

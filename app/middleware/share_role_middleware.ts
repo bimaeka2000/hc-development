@@ -3,7 +3,7 @@ import type { NextFn } from '@adonisjs/core/types/http'
 import User from '#models/user'
 
 export default class ShareRoleMiddleware {
-  public async handle({ session, view }: HttpContextContract, next: () => Promise<void>) {
+  public async handle({ session, view }: HttpContext, next: () => Promise<void>) {
     let userRole = null
 
     try {

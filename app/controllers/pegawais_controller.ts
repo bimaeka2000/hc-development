@@ -1,5 +1,10 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Pegawai from '#models/pegawai'
+import Agama from '#models/agama'
+import Role from '#models/role'
+import StatusKepegawaian from '#models/status_kepegawaian'
+import Suku from '#models/suku'
+import UnitKerja from '#models/unit_kerja'
 
 export default class PegawaisController {
   /**
@@ -18,17 +23,20 @@ export default class PegawaisController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request, response, session }: HttpContext) {}
 
   /**
    * Show individual record
    */
-  async show({ view, params }: HttpContext) {
+  async show({ view, params, response }: HttpContext) {
+    const id = params.id
     const pegawaiData = await Pegawai.query()
-      .where('id', params.id)
+      .where('id', id)
       .preload('keluarga')
       .preload('role')
-      .preload('dosen')
+      .preload('dosen', (dosenQuery) => {
+        dosenQuery.preload('pengabdian').preload('penelitian').preload('publikasi')
+      })
       .preload('dataKesehatanFisik')
       .preload('riwayatKesehatan')
       .preload('dokumen', (query) => {
@@ -37,12 +45,28 @@ export default class PegawaisController {
       .preload('pendidikan', (query) => {
         query.preload('jenjangPendidikan')
       })
+      .preload('statusKepegawaian')
+      .preload('unitKerja')
       .preload('suku')
       .preload('agama')
+      .preload('riwayatGaji')
+      .preload('pelatihan')
+      .preload('penghargaan')
       .firstOrFail()
 
+    // return response.json(pegawaiData)
+    const suku = await Suku.all()
+    const agama = await Agama.all()
+    const unitKerja = await UnitKerja.all()
+    const statusKepegawaian = await StatusKepegawaian.all()
+    const role = await Role.all()
     return view.render('dashboard/pegawai_detail', {
       pegawaiData,
+      suku,
+      agama,
+      unitKerja,
+      statusKepegawaian,
+      role,
     })
   }
 

@@ -4,7 +4,10 @@
     <div class="mini-section-title mb-0">
       Atribut Akademik
     </div>
-    <a href="edit/atribut-akademik" class="btn btn-sm btn-outline-primary ms-auto">      <i class="bi bi-pencil"></i>
+    <a
+      href="{{ route('atribut_akademik.show',{id:1}) }}"
+      class="btn btn-sm btn-outline-primary ms-auto"
+    >      <i class="bi bi-pencil"></i>
       Edit</a>
   </div>
   <ul class="list-group list-group-flush">
@@ -29,7 +32,7 @@
         <i class="bi bi-journal-bookmark me-2 text-primary"></i>Program Studi
       </div>
       <div class="fw-semibold">
-        {{ programStudi }}
+        {{ prodi }}
       </div>
     </li>
     <li class="list-group-item d-flex align-items-center justify-content-between">
@@ -45,7 +48,7 @@
         <i class="bi bi-diagram-3 me-2 text-primary"></i>Jenjang (Guru)
       </div>
       <div class="fw-semibold">
-        {{ jenjang }}
+        Dosen
       </div>
     </li>
   </ul>

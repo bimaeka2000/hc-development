@@ -1,15 +1,17 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 import './routes/api.js'
-import './routes/web.js'
+// import './routes/web.js'
 
 const PagesController = () => import('#controllers/pages_controller')
 const PegawaisController = () => import('#controllers/pegawais_controller')
+const UsersController = () => import('#controllers/users_controller')
 const SessionController = () => import('#controllers/session_controller')
 const AuthController = () => import('#controllers/auth_controller')
 const DashboardController = () => import('#controllers/dashboard_controller')
 const ProfilCardsController = () => import('#controllers/profil_cards_controller')
-const AtributAkademikCardsController = () => import('#controllers/atribut_akademik_cards_controller')
+const AtributAkademikCardsController = () =>
+  import('#controllers/atribut_akademik_cards_controller')
 const AtributLainCardsController = () => import('#controllers/atribut_lain_cards_controller')
 const DokumenCardsController = () => import('#controllers/dokumen_cards_controller')
 const KeluargaCardsController = () => import('#controllers/keluarga_cards_controller')
@@ -24,10 +26,15 @@ const PengajuanIzinCardsController = () => import('#controllers/pengajuan_izin_c
 const PenghargaanCardsController = () => import('#controllers/penghargaan_cards_controller')
 const PublikasiCardsController = () => import('#controllers/publikasi_cards_controller')
 const RingkasanCardsController = () => import('#controllers/ringkasan_cards_controller')
+const CutiCardsController = () => import('#controllers/cuti_cards_controller')
+const IzinCardsController = () => import('#controllers/izin_cards_controller')
+const SakitCardsController = () => import('#controllers/sakit_cards_controller')
+const GajiCardsController = () => import('#controllers/gaji_cards_controller')
+const JabatanCardsController = () => import('#controllers/jabatan_cards_controller')
 // #NOTE Route login
+// Untuk development
 router.get('/', async ({ view }) => {
-  const role = 'admin'
-  return view.render('layouts/dashboard', { role })
+  return view.render('login')
 })
 
 router.get('/welcome', async ({ view }) => {
@@ -49,7 +56,9 @@ router
     router.get('/dashboard', [DashboardController, 'index']).as('dashboard.index')
     router
       .group(() => {
+        router.resource('/user', UsersController)
         router.resource('/pegawai', PegawaisController)
+        router.resource('/profil', ProfilCardsController)
         router.resource('/atribut-akademik', AtributAkademikCardsController)
         router.resource('/atribut-lain', AtributLainCardsController)
         router.resource('/dokumen', DokumenCardsController)
@@ -65,16 +74,16 @@ router
         router.resource('/penghargaan', PenghargaanCardsController)
         router.resource('/ringkasan', RingkasanCardsController)
         router.resource('/publikasi', PublikasiCardsController)
-        router.get('/cuti', [PagesController, 'Cuti'])
-        router.get('/sakit', [PagesController, 'Sakit'])
-        router.get('/izin', [PagesController, 'Izin'])
-        router.get('/users', [PagesController, 'Users'])
+        router.resource('/jabatan', JabatanCardsController)
+        router.resource('/cuti', CutiCardsController)
+        router.resource('/izin', IzinCardsController)
+        router.resource('/sakit', SakitCardsController)
+        router.resource('/gaji', GajiCardsController)
       })
       .prefix('dashboard')
   })
-// .use(middleware.authView())
-// .use(middleware.auth({ guards: ['web'] })) // gunakan session guard
-
+  .use(middleware.authView())
+  .use(middleware.auth({ guards: ['web'] })) // gunakan session guard
 
 router.get('*', async ({ request, view, response }) => {
   response.status(404)

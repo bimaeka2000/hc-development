@@ -1,10 +1,12 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class PenghargaanCardsController {
+export default class UsersController {
   /**
    * Display a list of resource
    */
-  async index({}: HttpContext) {}
+  async index({ view }: HttpContext) {
+    return view.render('dashboard/users')
+  }
 
   /**
    * Display form to create a new record
@@ -19,11 +21,7 @@ export default class PenghargaanCardsController {
   /**
    * Show individual record
    */
-  async show({ params, view }: HttpContext) {
-    const id = params.id
-
-    return view.render('dashboard/edit/penghargaan')
-  }
+  async show({ params }: HttpContext) {}
 
   /**
    * Edit individual record

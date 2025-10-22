@@ -113,7 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     if (window.innerWidth < 992 && sidebar.classList.contains('show')) {
       const clickedOutsideSidebar = !sidebar.contains(e.target)
-      const clickedToggle = btnToggleSidebar && btnToggleSidebar.contains && btnToggleSidebar.contains(e.target)
+      const clickedToggle =
+        btnToggleSidebar && btnToggleSidebar.contains && btnToggleSidebar.contains(e.target)
       if (clickedOutsideSidebar && !clickedToggle) {
         sidebar.classList.remove('show')
       }

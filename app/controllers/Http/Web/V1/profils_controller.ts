@@ -45,7 +45,7 @@ export default class ProfilsController {
       'status_perkawinan',
       'nomor_urut',
       'foto',
-      'status'
+      'status',
     ]
 
     const data = request.only(allowedFields)
@@ -78,7 +78,7 @@ export default class ProfilsController {
       agama,
       unitKerja,
       statusKepegawaian,
-      role
+      role,
     })
   }
 
@@ -90,10 +90,7 @@ export default class ProfilsController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request, response }: HttpContext) {
-
-
-  }
+  async update({ params, request, response }: HttpContext) { }
 
   /**
    * Delete record

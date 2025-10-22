@@ -19,7 +19,10 @@ export default class PengajuanIzinCardsController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  async show({ params, view }: HttpContext) {
+    const id = params.id
+    return view.render('dashboard/edit/pengajuan-izin')
+  }
 
   /**
    * Edit individual record

@@ -2,8 +2,8 @@
   <Button
     label="Simpan"
     icon="pi pi-save"
-    severity="info"     
-    style="color: white;" 
+    severity="info"
+    style="color: white"
     :loading="loading"
     @click="handleSubmit"
   />

@@ -1,7 +1,10 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
-
+import type { BelongsTo, Has, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasOne, belongsTo } from '@adonisjs/lucid/orm'
+import Dosen from './dosen.js'
 export default class Pengabdian extends BaseModel {
+  static table = 'pengabdian'
+
   @column({ isPrimary: true })
   declare id: number
 
@@ -34,4 +37,7 @@ export default class Pengabdian extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @belongsTo(() => Dosen, { foreignKey: 'id_dosen' })
+  declare dosen: BelongsTo<typeof Dosen>
 }

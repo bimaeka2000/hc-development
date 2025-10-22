@@ -10,25 +10,66 @@ export default class ProfilCardsController {
    * Display a list of resource
    */
   async index({ view }: HttpContext) {
-    // return view.render('dashboard/edit/profil')
+    return view.render('dashboard/edit/profil')
   }
 
   /**
    * Display form to create a new record
    */
-  async create({ }: HttpContext) { }
+  async create({}: HttpContext) {}
 
   /**
    * Handle form submission for the create action
    */
-  async store({ response, request }: HttpContext) {
-    // #TODO simpan data disini
+  async store({ response, request, session }: HttpContext) {
+    /*
+        #TODO : 
+        [] simpan data disini
+        [] tambah data untuk status perkawinan di card profil 
+    */
+    session.flash('success', 'Data berhasil disimpan!')
+
+    const allowedFields = [
+      'agama_id',
+      'suku_id',
+      'status_kepegawaian_id',
+      'unit_kerja_id',
+      'role_id',
+      'npy',
+      'nik',
+      'npwp',
+      'jenis_kelamin',
+      'tempat_lahir',
+      'tanggal_lahir',
+      'alamat',
+      'no_hp',
+      'no_hp_darurat',
+      'nama_lengkap',
+      'email_pribadi',
+      'email_kantor',
+      'status_perkawinan',
+      'nomor_urut',
+      'foto',
+      'status',
+    ]
+
+    const data = request.only(allowedFields)
+    const cleanData = Object.fromEntries(
+      Object.entries(data).filter(([_, v]) => v !== undefined && v !== '' && v !== null)
+    )
+
+    return response.json([
+      {
+        data: cleanData,
+      },
+    ])
+    await Pegawai.query().where('id', params.id).update(cleanData)
   }
 
   /**
    * Show individual record
    */
-  async show({ view, params }: HttpContext) {
+  async show({ view, params, response }: HttpContext) {
     const id = params.id
     let suku = await Suku.all()
     let agama = await Agama.all()
@@ -50,6 +91,7 @@ export default class ProfilCardsController {
       .preload('suku')
       .preload('agama')
       .firstOrFail()
+    return response.json(pegawaiData)
     return view.render('dashboard/edit/profil', {
       pegawaiData,
       suku,
@@ -62,7 +104,7 @@ export default class ProfilCardsController {
   /**
    * Edit individual record
    */
-  async edit({ }: HttpContext) { }
+  async edit({}: HttpContext) {}
 
   /**
    * Handle form submission for the edit action
@@ -73,5 +115,5 @@ export default class ProfilCardsController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) { }
+  async destroy({ params }: HttpContext) {}
 }

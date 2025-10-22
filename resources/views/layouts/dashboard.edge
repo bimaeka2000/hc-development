@@ -2,79 +2,153 @@
 
   @slot('meta')
     <meta name="description" content="Dashboard page for Human Capital Management System" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
   @endslot
   @slot('main')
     <main class="flex-grow-1 p-3 p-lg-4">
-      <h1 class="h3 mb-4">Dashboard</h1>
+      <h1 class="h3 mb-4">
+        Dashboard
+      </h1>
       <style>
         /* Small bento-style layout for dashboard calendar & tools */
-        .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        @media (max-width: 992px) { .bento-grid { grid-template-columns: 1fr; } }
-        .bento-tile { min-height: 100px; display:flex; flex-direction:column; }
-        .bento-tile .card-body { flex: 1; }
-    /* Modern compact tables */
-    .unit-table { border-radius:6px; }
-    .unit-table th, .unit-table td { vertical-align: middle; }
-  .unit-badge { font-size:0.75rem; }
-  .percent-badge { font-size:0.72rem; min-width:44px; display:inline-block }
-        .unit-icon { font-size: 0.95rem; }
+        
+        .bento-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
+        
+        @media (max-width: 992px) {
+          .bento-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        
+        .bento-tile {
+          min-height: 100px;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .bento-tile .card-body {
+          flex: 1;
+        }
+        
+        /* Modern compact tables */
+        
+        .unit-table {
+          border-radius: 6px;
+        }
+        
+        .unit-table th,
+        .unit-table td {
+          vertical-align: middle;
+        }
+        
+        .unit-badge {
+          font-size: 0.75rem;
+        }
+        
+        .percent-badge {
+          font-size: 0.72rem;
+          min-width: 44px;
+          display: inline-block;
+        }
+        
+        .unit-icon {
+          font-size: 0.95rem;
+        }
+        
         /* Scoped hover 'glass' effect for cards on the dashboard only */
+        
         main .card {
           transition: transform 220ms ease, box-shadow 220ms ease, backdrop-filter 220ms ease;
           will-change: transform, box-shadow;
         }
+        
         /* On hover: subtle lift, soft shadow and faint glass blur */
+        
         main .card:hover {
           transform: translateY(-6px) scale(1.005);
-          box-shadow: 0 8px 24px rgba(16,24,40,0.12), 0 2px 6px rgba(16,24,40,0.06);
+          box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12), 0 2px 6px rgba(16, 24, 40, 0.06);
           backdrop-filter: blur(4px) saturate(110%);
         }
+        
         /* Reduce effect on small screens to avoid layout shifts */
+        
         @media (max-width: 576px) {
-          main .card:hover { transform: none; box-shadow: 0 4px 12px rgba(16,24,40,0.08); }
+          main .card:hover {
+            transform: none;
+            box-shadow: 0 4px 12px rgba(16, 24, 40, 0.08);
+          }
         }
+        
         /* compact calendar iframe styling */
-        #hc-calendar-iframe { border-radius: 6px; box-shadow: rgba(16,24,40,0.03) 0 1px 2px; }
+        
+        #hc-calendar-iframe {
+          border-radius: 6px;
+          box-shadow: rgba(16, 24, 40, 0.03) 0 1px 2px;
+        }
       </style>
       <!-- Charts row -->
       <div class="row mt-4">
         <div class="col-12 col-lg-6 mb-3">
           <div class="card p-3">
             <div class="d-flex align-items-center mb-2">
-              <h6 class="mb-0"><i class="bi bi-diagram-3-fill me-2 text-primary"></i>Distribusi Unit Kerja</h6>
+              <h6 class="mb-0">
+                <i class="bi bi-diagram-3-fill me-2 text-primary"></i>Distribusi Unit Kerja
+              </h6>
             </div>
             <div class="chart-container" style="height:285px; position:relative;">
-              <canvas id="unitChart" style="width:100%;height:100%;display:block"></canvas>
+              <canvas id="unitChart" style="width:100%;height:100%;display:block">
+              </canvas>
             </div>
             <div id="unit-summary" class="mt-3 small text-muted">
             </div>
           </div>
 
-            <!-- (Route cards removed from here; moved to bottom for cleaner layout) -->
+          <!-- (Route cards removed from here; moved to bottom for cleaner layout) -->
         </div>
 
         <div class="col-12 col-lg-6 mb-3">
           <div class="card p-3 mb-3">
-            <h6 class="mb-2"><i class="bi bi-heart-pulse-fill text-primary me-2"></i>Cuti & Izin</h6>
+            <h6 class="mb-2">
+              <i class="bi bi-heart-pulse-fill text-primary me-2"></i>Cuti & Izin
+            </h6>
             <div class="chart-container" style="height:200px; position:relative;">
-              <canvas id="cutiChart" style="width:100%;height:100%;display:block"></canvas>
+              <canvas id="cutiChart" style="width:100%;height:100%;display:block">
+              </canvas>
             </div>
           </div>
 
           <div class="card p-3">
-            <h6 class="mb-2"><i class="bi bi-people-fill text-primary me-2"></i>Total Pegawai</h6>
+            <h6 class="mb-2">
+              <i class="bi bi-people-fill text-primary me-2"></i>Total Pegawai
+            </h6>
             <div class="chart-container" style="height:173px; position:relative;">
-              <div id="pegawaiSummary" style="width:100%;height:100%;display:flex;flex-direction:row;align-items:center;gap:1rem;padding:0.25rem;">
+              <div
+                id="pegawaiSummary"
+                style="width:100%;height:100%;display:flex;flex-direction:row;align-items:center;gap:1rem;padding:0.25rem;"
+              >
                 <div style="flex:0 0 140px; display:flex;align-items:center;justify-content:center;">
                   <div class="text-center">
-                    <div class="mb-1"><i class="bi bi-people-fill text-primary" style="font-size:1.4rem"></i></div>
-                    <div class="h2 mb-0" id="pegawaiTotalBig">0</div>
-                    <div class="small text-muted">Total Pegawai</div>
+                    <div class="mb-1">
+                      <i class="bi bi-people-fill text-primary" style="font-size:1.4rem"></i>
+                    </div>
+                    <div class="h2 mb-0" id="pegawaiTotalBig">
+                      0
+                    </div>
+                    <div class="small text-muted">
+                      Total Pegawai
+                    </div>
                   </div>
                 </div>
                 <div style="flex:1 1 auto; height:100%;">
-                  <div id="pegawai-per-unit" class="mb-0 small" style="padding-left:0.5rem; overflow:hidden;"></div>
+                  <div id="pegawai-per-unit" class="mb-0 small" style="padding-left:0.5rem; overflow:hidden;">
+                  </div>
                 </div>
               </div>
             </div>
@@ -90,8 +164,13 @@
               <div class="card p-2 h-100">
                 <div class="card-body p-2">
                   <div class="d-flex align-items-center mb-2">
-                    <h6 class="mb-0"><i class="bi bi-calendar-event-fill me-2 text-primary"></i>Kalender & Hari Peringatan</h6>                  </div>
-                  <div id="hc-calendar" class="mb-2" style="min-height:120px;"></div>                </div>
+                    <h6 class="mb-0">
+                      <i class="bi bi-calendar-event-fill me-2 text-primary"></i>Kalender & Hari Peringatan
+                    </h6>
+                  </div>
+                  <div id="hc-calendar" class="mb-2" style="min-height:120px;">
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -99,24 +178,29 @@
               <div class="card p-2 h-100">
                 <div class="card-body p-2 d-flex flex-column">
                   <div class="d-flex align-items-center mb-2">
-                    <h6 class="mb-0"><i class="bi bi-bell-fill me-2 text-primary"></i>Notifikasi</h6>
+                    <h6 class="mb-0">
+                      <i class="bi bi-bell-fill me-2 text-primary"></i>Notifikasi
+                    </h6>
                     <button id="hc-add-btn" class="btn btn-sm btn-primary ms-auto d-none" title="Tambah peringatan">
                       <i class="bi bi-plus-lg"></i>
                     </button>
                   </div>
-                  <div id="hc-notifications" class="mt-1" style="overflow:auto"></div>
+                  <div id="hc-notifications" class="mt-1" style="overflow:auto">
+                  </div>
                 </div>
               </div>
 
               <div class="card p-2 mt-3">
                 <div class="card-body p-2">
-                  <h6 class="mb-0"><i class="bi bi-tools me-2 text-primary"></i>Tools HRD</h6>
+                  <h6 class="mb-0">
+                    <i class="bi bi-tools me-2 text-primary"></i>Tools HRD
+                  </h6>
                   <div class="mt-2 d-flex gap-2">
                     <input id="hc-search" class="form-control form-control-sm" placeholder="Cari pegawai (simulasi)" />
                   </div>
                   <div class="d-flex gap-2 mt-2">
-                    <button id="hc-export-csv" class="btn btn-outline-secondary btn-sm flex-fill"><i class="bi bi-file-earmark-spreadsheet me-1 text-primary"></i>Export CSV</button>
-                    <button id="hc-generate-report" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-bar-chart-line me-1 text-primary"></i>Generate</button>
+                    <button id="hc-export-csv" class="btn btn-outline-secondary btn-sm flex-fill">                      <i class="bi bi-file-earmark-spreadsheet me-1 text-primary"></i>Export CSV</button>
+                    <button id="hc-generate-report" class="btn btn-outline-primary btn-sm flex-fill">                      <i class="bi bi-bar-chart-line me-1 text-primary"></i>Generate</button>
                   </div>
                   <small class="text-muted d-block mt-2">Fitur ringan untuk HR: export cepat & pencarian.</small>
                 </div>
@@ -134,11 +218,15 @@
               <div class="card h-100 p-0">
                 <div class="p-4 text-center">
                   <i class="bi bi-person-vcard text-primary mb-3" style="font-size:1.8rem"></i>
-                  <h5 class="mb-2">Pegawai</h5>
-                  <p class="text-muted small mb-0">Mengelola Data Pegawai</p>
+                  <h5 class="mb-2">
+                    Pegawai
+                  </h5>
+                  <p class="text-muted small mb-0">
+                    Mengelola Data Pegawai
+                  </p>
                 </div>
                 <div class="card-body pt-0 pb-3 d-flex justify-content-center gap-2">
-                  <a class="btn btn-outline-primary btn-sm" href="{{ route('/dashboard/pegawai') }}"><i class="bi bi-person-vcard me-2"></i>Pegawai</a>
+                  <a class="btn btn-outline-primary btn-sm" href="{{ route('/dashboard/pegawai') }}">                    <i class="bi bi-person-vcard me-2"></i>Pegawai</a>
                 </div>
               </div>
             </div>
@@ -147,12 +235,16 @@
               <div class="card h-100 p-0">
                 <div class="p-4 text-center">
                   <i class="bi bi-journal-text text-primary mb-3" style="font-size:1.8rem"></i>
-                  <h5 class="mb-2">Penelitian & Pengabdian</h5>
-                  <p class="text-muted small mb-0">Mengelola kegiatan ilmiah dan pengabdian</p>
+                  <h5 class="mb-2">
+                    Penelitian & Pengabdian
+                  </h5>
+                  <p class="text-muted small mb-0">
+                    Mengelola kegiatan ilmiah dan pengabdian
+                  </p>
                 </div>
                 <div class="card-body pt-0 pb-3 d-flex justify-content-center gap-2">
-                  <a class="btn btn-outline-primary btn-sm" href="{{ route('/dashboard/penelitian') }}"><i class="bi bi-journal-bookmark me-2"></i>Penelitian</a>
-                  <a class="btn btn-outline-primary btn-sm" href="{{ route('/dashboard/pengabdian') }}"><i class="bi bi-hand-thumbs-up me-2"></i>Pengabdian</a>
+                  <a class="btn btn-outline-primary btn-sm" href="{{ route('/dashboard/penelitian') }}">                    <i class="bi bi-journal-bookmark me-2"></i>Penelitian</a>
+                  <a class="btn btn-outline-primary btn-sm" href="{{ route('/dashboard/pengabdian') }}">                    <i class="bi bi-hand-thumbs-up me-2"></i>Pengabdian</a>
                 </div>
               </div>
             </div>
@@ -161,12 +253,16 @@
               <div class="card h-100 p-0">
                 <div class="p-4 text-center">
                   <i class="bi bi-calendar-check text-primary mb-3" style="font-size:1.8rem"></i>
-                  <h5 class="mb-2">Cuti</h5>
-                  <p class="text-muted small mb-0">Kelola pengajuan izin dan sakit</p>
+                  <h5 class="mb-2">
+                    Cuti
+                  </h5>
+                  <p class="text-muted small mb-0">
+                    Kelola pengajuan izin dan sakit
+                  </p>
                 </div>
                 <div class="card-body pt-0 pb-3 d-flex justify-content-center gap-2">
-                  <a class="btn btn-outline-primary btn-sm" href="{{ route('/dashboard/izin') }}"><i class="bi bi-calendar-plus me-1"></i>Izin</a>
-                  <a class="btn btn-outline-primary btn-sm" href="{{ route('/dashboard/sakit') }}"><i class="bi bi-calendar-event me-2"></i>Sakit</a>
+                  <a class="btn btn-outline-primary btn-sm" href="{{ route('/dashboard/izin') }}">                    <i class="bi bi-calendar-plus me-1"></i>Izin</a>
+                  <a class="btn btn-outline-primary btn-sm" href="{{ route('/dashboard/sakit') }}">                    <i class="bi bi-calendar-event me-2"></i>Sakit</a>
                 </div>
               </div>
             </div>
@@ -175,216 +271,228 @@
       </div>
 
       {{-- Hidden data payload inserted by controller --}}
-      <div id="dashboard-data" style="display:none"
-        data-unit-labels='{{{ unitLabels || "[]" }}}'
-        data-unit-counts='{{{ unitCounts || "[]" }}}'
-        data-cuti-counts='{{{ cutiCounts || "{}" }}}'
-        data-pegawai-total='{{{ pegawaiTotal || 0 }}}'
-      ></div>
+      {{-- <div id="dashboard-data" style="display:none" data-unit-labels='{{{ unitLabels || "[]" }}}' --}}      {{-- {{--
+      data-unit-counts='{{{ unitCounts || "[]" }}}' data-cuti-counts='{{ { cutiCounts || "{}" }}}' --}}      --}} {{--
+    data-pegawai-total='{{{ pegawaiTotal || 0 }}}'> --}}
+    </div>
 
-      {{-- Chart.js CDN and rendering script --}}
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <script>
-        (function(){
-          // Helper to safely parse JSON that might be HTML-escaped
-          function safeParse(str, fallback) {
+    {{-- Chart.js CDN and rendering script --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js">
+
+    </script>
+    <script>
+      (function() {
+        // Helper to safely parse JSON that might be HTML-escaped
+        function safeParse(str, fallback) {
+          try {
+            return JSON.parse(str);
+          } catch (e) {
             try {
-              return JSON.parse(str)
-            } catch (e) {
-              try {
-                // Unescape common HTML entities and try again
-                const unescaped = String(str)
-                  .replace(/&quot;/g, '"')
-                  .replace(/&#39;/g, "'")
-                  .replace(/&amp;/g, '&')
-                return JSON.parse(unescaped)
-              } catch (e2) {
-                return fallback
-              }
+              // Unescape common HTML entities and try again
+              const unescaped = String(str).replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
+              return JSON.parse(unescaped);
+            } catch (e2) {
+              return fallback;
             }
           }
-
+        }
+        try {
+          const el = document.getElementById("dashboard-data");
+          if (!el) return;
+          const unitLabels = safeParse(el.getAttribute("data-unit-labels") || "[]", []);
+          const unitCounts = safeParse(el.getAttribute("data-unit-counts") || "[]", []);
+          const cutiCounts = safeParse(el.getAttribute("data-cuti-counts") || "{}", {});
+          const pegawaiTotal = Number(el.getAttribute("data-pegawai-total") || 0);
+          // Destroy existing charts if re-initializing (optional)
           try {
-            const el = document.getElementById('dashboard-data')
-            if (!el) return
-
-            const unitLabels = safeParse(el.getAttribute('data-unit-labels') || '[]', [])
-            const unitCounts = safeParse(el.getAttribute('data-unit-counts') || '[]', [])
-            const cutiCounts = safeParse(el.getAttribute('data-cuti-counts') || '{}', {})
-            const pegawaiTotal = Number(el.getAttribute('data-pegawai-total') || 0)
-
-            // Destroy existing charts if re-initializing (optional)
-            try { if (Chart.getChart) { ['unitChart','cutiChart','pegawaiChart'].forEach(id=>{const c=Chart.getChart(id); if(c) c.destroy()}) } } catch(e){}
-
-            // Unit distribution as doughnut (pie) chart
-            const unitEl = document.getElementById('unitChart')
-            if (unitEl && unitEl.getContext) {
-              const ctxUnit = unitEl.getContext('2d')
-              // build a color palette (repeat if necessary)
-              const palette = [
-                '#4e79a7','#f28e2b','#e15759','#76b7b2','#59a14f','#edc948','#b07aa1','#ff9da7','#9c755f','#bab0ab'
-              ]
-              const bg = unitLabels.map((_, i) => palette[i % palette.length])
-              new Chart(ctxUnit, {
-                type: 'pie',
-                data: {
-                  labels: unitLabels,
-                  datasets: [{
-                    data: unitCounts,
-                    backgroundColor: bg,
-                    borderColor: '#ffffff',
-                    borderWidth: 1
-                  }]
-                },
-                options: {
-                  maintainAspectRatio: false,
-                  responsive: true,
-                  plugins: {
-                    legend: { display: true, position: 'right' },
-                    tooltip: { enabled: true }
+            if (Chart.getChart) {
+              [ "unitChart", "cutiChart", "pegawaiChart" ].forEach(id => {
+                const c = Chart.getChart(id);
+                if (c) c.destroy();
+              });
+            }
+          } catch (e) {}
+          // Unit distribution as doughnut (pie) chart
+          const unitEl = document.getElementById("unitChart");
+          if (unitEl && unitEl.getContext) {
+            const ctxUnit = unitEl.getContext("2d");
+            // build a color palette (repeat if necessary)
+            const palette = [ "#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#59a14f", "#edc948", "#b07aa1", "#ff9da7", "#9c755f", "#bab0ab" ];
+            const bg = unitLabels.map((_, i) => palette[i % palette.length]);
+            new Chart(ctxUnit, {
+              type: "pie",
+              data: {
+                labels: unitLabels,
+                datasets: [ {
+                  data: unitCounts,
+                  backgroundColor: bg,
+                  borderColor: "#ffffff",
+                  borderWidth: 1
+                } ]
+              },
+              options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                  legend: {
+                    display: true,
+                    position: "right"
+                  },
+                  tooltip: {
+                    enabled: true
                   }
                 }
-              })
-            }
-
-            // Cuti / Izin doughnut
-            const cutiEl = document.getElementById('cutiChart')
-            if (cutiEl && cutiEl.getContext) {
-              const ctxCuti = cutiEl.getContext('2d')
-              new Chart(ctxCuti, {
-                type: 'doughnut',
-                data: {
-                  labels: ['Sakit', 'Izin'],
-                  datasets: [{
-                    data: [Number(cutiCounts.sakit || 0), Number(cutiCounts.izin || 0)],
-                    backgroundColor: ['#ffc107', '#0d6efd']
-                  }]
-                },
-                options: { maintainAspectRatio: false, responsive: true }
-              })
-            }
-
-            // Small helper: map unit name to an icon class
-            function unitIconFor(name){
-              const map = {
-                'Kepegawaian': 'bi-people-fill',
-                'Penelitian': 'bi-journal-bookmark',
-                'Pengabdian': 'bi-hand-thumbs-up',
-                'Keuangan': 'bi-cash-stack',
-                'Teknik': 'bi-tools',
-                'Umum': 'bi-building'
               }
-              for(const key in map){ if(name.toLowerCase().includes(key.toLowerCase())) return map[key] }
-              return 'bi-building'
+            });
+          }
+          // Cuti / Izin doughnut
+          const cutiEl = document.getElementById("cutiChart");
+          if (cutiEl && cutiEl.getContext) {
+            const ctxCuti = cutiEl.getContext("2d");
+            new Chart(ctxCuti, {
+              type: "doughnut",
+              data: {
+                labels: [ "Sakit", "Izin" ],
+                datasets: [ {
+                  data: [ Number(cutiCounts.sakit || 0), Number(cutiCounts.izin || 0) ],
+                  backgroundColor: [ "#ffc107", "#0d6efd" ]
+                } ]
+              },
+              options: {
+                maintainAspectRatio: false,
+                responsive: true
+              }
+            });
+          }
+          // Small helper: map unit name to an icon class
+          function unitIconFor(name) {
+            const map = {
+              Kepegawaian: "bi-people-fill",
+              Penelitian: "bi-journal-bookmark",
+              Pengabdian: "bi-hand-thumbs-up",
+              Keuangan: "bi-cash-stack",
+              Teknik: "bi-tools",
+              Umum: "bi-building"
+            };
+            for (const key in map) {
+              if (name.toLowerCase().includes(key.toLowerCase())) return map[key];
             }
-
-            // Pegawai summary (big total + per-unit compact rows) - keep same container height
-            try {
-              const totalEl = document.getElementById('pegawaiTotalBig')
-              const listEl = document.getElementById('pegawai-per-unit')
-              if (totalEl) totalEl.textContent = String(pegawaiTotal)
-              if (listEl) {
-                  // build pairs from unitLabels/unitCounts
-                  const pairs = (unitLabels || []).map((l, i) => ({ label: l, value: Number(unitCounts[i] || 0) }))
-                  // sort descending
-                  pairs.sort((a, b) => b.value - a.value)
-                  // calculate percentages based on pegawaiTotal (fallback to sum if pegawaiTotal missing)
-                  const sum = pairs.reduce((s, p) => s + p.value, 0)
-                  const denom = pegawaiTotal > 0 ? pegawaiTotal : (sum || 1)
-                  // take top 6 rows so table fits card height without scroll
-                  const top = pairs.slice(0, 6)
-                  // render as a modern compact table inside the pegawai card
-                  const container = listEl.parentNode
-                  container.innerHTML = ''
-                  const table = document.createElement('table')
-                  table.className = 'table table-sm table-borderless unit-table mb-0'
-                  const thead = document.createElement('thead')
-                  thead.innerHTML = '<tr><th style="width:28px"></th><th>Unit</th><th class="text-end">Jumlah</th><th class="text-end">%</th></tr>'
-                  table.appendChild(thead)
-                  const tbody = document.createElement('tbody')
-                  top.forEach(p => {
-                    const pct = denom > 0 ? ((p.value / denom) * 100) : 0
-                    const iconClass = unitIconFor(p.label)
-                    const tr = document.createElement('tr')
-                    tr.innerHTML = `<td><i class="bi ${iconClass} text-primary"></i></td><td class="small text-truncate">${p.label}</td><td class="text-end"><span class="badge bg-light text-dark unit-badge">${p.value}</span></td><td class="text-end"><span class="badge bg-primary text-white percent-badge">${pct.toFixed(0)}%</span></td>`
-                    tbody.appendChild(tr)
-                  })
-                  table.appendChild(tbody)
-                  container.appendChild(table)
-              }
-            } catch (e) { console.warn('pegawai summary render error', e) }
-
-            // Fill unit summary as a modern borderless table (no percentage, avoid scroll)
-            try {
-              const summaryEl = document.getElementById('unit-summary')
-              if (summaryEl) {
-                const pairs = (unitLabels || []).map((l, i) => ({ label: l, value: Number(unitCounts[i] || 0) }))
-                pairs.sort((a, b) => b.value - a.value)
-                const table = document.createElement('table')
-                table.className = 'table table-sm table-borderless unit-table mb-0'
-                const thead = document.createElement('thead')
-                thead.innerHTML = '<tr><th style="width:28px"></th><th>Unit</th><th class="text-end">Jumlah</th></tr>'
-                table.appendChild(thead)
-                const tbody = document.createElement('tbody')
-                pairs.slice(0, 8).forEach(p => {
-                  const iconClass = unitIconFor(p.label)
-                  const tr = document.createElement('tr')
-                  tr.innerHTML = `<td class="align-middle text-muted"><i class="bi ${iconClass} text-primary" style="font-size:0.95rem"></i></td><td class="align-middle small text-truncate">${p.label}</td><td class="align-middle small text-end"><span class="badge bg-light text-dark unit-badge">${p.value}</span></td>`
-                  tbody.appendChild(tr)
-                })
-                table.appendChild(tbody)
-                summaryEl.innerHTML = ''
-                summaryEl.appendChild(table)
-              }
-            } catch (e) { console.warn('unit summary render error', e) }
+            return "bi-building";
+          }
+          // Pegawai summary (big total + per-unit compact rows) - keep same container height
+          try {
+            const totalEl = document.getElementById("pegawaiTotalBig");
+            const listEl = document.getElementById("pegawai-per-unit");
+            if (totalEl) totalEl.textContent = String(pegawaiTotal);
+            if (listEl) {
+              // build pairs from unitLabels/unitCounts
+              const pairs = (unitLabels || []).map((l, i) => ({
+                label: l,
+                value: Number(unitCounts[i] || 0)
+              }));
+              // sort descending
+              pairs.sort((a, b) => b.value - a.value);
+              // calculate percentages based on pegawaiTotal (fallback to sum if pegawaiTotal missing)
+              const sum = pairs.reduce((s, p) => s + p.value, 0);
+              const denom = pegawaiTotal > 0 ? pegawaiTotal : sum || 1;
+              // take top 6 rows so table fits card height without scroll
+              const top = pairs.slice(0, 6);
+              // render as a modern compact table inside the pegawai card
+              const container = listEl.parentNode;
+              container.innerHTML = "";
+              const table = document.createElement("table");
+              table.className = "table table-sm table-borderless unit-table mb-0";
+              const thead = document.createElement("thead");
+              thead.innerHTML = '<tr><th style="width:28px"></th><th>Unit</th><th class="text-end">Jumlah</th><th class="text-end">%</th></tr>';
+              table.appendChild(thead);
+              const tbody = document.createElement("tbody");
+              top.forEach(p => {
+                const pct = denom > 0 ? p.value / denom * 100 : 0;
+                const iconClass = unitIconFor(p.label);
+                const tr = document.createElement("tr");
+                tr.innerHTML = `<td><i class="bi ${iconClass} text-primary"></i></td><td class="small text-truncate">${p.label}</td><td class="text-end"><span class="badge bg-light text-dark unit-badge">${p.value}</span></td><td class="text-end"><span class="badge bg-primary text-white percent-badge">${pct.toFixed(0)}%</span></td>`;
+                tbody.appendChild(tr);
+              });
+              table.appendChild(tbody);
+              container.appendChild(table);
+            }
           } catch (e) {
-            console.error('Dashboard charts error', e)
+            console.warn("pegawai summary render error", e);
           }
-        })()
-      </script>
-      <!-- Embed an external Google Calendar iframe for a modern UI.
-           Assumption: use public Indonesian Holidays calendar by default.
-           To change the calendar, replace `defaultCalendarId` with another publicly shared Google Calendar ID. -->
-      <script>
-        (function(){
-          // Default to Indonesian public holidays calendar. If you have a different public Google Calendar ID, replace this.
-          // NOTE: This value is URL-encoded for the iframe src (e.g. 'en.indonesian%23holiday%40group.v.calendar.google.com')
-          const defaultCalendarId = 'en.indonesian%23holiday%40group.v.calendar.google.com'
-
-          function embedGoogleCalendar(containerId, calendarId){
-            const container = document.getElementById(containerId)
-            if(!container) return
-            container.innerHTML = ''
-            const iframe = document.createElement('iframe')
-            iframe.id = 'hc-calendar-iframe'
-            iframe.style.width = '100%'
-            iframe.style.minHeight = '280px'
-            iframe.style.border = '0'
-            iframe.loading = 'lazy'
-            // mode=MONTH, showNav etc. timezone set to Asia/Jakarta
-            iframe.src = `https://calendar.google.com/calendar/embed?src=${calendarId}&ctz=Asia%2FJakarta&mode=MONTH&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0`
-            container.appendChild(iframe)
-          }
-
-          document.addEventListener('DOMContentLoaded', ()=>{
-            embedGoogleCalendar('hc-calendar', defaultCalendarId)
-            // hide add button (not applicable for embedded calendar)
-            const addBtn = document.getElementById('hc-add-btn')
-            if(addBtn) addBtn.style.display = 'none'
-            // add a small note under notifications to explain how to change calendar source
-            const note = document.createElement('div')
-            note.className = 'small text-muted mt-2'
-            note.textContent = 'Embedded Google Calendar (public). Change calendar source by updating defaultCalendarId in the template.'
-            const noti = document.getElementById('hc-notifications')
-            if(noti) noti.parentNode.insertBefore(note, noti.nextSibling)
-            // if notifications empty, show placeholder with icon
-            const notiArea = document.getElementById('hc-notifications')
-            if(notiArea && !notiArea.hasChildNodes()){
-              notiArea.innerHTML = '<div class="text-center text-muted small py-3"><i class="bi bi-bell me-1"></i>Tidak ada notifikasi saat ini.</div>'
+          // Fill unit summary as a modern borderless table (no percentage, avoid scroll)
+          try {
+            const summaryEl = document.getElementById("unit-summary");
+            if (summaryEl) {
+              const pairs = (unitLabels || []).map((l, i) => ({
+                label: l,
+                value: Number(unitCounts[i] || 0)
+              }));
+              pairs.sort((a, b) => b.value - a.value);
+              const table = document.createElement("table");
+              table.className = "table table-sm table-borderless unit-table mb-0";
+              const thead = document.createElement("thead");
+              thead.innerHTML = '<tr><th style="width:28px"></th><th>Unit</th><th class="text-end">Jumlah</th></tr>';
+              table.appendChild(thead);
+              const tbody = document.createElement("tbody");
+              pairs.slice(0, 8).forEach(p => {
+                const iconClass = unitIconFor(p.label);
+                const tr = document.createElement("tr");
+                tr.innerHTML = `<td class="align-middle text-muted"><i class="bi ${iconClass} text-primary" style="font-size:0.95rem"></i></td><td class="align-middle small text-truncate">${p.label}</td><td class="align-middle small text-end"><span class="badge bg-light text-dark unit-badge">${p.value}</span></td>`;
+                tbody.appendChild(tr);
+              });
+              table.appendChild(tbody);
+              summaryEl.innerHTML = "";
+              summaryEl.appendChild(table);
             }
-          })
-        })()
-      </script>
-    </main>
-  @endslot
+          } catch (e) {
+            console.warn("unit summary render error", e);
+          }
+        } catch (e) {
+          console.error("Dashboard charts error", e);
+        }
+      })();
+    </script>
+    <!-- Embed an external Google Calendar iframe for a modern UI.
+           Assumption: use public Indonesian Holidays calendar by default.
+    To change the calendar, replace `defaultCalendarId` with another publicly shared Google Calendar ID. -->
+    <script>
+      (function() {
+        // Default to Indonesian public holidays calendar. If you have a different public Google Calendar ID, replace this.
+        // NOTE: This value is URL-encoded for the iframe src (e.g. 'en.indonesian%23holiday%40group.v.calendar.google.com')
+        const defaultCalendarId = "en.indonesian%23holiday%40group.v.calendar.google.com";
+        function embedGoogleCalendar(containerId, calendarId) {
+          const container = document.getElementById(containerId);
+          if (!container) return;
+          container.innerHTML = "";
+          const iframe = document.createElement("iframe");
+          iframe.id = "hc-calendar-iframe";
+          iframe.style.width = "100%";
+          iframe.style.minHeight = "280px";
+          iframe.style.border = "0";
+          iframe.loading = "lazy";
+          // mode=MONTH, showNav etc. timezone set to Asia/Jakarta
+          iframe.src = `https://calendar.google.com/calendar/embed?src=${calendarId}&ctz=Asia%2FJakarta&mode=MONTH&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0`;
+          container.appendChild(iframe);
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+          embedGoogleCalendar("hc-calendar", defaultCalendarId);
+          // hide add button (not applicable for embedded calendar)
+          const addBtn = document.getElementById("hc-add-btn");
+          if (addBtn) addBtn.style.display = "none";
+          // add a small note under notifications to explain how to change calendar source
+          const note = document.createElement("div");
+          note.className = "small text-muted mt-2";
+          note.textContent = "Embedded Google Calendar (public). Change calendar source by updating defaultCalendarId in the template.";
+          const noti = document.getElementById("hc-notifications");
+          if (noti) noti.parentNode.insertBefore(note, noti.nextSibling);
+          // if notifications empty, show placeholder with icon
+          const notiArea = document.getElementById("hc-notifications");
+          if (notiArea && !notiArea.hasChildNodes()) {
+            notiArea.innerHTML = '<div class="text-center text-muted small py-3"><i class="bi bi-bell me-1"></i>Tidak ada notifikasi saat ini.</div>';
+          }
+        });
+      })();
+    </script>
+  </main>
+@endslot
 @end

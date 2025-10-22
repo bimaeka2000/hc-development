@@ -15,7 +15,6 @@ export default defineConfig({
        * Paths to watch and reload the browser on file change
        */
       reload: ['resources/views/**/*.edge'],
-
-    })
+    }),
   ],
 })

@@ -9,6 +9,6 @@
 <script setup>
 import Message from 'primevue/message'
 const props = defineProps({
-  message: String
+  message: String,
 })
 </script>
