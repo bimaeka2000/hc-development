@@ -44,6 +44,7 @@ router.get('/', async ({ view }) => {
 router.get('/welcome', async ({ view }) => {
   return view.render('welcome')
 })
+// #NOTE Login manual
 
 // #NOTE SSO Goolgle OAuth2
 router.get('/auth/google/redirect', [AuthController, 'redirectToGoogle']).as('google.redirect')
@@ -88,6 +89,7 @@ router
       .prefix('dashboard')
   })
   .use(middleware.authView())
+  .use(middleware.shareRole())
   .use(middleware.auth({ guards: ['web'] })) // gunakan session guard
 
 router.get('*', async ({ request, view, response }) => {

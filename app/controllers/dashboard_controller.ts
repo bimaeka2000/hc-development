@@ -68,6 +68,9 @@ export default class DashboardController {
       // )
 
       await response.redirect().toRoute('dashboard.index')
+      response.clearCookie('state')
+      response.clearCookie('google_token')
+      response.clearCookie('user')
     } catch (error) {
       await trx.rollback()
       return response.badRequest({
@@ -76,20 +79,52 @@ export default class DashboardController {
       })
     }
   }
-  async index({ view, session, response }: HttpContext) {
-    const userGoogle = session.get('user_google')
-    // jika belum login atau session kosong
-    if (!userGoogle) {
-      return response.redirect().toRoute('auth.login')
+
+  async index({ view, session, auth, response }: HttpContext) {
+    try {
+      // 1️⃣ Coba ambil user dari session (Google SSO)
+      const userGoogle = session.get('user_google')
+      const userAuth = auth?.user
+      let user = null
+
+      if (userGoogle?.email) {
+        user = await User.findBy('email', userGoogle.email)
+      }
+      // 2️⃣ Kalau tidak ada session, ambil dari auth guard (login manual)
+      else if (userAuth) {
+        user = userAuth
+      }
+
+      // 3️⃣ Kalau dua-duanya kosong, arahkan ke login
+      if (!user) {
+        return response.redirect('/login')
+      }
+
+      // Debug log (untuk memastikan yang aktif)
+      // console.log('🧠 Active User:', user.email, '| Login via:', userGoogle ? 'Google SSO' : 'Manual')
+
+      // 4️⃣ Kirim ke view
+      return view.render('layouts/dashboard', { user })
+
+    } catch (error) {
+      // console.error('❌ Dashboard index error:', error)
+      return response.internalServerError('Terjadi kesalahan di server.')
     }
-
-    const email = userGoogle.email
-    const user = await User.findBy('email', email)
-
-    if (!user) {
-      return response.status(404).send('User tidak ditemukan')
-    }
-
-    return view.render('layouts/dashboard', { user })
   }
+  // async index({ view, session, response }: HttpContext) {
+  //   const userGoogle = session.get('user_google')
+  //   // jika belum login atau session kosong
+  //   if (!userGoogle) {
+  //     return response.redirect("/login")
+  //   }
+
+  //   const email = userGoogle.email
+  //   const user = await User.findBy('email', email)
+
+  //   if (!user) {
+  //     return response.status(404).send('User tidak ditemukan')
+  //   }
+
+  //   return view.render('layouts/dashboard', { user })
+  // }
 }

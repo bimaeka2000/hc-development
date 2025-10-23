@@ -3,13 +3,51 @@ import type { NextFn } from '@adonisjs/core/types/http'
 
 export default class ShareUserMiddleware {
   public async handle({ auth, view, session }: HttpContext, next: () => Promise<void>) {
-    // Pastikan sudah login
-    const user = session.get('user_google')
 
-    // Kirim user ke semua view Edge
-    view.share({
-      user: user || null,
-    })
+    let user = null
+
+    try {
+      // Cek user dari session (Google)
+      const userGoogle = session.get('user_google')
+
+      if (userGoogle) {
+        user = {
+          name: userGoogle.name,
+          email: userGoogle.email,
+          picture: userGoogle.picture,
+          source: 'google',
+        }
+      }
+      // Kalau tidak ada, ambil user manual dari auth guard
+      else if (auth.user) {
+        user = {
+          id: auth.user.id,
+          name: auth.user.name,
+          email: auth.user.email,
+          picture: auth.user.picture ?? null,
+          source: 'manual',
+        }
+      }
+
+      // Share ke semua view Edge
+      view.share({ user })
+    } catch (error) {
+      console.error('❌ ShareUserMiddleware error:', error)
+      view.share({ user: null })
+    }
+
     await next()
   }
+  // public async handle({ auth, view, session }: HttpContext, next: () => Promise<void>) {
+  //   // Pastikan sudah login
+  //   const user = session.get('user_google')
+
+  //   // Kirim user ke semua view Edge
+  //   view.share({
+  //     user: user || null,
+  //   })
+  //   await next()
+  // }
+
+
 }

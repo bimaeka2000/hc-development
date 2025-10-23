@@ -25,7 +25,7 @@
 
 <body class="bg-body-secondary theme-light-blue" data-bs-theme="light">
   {{-- #NOTE Perubahan untuk develop --}}
-  @if(userRole.role === 'admin' || userRole.role === 'hrd')
+  @if(userRole?.role === 'admin' || userRole?.role === 'hrd')
   @include('partials/nav_admin')
   @else
   @include('partials/nav_pegawai')
