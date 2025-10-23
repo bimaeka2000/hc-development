@@ -24,7 +24,7 @@ export default class PengabdianCardsController {
     const id = params.id
     // #TODO Ini ambil data dosen, query menggunakan id_role
     // const dataPengabdian = Pengabdian.query()
-    return view.render('dashboard/edit/pengabdian')
+    return view.render('pegawai/edit/pengabdian')
   }
 
   /**

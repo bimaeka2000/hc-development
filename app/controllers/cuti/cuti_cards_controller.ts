@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class PengajuanCutiCardsController {
+export default class CutiCardsController {
   /**
    * Display a list of resource
    */
@@ -21,7 +21,7 @@ export default class PengajuanCutiCardsController {
    */
   async show({ params, view }: HttpContext) {
     const id = params.id
-    return view.render('dashboard/edit/pengajuan-cuti')
+    return view.render('pegawai/edit/riwayat-cuti')
   }
 
   /**

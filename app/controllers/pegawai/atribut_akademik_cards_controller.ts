@@ -24,7 +24,7 @@ export default class AtributAkademikCardsController {
     const dataAktributAkademik = await Dosen.query().where('pegawai_id', id)
     // .preload('pegawai')
     // .firstOrFail()
-    return view.render('dashboard/edit/atribut-akademik')
+    return view.render('pegawai/edit/atribut-akademik')
   }
 
   /**

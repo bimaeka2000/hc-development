@@ -1,7 +1,7 @@
-import Pelatihan from '#models/pelatihan'
+import DokumenPegawai from '#models/dokumen_pegawai'
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class PelatihanCardsController {
+export default class DokumenCardsController {
   /**
    * Display a list of resource
    */
@@ -22,9 +22,9 @@ export default class PelatihanCardsController {
    */
   async show({ params, view }: HttpContext) {
     const id = params.id
-    // const dataPelatihan = Pelatihan.query().where('pegawai_id', id).firstOrFail()
+    // const dataDokumen = DokumenPegawai.query().where('pegawai_id', id).firstOrFail()
 
-    return view.render('dashboard/edit/pelatihan')
+    return view.render('pegawai/edit/dokumen')
   }
 
   /**

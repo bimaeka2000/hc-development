@@ -1,7 +1,7 @@
-import Keluarga from '#models/keluarga'
+import Publikasi from '#models/publikasi'
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class KeluargaCardsController {
+export default class PublikasiCardsController {
   /**
    * Display a list of resource
    */
@@ -22,8 +22,10 @@ export default class KeluargaCardsController {
    */
   async show({ params, view }: HttpContext) {
     const id = params.id
-    const dataKeluarga = Keluarga.query().where('pegawai_id', id).firstOrFail()
-    return view.render('dashboard/edit/keluarga')
+    // #TODO Ini ambil data dosen, query menggunakan id_role
+
+    const dataPublikasi = Publikasi.query()
+    return view.render('pegawai/edit/publikasi')
   }
 
   /**

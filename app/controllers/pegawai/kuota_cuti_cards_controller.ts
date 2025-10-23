@@ -1,7 +1,6 @@
-import Publikasi from '#models/publikasi'
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class PublikasiCardsController {
+export default class KuotaCutiCardsController {
   /**
    * Display a list of resource
    */
@@ -22,10 +21,8 @@ export default class PublikasiCardsController {
    */
   async show({ params, view }: HttpContext) {
     const id = params.id
-    // #TODO Ini ambil data dosen, query menggunakan id_role
 
-    const dataPublikasi = Publikasi.query()
-    return view.render('dashboard/edit/publikasi')
+    return view.render('pegawai/edit/kuota-cuti')
   }
 
   /**

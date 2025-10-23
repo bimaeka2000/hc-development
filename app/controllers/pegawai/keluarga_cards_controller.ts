@@ -1,7 +1,7 @@
+import Keluarga from '#models/keluarga'
 import type { HttpContext } from '@adonisjs/core/http'
-import Dosen from '#models/dosen'
-import Pegawai from '#models/pegawai'
-export default class AtributLainCardsController {
+
+export default class KeluargaCardsController {
   /**
    * Display a list of resource
    */
@@ -20,14 +20,10 @@ export default class AtributLainCardsController {
   /**
    * Show individual record
    */
-  async show({ params, view, response }: HttpContext) {
+  async show({ params, view }: HttpContext) {
     const id = params.id
-    // return response.json(id)
-    const dataAtributLain = await Dosen.query().where('pegawai_id', id)
-    return response.json(dataAtributLain)
-    return view.render('dashboard/edit/atribut-pegawai-lain', { dataAtributLain })
-    // .preload('pegawai')
-    // .firstOrFail()
+    const dataKeluarga = Keluarga.query().where('pegawai_id', id).firstOrFail()
+    return view.render('pegawai/edit/keluarga')
   }
 
   /**

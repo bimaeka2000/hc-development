@@ -1,7 +1,7 @@
-import DokumenPegawai from '#models/dokumen_pegawai'
 import type { HttpContext } from '@adonisjs/core/http'
-
-export default class DokumenCardsController {
+import Dosen from '#models/dosen'
+import Pegawai from '#models/pegawai'
+export default class AtributLainCardsController {
   /**
    * Display a list of resource
    */
@@ -20,11 +20,14 @@ export default class DokumenCardsController {
   /**
    * Show individual record
    */
-  async show({ params, view }: HttpContext) {
+  async show({ params, view, response }: HttpContext) {
     const id = params.id
-    // const dataDokumen = DokumenPegawai.query().where('pegawai_id', id).firstOrFail()
-
-    return view.render('dashboard/edit/dokumen')
+    // return response.json(id)
+    const dataAtributLain = await Dosen.query().where('pegawai_id', id)
+    return response.json(dataAtributLain)
+    return view.render('pegawai/edit/atribut-pegawai-lain', { dataAtributLain })
+    // .preload('pegawai')
+    // .firstOrFail()
   }
 
   /**

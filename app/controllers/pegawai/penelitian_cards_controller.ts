@@ -1,7 +1,7 @@
-import RiwayatPendidikan from '#models/riwayat_pendidikan'
+import Penelitian from '#models/penelitian'
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class PendidikanCardsController {
+export default class PenelitianCardsController {
   /**
    * Display a list of resource
    */
@@ -20,11 +20,11 @@ export default class PendidikanCardsController {
   /**
    * Show individual record
    */
-  async show({ params, view }: HttpContext) {
+  async show({ view, params }: HttpContext) {
     const id = params.id
-    // const riwayatPendidikan = RiwayatPendidikan.query().where('pegawai_id', id).firstOrFail()
-
-    return view.render('dashboard/edit/pendidikan')
+    // #TODO Ini ambil data dosen, query menggunakan id_role
+    // const dataPenelitian = Penelitian.query()
+    return view.render('pegawai/edit/penelitian')
   }
 
   /**

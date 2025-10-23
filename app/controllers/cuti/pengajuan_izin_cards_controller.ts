@@ -21,7 +21,7 @@ export default class PengajuanIzinCardsController {
    */
   async show({ params, view }: HttpContext) {
     const id = params.id
-    return view.render('dashboard/edit/pengajuan-izin')
+    return view.render('pegawai/edit/pengajuan-izin')
   }
 
   /**

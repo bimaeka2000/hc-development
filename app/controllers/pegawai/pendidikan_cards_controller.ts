@@ -1,7 +1,7 @@
-import DataKesehatanFisik from '#models/data_kesehatan_fisik'
+import RiwayatPendidikan from '#models/riwayat_pendidikan'
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class KesehatanFisikCardsController {
+export default class PendidikanCardsController {
   /**
    * Display a list of resource
    */
@@ -22,9 +22,9 @@ export default class KesehatanFisikCardsController {
    */
   async show({ params, view }: HttpContext) {
     const id = params.id
-    // const dataKesehatanFisik = DataKesehatanFisik.query().where('pegawai_id', id).firstOrFail()
+    // const riwayatPendidikan = RiwayatPendidikan.query().where('pegawai_id', id).firstOrFail()
 
-    return view.render('dashboard/edit/kesehatan-fisik')
+    return view.render('pegawai/edit/pendidikan')
   }
 
   /**

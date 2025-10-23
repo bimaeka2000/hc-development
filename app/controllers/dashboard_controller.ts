@@ -37,7 +37,7 @@ export default class DashboardController {
             name: userGoogle.name,
             picture: userGoogle.picture,
             password: hashed,
-            role: 'admin',
+            role: 'pegawai',
           },
           { client: trx }
         )
@@ -78,7 +78,6 @@ export default class DashboardController {
   }
   async index({ view, session, response }: HttpContext) {
     const userGoogle = session.get('user_google')
-    console.log(userGoogle)
     // jika belum login atau session kosong
     if (!userGoogle) {
       return response.redirect().toRoute('auth.login')

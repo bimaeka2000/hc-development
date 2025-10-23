@@ -1,7 +1,7 @@
-import Penelitian from '#models/penelitian'
+import DataKesehatanFisik from '#models/data_kesehatan_fisik'
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class PenelitianCardsController {
+export default class KesehatanFisikCardsController {
   /**
    * Display a list of resource
    */
@@ -20,11 +20,11 @@ export default class PenelitianCardsController {
   /**
    * Show individual record
    */
-  async show({ view, params }: HttpContext) {
+  async show({ params, view }: HttpContext) {
     const id = params.id
-    // #TODO Ini ambil data dosen, query menggunakan id_role
-    // const dataPenelitian = Penelitian.query()
-    return view.render('dashboard/edit/penelitian')
+    // const dataKesehatanFisik = DataKesehatanFisik.query().where('pegawai_id', id).firstOrFail()
+
+    return view.render('pegawai/edit/kesehatan-fisik')
   }
 
   /**

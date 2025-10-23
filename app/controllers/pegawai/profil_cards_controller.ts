@@ -92,7 +92,7 @@ export default class ProfilCardsController {
       .preload('agama')
       .firstOrFail()
     return response.json(pegawaiData)
-    return view.render('dashboard/edit/profil', {
+    return view.render('pegawai/edit/profil', {
       pegawaiData,
       suku,
       agama,
