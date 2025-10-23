@@ -1,67 +1,79 @@
 @layout.layout({title:'Edit Keluarga'})
 
-  @slot('meta')
-    <meta name="description" content="Dashboard page for Human Capital Management System" />
-  @endslot
-  @slot('main')
-    <main class="flex-grow-1 p-3 p-lg-4">
-      <div class="panel-soft glass-card card-hover">
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-people me-2 text-primary"></i>
-          <div class="mini-section-title mb-0">
-            Keluarga
-          </div>
-
-        </div>
-        <div class="table-responsive">
-          <table class="table table-sm table-hover align-middle data-table">
-            <thead>
-              <tr>
-                <th>
-                  <i class="bi bi-person"></i>Hubungan
-                </th>
-                <th>
-                  <i class="bi bi-person-vcard"></i>Nama
-                </th>
-                <th style="width:60px">
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  Pasangan
-                </td>
-                <td>
-                  [Keluarga 1]
-                </td>
-                <td>
-                  <button class="btn btn-sm btn-outline-danger">Hapus</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Anak
-                </td>
-                <td>
-                  [Keluarga 2]
-                </td>
-                <td>
-                  <button class="btn btn-sm btn-outline-danger">Hapus</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="d-flex gap-2">
-          <button class="btn btn-primary btn-sm ms-auto">            <i class="bi bi-save"></i>Simpan</button>
-          <div style="margin-left: 1125px">
-            <a class="btn btn-outline-secondary btn-sm" href="#" onclick="history.back(); return false;">              <i class="bi bi-arrow-left"></i>Batal</a>
-          </div>
-          <button class="btn btn-sm btn-outline-secondary">            <i class="bi bi-plus"></i>Tambah</button>
-
-        </div>
+@slot('meta')
+<meta name="description" content="Dashboard page for Human Capital Management System" />
+@endslot
+@slot('main')
+<main class="flex-grow-1 p-3 p-lg-4">
+  <div class="panel-soft glass-card card-hover">
+    <div class="d-flex align-items-center mb-2">
+      <i class="bi bi-people me-2 text-primary"></i>
+      <div class="mini-section-title mb-0">
+        Keluarga
       </div>
-    </main>
-  @endslot
+
+    </div>
+    <div class="table-responsive">
+      <table class="table table-sm table-hover align-middle data-table">
+        <thead>
+          <tr>
+            <th>
+              <i class="bi bi-person"></i>Hubungan
+            </th>
+            <th>
+              <i class="bi bi-person-vcard"></i>Nama
+            </th>
+            <th>
+              <i class="bi bi-person-vcard"></i>Pekerjaan
+            </th>
+            <th>
+              <i class="bi bi-person-vcard"></i>Tanggal Lahir
+            </th>
+            <th style="width:60px">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Pasangan
+            </td>
+            <td>
+              [Keluarga 1]
+            </td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger">Hapus</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Anak
+            </td>
+            <td>
+              [Keluarga 2]
+            </td>
+            <td>
+            </td>
+
+            <td>
+              [Keluarga 2]
+            </td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger">Hapus</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary btn-sm ms-auto"> <i class="bi bi-save"></i>Simpan</button>
+      <div style="margin-left: 1125px">
+        <a class="btn btn-outline-secondary btn-sm" href="#" onclick="history.back(); return false;"> <i
+            class="bi bi-arrow-left"></i>Batal</a>
+      </div>
+      <button class="btn btn-sm btn-outline-secondary"> <i class="bi bi-plus"></i>Tambah</button>
+    </div>
+  </div>
+</main>
+@endslot
 @end
