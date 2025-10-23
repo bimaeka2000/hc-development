@@ -14,11 +14,14 @@ import JenjangPendidikan from '#models/jenjang_pendidikan'
 import Suku from '#models/suku'
 import Agama from '#models/agama'
 export default class PagesController {
-  async Pegawai({ view }: HttpContext) {
+  async Pegawai({ view, route }: HttpContext) {
     // looping semua data pegawai
     // Load all pegawai for listing page
     const pegawais = await Pegawai.query().orderBy('id', 'asc')
-    return view.render('dashboard/pegawai', { pegawais })
+    return view.render('dashboard/pegawai', {
+      pegawais,
+      currentRoute: 'dashboard',
+    })
   }
 
   async PegawaiDetail({ view, session }: HttpContext) {

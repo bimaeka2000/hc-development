@@ -15,7 +15,8 @@
             class="bi bi-speedometer2 me-2"></i>Dashboard</a>
       </li>
       <li>
-        <a class="nav-link text-white d-flex align-items-center" href="{{ route('user.index') }}">          <i class="bi bi-people me-2"></i>
+        <a class="nav-link text-white d-flex align-items-center" href="{{ route('user.index') }}"> <i
+            class="bi bi-people me-2"></i>
           Users</a>
       </li>
       <li>
@@ -67,12 +68,16 @@
       </li>
 
       <li>
-        <a class="nav-link text-white d-flex align-items-center" id="logoutSidebar" href="{{ route('logout') }}"> <i
-            class="bi bi-box-arrow-right me-2"></i>Keluar</a>
+        <div id="vue-logout">
+        </div>
+        <a class="nav-link text-white d-flex align-items-center" id="logoutSidebar" href="{{ route('logout') }}">
+          <i class="bi bi-box-arrow-right me-2"></i>Keluar</a>
+
       </li>
 
     </ul>
   </div>
+
   {{-- #NOTE ambil data user. [picture,name,email] --}}
 
   <div class="p-3 border-top border-secondary small">
@@ -90,3 +95,5 @@
     </div>
   </div>
 </nav>
+
+@vite('resources/js/main/buttonLogout.js')

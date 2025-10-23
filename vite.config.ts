@@ -16,5 +16,9 @@ export default defineConfig({
        */
       reload: ['resources/views/**/*.edge'],
     }),
+
   ],
+  optimizeDeps: {
+    exclude: ['@primevue/themes']
+  }
 })

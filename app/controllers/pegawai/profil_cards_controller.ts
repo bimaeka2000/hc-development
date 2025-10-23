@@ -16,7 +16,7 @@ export default class ProfilCardsController {
   /**
    * Display form to create a new record
    */
-  async create({}: HttpContext) {}
+  async create({ }: HttpContext) { }
 
   /**
    * Handle form submission for the create action
@@ -27,7 +27,7 @@ export default class ProfilCardsController {
         [] simpan data disini
         [] tambah data untuk status perkawinan di card profil 
     */
-    session.flash('success', 'Data berhasil disimpan!')
+    session.flash('success', 'profil card berhasil disimpan!')
 
     const allowedFields = [
       'agama_id',
@@ -58,11 +58,7 @@ export default class ProfilCardsController {
       Object.entries(data).filter(([_, v]) => v !== undefined && v !== '' && v !== null)
     )
 
-    return response.json([
-      {
-        data: cleanData,
-      },
-    ])
+    return response.redirect().back()
     await Pegawai.query().where('id', params.id).update(cleanData)
   }
 
@@ -91,7 +87,7 @@ export default class ProfilCardsController {
       .preload('suku')
       .preload('agama')
       .firstOrFail()
-    return response.json(pegawaiData)
+    // return response.json(pegawaiData)
     return view.render('pegawai/edit/profil', {
       pegawaiData,
       suku,
@@ -104,7 +100,7 @@ export default class ProfilCardsController {
   /**
    * Edit individual record
    */
-  async edit({}: HttpContext) {}
+  async edit({ }: HttpContext) { }
 
   /**
    * Handle form submission for the edit action
@@ -115,5 +111,5 @@ export default class ProfilCardsController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params }: HttpContext) { }
 }
