@@ -49,6 +49,7 @@ router.get('/welcome', async ({ view }) => {
 router.get('/auth/google/redirect', [AuthController, 'redirectToGoogle']).as('google.redirect')
 router.get('/auth/google/callback', [AuthController, 'googleCallback'])
 router.get('/checkuser', [DashboardController, 'checkUser'])
+router.post('/login', [SessionController, 'store']).as('login.manual')
 
 // #NOTE Session routes
 router.post('session', [SessionController, 'store'])

@@ -34,17 +34,25 @@
       </div>
 
       {{-- #TODO tambahkan atribut href dan aria-label yang sesuai --}}
-      <form id="loginForm" novalidate>
+      <form action="{{ route('login.manual') }}" method="POST" novalidate>
+        {{ csrfField() }}
         <div class="mb-3">
           <label class="form-label">Nama Pengguna</label>
-          <input id="loginUser" class="form-control" placeholder="Name Pengguna" required />
+          <input id="loginUser" name="email" class="form-control" placeholder="Name Pengguna" required />
           <div id="hintUser" class="input-hint">
             <i class="bi bi-exclamation-octagon m-2"></i>Fill this field
           </div>
         </div>
         <div class="mb-3">
           <label class="form-label">Kata Sandi</label>
-          <input id="loginPass" type="password" class="form-control" placeholder="Kata Sandi" required />
+          <input
+            id="loginPass"
+            name="password"
+            type="password"
+            class="form-control"
+            placeholder="Kata Sandi"
+            required
+          />
           <div id="hintPass" class="input-hint">
             <i class="bi bi-exclamation-octagon m-2"></i>Fill this field
           </div>
