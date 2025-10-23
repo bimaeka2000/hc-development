@@ -23,9 +23,9 @@ export default class ProfilCardsController {
    */
   async store({ response, request, session }: HttpContext) {
     /*
-        #TODO : 
+        #TODO :
         [] simpan data disini
-        [] tambah data untuk status perkawinan di card profil 
+        [] tambah data untuk status perkawinan di card profil
     */
     session.flash('success', 'Data berhasil disimpan!')
 
@@ -91,7 +91,7 @@ export default class ProfilCardsController {
       .preload('suku')
       .preload('agama')
       .firstOrFail()
-    return response.json(pegawaiData)
+    // return response.json(pegawaiData)
     return view.render('pegawai/edit/profil', {
       pegawaiData,
       suku,
