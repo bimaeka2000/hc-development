@@ -109,7 +109,11 @@
         </a>
       </li>
       <li>
-        <a class="nav-link text-white d-flex align-items-center" id="logoutSidebar" href="{{ route('logout') }}">
+        <a
+          class="nav-link text-white d-flex align-items-center"
+          id="logoutSidebar"
+          href="{{ route('logout') }}"
+        >
           <i class="bi bi-box-arrow-right me-2"></i>
           Keluar
         </a>
@@ -137,7 +141,7 @@
 <script>
   // Client-side fallback to reliably mark active sidebar link.
   // This normalizes paths, supports absolute/relative hrefs, and chooses the longest-prefix match.
-  (function () {
+  (function() {
     try {
       // Prefer server-shared activePath when available (injected via data-active-path)
       const sidebar = document.getElementById("sidebar");

@@ -8,16 +8,13 @@ export default class SessionController {
 
     try {
       const user = await User.verifyCredentials(email, password)
-      // await User.accessTokens.create(user, ['*'], {
-      //   name: 'bearer-token',
-      //   expiresIn: '30 days',
-      // })
+      await User.accessTokens.create(user, ['*'], {
+        name: 'bearer-token',
+        expiresIn: '30 days',
+      })
       // const token = await auth.use('api').createToken(user)
-      // return response.json(user)
-      await auth.use('web').login(user)
-
+      await auth.use('web').login(user) // return response.json(token)
       await response.redirect().toRoute('dashboard.index')
-
     } catch (error) {
       console.log(error.message)
       return response.redirect().back()
