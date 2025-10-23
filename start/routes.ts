@@ -60,6 +60,12 @@ router
   .group(() => {
     router.get('/logout', [SessionController, 'logOut']).as('logout')
     router.get('/dashboard', [DashboardController, 'index']).as('dashboard.index')
+    router.get('/penelitian', [PagesController, 'Penelitian'])
+    router.get('/cuti', [PagesController, 'Cuti'])
+    router.get('/sakit', [PagesController, 'Sakit'])
+    router.get('/izin', [PagesController, 'Izin'])
+    router.get('/pengabdian', [PagesController, 'Pengabdian'])
+    // router.get('/dashboard/sakit', [PagesController, 'Users'])
     router
       .group(() => {
         router.resource('/user', UsersController)
