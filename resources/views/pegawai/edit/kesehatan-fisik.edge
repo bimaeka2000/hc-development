@@ -1,0 +1,61 @@
+@layout.layout({title:'Edit Kesehatan Fisik'})
+
+  @slot('meta')
+    <meta name="description" content="Dashboard page for Human Capital Management System" />
+  @endslot
+  
+  @slot('main')
+
+    <main class="flex-grow-1 p-3 p-lg-4">
+      <div class="panel-soft glass-card card-hover">
+        <div class="d-flex align-items-center mb-2">
+          <i class="bi bi-heart-pulse me-2 text-primary"></i>
+          <div class="mini-section-title mb-0">
+            Kesehatan Fisik
+          </div>
+          <a href="../pages/pegawai-detail.html" class="btn btn-sm btn-outline-secondary ms-auto">            <i class="bi bi-arrow-left"></i>Kembali</a>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-3">
+            <label class="form-label form-label-sm">Tinggi (cm)</label>            <input class="form-control form-control-sm" type="number" min="0" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label form-label-sm">Berat (kg)</label>            <input class="form-control form-control-sm" type="number" min="0" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label form-label-sm">Golongan Darah</label>            <select class="form-select form-select-sm">
+              <option>
+                A
+              </option>
+              <option>
+                B
+              </option>
+              <option>
+                AB
+              </option>
+              <option>
+                O
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label form-label-sm">Tekanan Darah</label>            <input class="form-control form-control-sm" type="text" placeholder="120/80" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label form-label-sm">Alergi</label>            <input class="form-control form-control-sm" type="text" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label form-label-sm">Disabilitas</label>            <input class="form-control form-control-sm" type="text" />
+          </div>
+          <div class="col-12">
+            <label class="form-label form-label-sm">Catatan Kesehatan</label>            <textarea class="form-control form-control-sm" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="mt-3 d-flex gap-2">
+          <button class="btn btn-primary btn-sm">            <i class="bi bi-save"></i>Simpan</button>
+          <a class="btn btn-outline-secondary btn-sm" href="#" onclick="history.back(); return false;">            <i class="bi bi-arrow-left"></i>Batal</a>
+        </div>
+      </div>
+    </main>
+  @endslot
+@end

@@ -1,0 +1,20 @@
+<div class="panel-soft glass-card card-hover">
+  <div class="d-flex align-items-center mb-2">
+    <i class="bi bi-person-workspace me-2 text-primary"></i>
+    <div class="mini-section-title mb-0">
+      Atribut Pegawai Lain
+    </div>
+    <a href="{{ route('atribut_lain.show',{id:id}) }}" class="btn btn-sm btn-outline-primary ms-auto">
+      <i class="bi bi-pencil"></i>Edit</a>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex align-items-center justify-content-between">
+      <div class="text-secondary small d-flex align-items-center">
+        <i class="bi bi-briefcase me-2 text-primary"></i>Jabatan (Pegawai Lain)
+      </div>
+      <div class="fw-semibold">
+        {{ jabatanPegawaiLain }}
+      </div>
+    </li>
+  </ul>
+</div>

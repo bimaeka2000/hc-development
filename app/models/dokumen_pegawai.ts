@@ -11,7 +11,7 @@ export default class DokumenPegawai extends BaseModel {
   declare id: number
 
   @column({ columnName: 'pegawai_id' })
-  declare pegawaiId: number
+  declare pegawai_id: number
 
   @belongsTo(() => DokumenPegawai)
   declare jenisDokumenId: BelongsTo<typeof DokumenPegawai>

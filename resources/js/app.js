@@ -13,11 +13,11 @@ import SubmitButton from './components/button/SubmitButton.vue'
 
 // Aktifkan PrimeVue
 const vueGlobal = {
-    theme: { preset: Aura },
+  theme: { preset: Aura },
 }
 
 const app1 = createApp(MessageAlert, {
-    message: document.body.dataset.flashSuccess || '',
+  message: document.body.dataset.flashSuccess || '',
 })
 const app2 = createApp(SubmitButton)
 

@@ -5,7 +5,17 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     await DataKesehatanFisik.createMany([
       {
-        pegawai_id: 1,
+        pegawai_id: 2,
+        tinggi_cm: 100,
+        berat_kg: 200,
+        golongan_darah: 'o',
+        tekanan_darah: '190',
+        alergi: 'tidak ada',
+        disabilitas: 'tidak',
+        catatan_kesehatan: 'sehat',
+      },
+      {
+        pegawai_id: 3,
         tinggi_cm: 100,
         berat_kg: 200,
         golongan_darah: 'o',

@@ -7,9 +7,9 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     await User.createMany([
       {
-        email: 'bimaekaputra@satyaterrabhinneka.ac.id',
-        password: 'bimaeka2000',
-        role: 'superadmin',
+        email: 'admin@admin.com',
+        password: 'admin',
+        role: 'admin',
       },
     ])
   }

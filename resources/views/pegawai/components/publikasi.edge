@@ -1,0 +1,25 @@
+{{-- Publikasi --}}
+<div class="panel-soft glass-card card-hover">
+  <div class="d-flex align-items-center mb-2">
+    <i class="bi bi-book me-2 text-primary"></i>
+    <div class="mini-section-title mb-0 mt-2">
+      Publikasi
+    </div>
+  </div>
+  <ul class="list-group list-group-flush small">
+    @if(items && items.length > 0)
+      @each(item in items)
+        <li class="list-group-item d-flex align-items-center justify-content-between">
+          <span>{{ item.judul || 'Belum Ada Judul' }}</span>
+          <span class="badge text-bg-light text-secondary">
+            {{ item.tahun || 'Belum Ada Tahun' }}
+      </span>
+        </li>
+      @end
+    @else
+      <li class="list-group-item text-center text-muted">
+        Belum Ada Data Penelitian
+      </li>
+    @endif
+  </ul>
+</div>

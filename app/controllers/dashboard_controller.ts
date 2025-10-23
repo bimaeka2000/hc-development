@@ -37,7 +37,7 @@ export default class DashboardController {
             name: userGoogle.name,
             picture: userGoogle.picture,
             password: hashed,
-            role: 'admin',
+            role: 'pegawai',
           },
           { client: trx }
         )
@@ -76,10 +76,19 @@ export default class DashboardController {
       })
     }
   }
-  async index({ view, session }: HttpContext) {
+  async index({ view, session, response }: HttpContext) {
     const userGoogle = session.get('user_google')
-    const email = userGoogle?.email
+    // jika belum login atau session kosong
+    if (!userGoogle) {
+      return response.redirect().toRoute('auth.login')
+    }
+
+    const email = userGoogle.email
     const user = await User.findBy('email', email)
+
+    if (!user) {
+      return response.status(404).send('User tidak ditemukan')
+    }
 
     return view.render('layouts/dashboard', { user })
   }

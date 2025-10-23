@@ -11,7 +11,7 @@ export default class DataKesehatanFisik extends BaseModel {
   declare id: number
 
   @column({ columnName: 'pegawai_id' })
-  declare pegawaiId: number
+  declare pegawai_id: number
 
   @column()
   declare tinggi_cm: number

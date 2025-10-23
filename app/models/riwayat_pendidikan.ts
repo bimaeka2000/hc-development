@@ -10,7 +10,7 @@ export default class RiwayatPendidikan extends BaseModel {
   declare id: number
 
   @column({ columnName: 'pegawai_id' })
-  declare pegawaiId: number
+  declare pegawai_id: number
 
   @belongsTo(() => JenjangPendidikan, { foreignKey: 'jenjang_id' })
   declare jenjangPendidikan: BelongsTo<typeof this.jenjangPendidikan>

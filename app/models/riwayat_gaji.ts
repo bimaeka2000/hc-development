@@ -1,7 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
-
+import type { BelongsTo, Has, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasOne, belongsTo } from '@adonisjs/lucid/orm'
+import Pegawai from './pegawai.js'
 export default class RiwayatGaji extends BaseModel {
+  static table = 'riwayat_gaji'
   @column({ isPrimary: true })
   declare id: number
 
@@ -19,4 +21,7 @@ export default class RiwayatGaji extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @belongsTo(() => Pegawai, { foreignKey: 'pegawai_id' })
+  declare pegawai: BelongsTo<typeof Pegawai>
 }
