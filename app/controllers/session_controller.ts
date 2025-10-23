@@ -17,7 +17,7 @@ export default class SessionController {
       await response.redirect().toRoute('dashboard.index')
     } catch (error) {
       console.log(error.message)
-      // return response.redirect().toPath('/login')
+      return response.redirect().back()
     }
   }
 
