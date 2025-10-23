@@ -34,7 +34,9 @@ const sessionConfig = defineConfig({
    * variable in order to infer the store name without any
    * errors.
    */
-  store: env.get('SESSION_DRIVER'),
+  // ✅ Gunakan .env, fallback ke 'file' jika tidak ada
+  store: env.get('SESSION_DRIVER', 'cookie'),
+
 
   /**
    * List of configured stores. Refer documentation to see
@@ -42,7 +44,11 @@ const sessionConfig = defineConfig({
    */
   stores: {
     cookie: stores.cookie(),
+    file: stores.file({
+      location: app.tmpPath('sessions')
+    }),
   },
+
 })
 
 export default sessionConfig

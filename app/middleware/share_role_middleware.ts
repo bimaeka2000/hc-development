@@ -3,22 +3,18 @@ import type { NextFn } from '@adonisjs/core/types/http'
 import User from '#models/user'
 
 export default class ShareRoleMiddleware {
-  public async handle({ session, view }: HttpContext, next: () => Promise<void>) {
+  public async handle({ session, view, auth, response }: HttpContext, next: () => Promise<void>) {
     let userRole = null
 
-    try {
-      // Ambil data dari session (hasil login Google)
-      const userGoogle = session.get('user_google')
+    const userGoogle = session.get('user_google')
 
-      if (userGoogle?.email) {
-        // Ambil user dari database berdasarkan email
-        userRole = await User.query().where('email', userGoogle.email).first()
-      }
-    } catch (error) {
-      console.error('❌ Middleware ShareUser error:', error)
+    if (userGoogle?.email) {
+      userRole = await User.query().where('email', userGoogle.email).first()
+    } else if (auth.user) {
+      userRole = auth.user
     }
 
-    // Bagi user ke semua view Edge (layout, partial, dll)
+    // ✅ Selalu share meskipun null
     view.share({ userRole })
 
     await next()

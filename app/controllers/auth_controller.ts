@@ -45,14 +45,19 @@ export default class AuthController {
 
     if (!payload?.email) return response.badRequest({ error: 'Email tidak ditemukan di Google' })
     //    #NOTE Simpan informasi user di session atau database sesuai kebutuhan aplikasi Anda
-    response.cookie('user', payload.email, {
-      httpOnly: false,
-      sameSite: 'lax',
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7, // 7 hari
-    })
+    // response.cookie('user', payload.email, {
+    //   httpOnly: false,
+    //   sameSite: 'lax',
+    //   path: '/',
+    //   maxAge: 60 * 60 * 24 * 7, // 7 hari
+    // })
 
-    await session.put('user_google', payload)
+    // await session.put('user_google', payload)
+    await session.put('user_google', {
+      email: payload.email,
+      name: payload.name,
+      picture: payload.picture,
+    })
     return response.redirect('/checkuser')
   }
 }

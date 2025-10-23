@@ -14,50 +14,40 @@
 
     <ul class="nav nav-pills flex-column gap-1">
       <li class="nav-item">
-        <a
-          class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '') === '/dashboard') active bg-primary text-white @endif"
-          href="{{ route('/dashboard') }}"
-        >
+        <a class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '') === '/dashboard') active bg-primary text-white @endif"
+          href="{{ route('/dashboard') }}">
           <i class="bi bi-speedometer2 me-2"></i>
           Dashboard
         </a>
       </li>
 
       <li>
-        <a
-          class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/users')) active bg-primary text-white @endif"
-          href="{{ route('/dashboard/users') }}"
-        >
+        <a class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/users')) active bg-primary text-white @endif"
+          href="{{ route('/dashboard/users') }}">
           <i class="bi bi-people me-2"></i>
           Users
         </a>
       </li>
 
       <li>
-        <a
-          class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/pegawai')) active bg-primary text-white @endif"
-          href="{{ route('/dashboard/pegawai') }}"
-        >
+        <a class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/pegawai')) active bg-primary text-white @endif"
+          href="{{ route('/dashboard/pegawai') }}">
           <i class="bi bi-person-vcard me-2"></i>
           Pegawai
         </a>
       </li>
 
       <li>
-        <a
-          class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/penelitian')) active bg-primary text-white @endif"
-          href="{{ route('/dashboard/penelitian') }}"
-        >
+        <a class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/penelitian')) active bg-primary text-white @endif"
+          href="{{ route('/dashboard/penelitian') }}">
           <i class="bi bi-journal-bookmark me-2"></i>
           Penelitian
         </a>
       </li>
 
       <li>
-        <a
-          class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/pengabdian')) active bg-primary text-white @endif"
-          href="{{ route('/dashboard/pengabdian') }}"
-        >
+        <a class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/pengabdian')) active bg-primary text-white @endif"
+          href="{{ route('/dashboard/pengabdian') }}">
           <i class="bi bi-hand-thumbs-up me-2"></i>
           Pengabdian
         </a>
@@ -65,45 +55,33 @@
 
       <li class="nav-item">
         <div class="d-flex align-items-center">
-          <a
-            class="nav-link text-white flex-grow-1 d-flex align-items-center @if(activePath && (activePath.replace(/\/$/, '').startsWith('/dashboard/cuti') || activePath.replace(/\/$/, '').startsWith('/dashboard/sakit') || activePath.replace(/\/$/, '').startsWith('/dashboard/izin'))) active bg-primary text-white @endif"
-            href="{{ route('/dashboard/cuti') }}"
-          >
+          <a class="nav-link text-white flex-grow-1 d-flex align-items-center @if(activePath && (activePath.replace(/\/$/, '').startsWith('/dashboard/cuti') || activePath.replace(/\/$/, '').startsWith('/dashboard/sakit') || activePath.replace(/\/$/, '').startsWith('/dashboard/izin'))) active bg-primary text-white @endif"
+            href="{{ route('/dashboard/cuti') }}">
             <i class="bi bi-calendar-check me-2"></i>
             <span>Cuti</span>
           </a>
 
-          <button
-            class="btn btn-sm btn-link text-white p-0 ms-1 nav-caret-btn"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapse-cuti"
-            aria-expanded="false"
-            aria-controls="collapse-cuti"
-            title="Tampilkan submenu"
-          >
+          <button class="btn btn-sm btn-link text-white p-0 ms-1 nav-caret-btn" data-bs-toggle="collapse"
+            data-bs-target="#collapse-cuti" aria-expanded="false" aria-controls="collapse-cuti"
+            title="Tampilkan submenu">
             <i class="bi bi-chevron-down"></i>
           </button>
         </div>
 
         <ul
           class="nav flex-column collapse ps-4 mt-1 @if(activePath && (activePath.replace(/\/$/, '').startsWith('/dashboard/cuti') || activePath.replace(/\/$/, '').startsWith('/dashboard/sakit') || activePath.replace(/\/$/, '').startsWith('/dashboard/izin'))) show @endif"
-          id="collapse-cuti"
-        >
+          id="collapse-cuti">
           <li>
-            <a
-              class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/sakit')) active bg-primary text-white @endif"
-              href="{{ route('/dashboard/sakit') }}"
-            >
+            <a class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/sakit')) active bg-primary text-white @endif"
+              href="{{ route('/dashboard/sakit') }}">
               <i class="bi bi-emoji-dizzy me-2"></i>
               Pengajuan Sakit
             </a>
           </li>
 
           <li>
-            <a
-              class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/izin')) active bg-primary text-white @endif"
-              href="{{ route('/dashboard/izin') }}"
-            >
+            <a class="nav-link text-white d-flex align-items-center @if(activePath && activePath.replace(/\/$/, '').startsWith('/dashboard/izin')) active bg-primary text-white @endif"
+              href="{{ route('/dashboard/izin') }}">
               <i class="bi bi-calendar-event me-2"></i>
               Pengajuan Izin
             </a>
