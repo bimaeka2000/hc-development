@@ -32,7 +32,6 @@ export default class ShareUserMiddleware {
       // Share ke semua view Edge
       view.share({ user })
     } catch (error) {
-      console.error('❌ ShareUserMiddleware error:', error)
       view.share({ user: null })
     }
 

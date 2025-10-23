@@ -1,6 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user'
-import { middleware } from '#start/kernel'
 
 export default class SessionController {
   async store({ request, response, auth }: HttpContext) {
@@ -17,7 +16,7 @@ export default class SessionController {
       await response.redirect().toRoute('dashboard.index')
     } catch (error) {
       console.log(error.message)
-      return response.redirect().back()
+      return response.redirect('/login')
     }
   }
 
@@ -26,7 +25,7 @@ export default class SessionController {
   }
 
   async logOut({ auth, response, session }: HttpContext) {
-    this.destroy
+    // this.destroy
     session.forget('user_google')
     session.forget('user')
 

@@ -31,22 +31,14 @@
   @include('partials/nav_pegawai')
   @endif
   <div class="main-wrapper d-flex flex-column min-vh-100">
-    @if (currentRoute === 'dashboard')
-    @include('components/header-dashboard')
-    @else
     @include('components/header')
-    @endif
-    {{-- @include('components/header') --}}
     <main class="flex-grow-1 p-3 p-lg-4">
       {{{ await $slots.main() }}}
     </main>
     @include('components/footer')
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  @vite(['resources/js/script.js'])
 
 </body>
 

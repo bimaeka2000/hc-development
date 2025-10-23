@@ -97,7 +97,7 @@ export default class DashboardController {
 
       // 3️⃣ Kalau dua-duanya kosong, arahkan ke login
       if (!user) {
-        return response.redirect('/login')
+        return response.redirect().back()
       }
 
       // Debug log (untuk memastikan yang aktif)
