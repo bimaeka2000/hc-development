@@ -12,6 +12,10 @@ export default class PegawaisController {
    */
   async index({ view }: HttpContext) {
     const pegawais = await Pegawai.query().orderBy('id', 'asc')
+      .preload('role')
+      .preload('statusKepegawaian')
+      .preload('unitKerja')
+
     return view.render('dashboard/pegawai', { pegawais })
   }
 

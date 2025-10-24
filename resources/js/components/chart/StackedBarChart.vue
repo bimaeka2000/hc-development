@@ -58,9 +58,7 @@ const setChartOptions = () => {
                 ticks: {
                     color: textColorSecondary
                 },
-                grid: {
-                    color: surfaceBorder
-                }
+              
             }
         }
     };

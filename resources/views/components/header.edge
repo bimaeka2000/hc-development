@@ -15,10 +15,13 @@
         #pv-breadcrumb .breadcrumb-icon {
           color: #000 !important;
         }
+
         /* Ensure link text inside breadcrumb is black by default */
-        #pv-breadcrumb a, #pv-breadcrumb span {
+        #pv-breadcrumb a,
+        #pv-breadcrumb span {
           color: #000 !important;
         }
+
         /* Add larger symmetric horizontal spacing around breadcrumb separators */
         /* Make left and right spacing equal and a bit larger for visual clarity */
         #pv-breadcrumb .p-breadcrumb .p-breadcrumb-chevron,
@@ -33,7 +36,8 @@
         #pv-breadcrumb .p-breadcrumb ul,
         #pv-breadcrumb ul {
           display: flex !important;
-          gap: 1rem; /* space between list items (controls left/right spacing around separators) */
+          gap: 1rem;
+          /* space between list items (controls left/right spacing around separators) */
           align-items: center;
           padding: 0;
           margin: 0;
@@ -82,7 +86,8 @@
         #pv-breadcrumb a:focus .p-menuitem-text,
         #pv-breadcrumb a:focus .p-breadcrumb-link {
           transform: translateY(-2px);
-          display: inline-block; /* allow transform on inline text */
+          display: inline-block;
+          /* allow transform on inline text */
         }
 
         /* Slight lift for breadcrumb icons on hover */
@@ -103,25 +108,22 @@
   </div>
 </nav>
 
-<<<<<<< HEAD
 @vite(['resources/js/main/BreadCrumbHeader.js'])
-=======
 <!-- Provide breadcrumb data to the client module. The `breadcrumbs` variable can be passed from controllers. -->
 <script>
   window.__PV_BREADCRUMBS = [];
-  @if(breadcrumbs && breadcrumbs.length > 0)
+  @if (breadcrumbs && breadcrumbs.length > 0)
     window.__PV_BREADCRUMBS = [
-    @each(crumb in breadcrumbs)
+      @each(crumb in breadcrumbs)
       {
-        label: "{{ crumb.label }}"@if(crumb.href), href: "{{ crumb.href }}"@endif
-      }@if(!$loop.last),@endif
-    @endeach
+        label: "{{ crumb.label }}"@if (crumb.href), href: "{{ crumb.href }}"@endif
+      }@if (!$loop.last), @endif
+  @endeach
     ];
   @else
-    window.__PV_BREADCRUMBS = [{ label: 'Dashboard', href: '{{ route('/dashboard') }}' }];
+  window.__PV_BREADCRUMBS = [{ label: 'Dashboard', href: '{{ route(' / dashboard') }}' }];
   @endif
 </script>
 
 <!-- Mount the PrimeVue breadcrumb using the Vite dev server / built assets. This expects you to have a Vite entry that serves resources/js/pv-breadcrumb.js as an ESM module. -->
 <script type="module" src="/resources/js/pv-breadcrumb.js"></script>
->>>>>>> origin/jasswant-development
