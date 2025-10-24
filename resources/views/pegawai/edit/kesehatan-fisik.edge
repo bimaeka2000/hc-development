@@ -2,60 +2,230 @@
 
   @slot('meta')
     <meta name="description" content="Dashboard page for Human Capital Management System" />
+    <script src="https://cdn.tailwindcss.com"></script>
   @endslot
-
+  
   @slot('main')
 
-    <main class="flex-grow-1 p-3 p-lg-4">
-      <div class="panel-soft glass-card card-hover">
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-heart-pulse me-2 text-primary"></i>
-          <div class="mini-section-title mb-0">
-            Kesehatan Fisik
+    <main class="flex-grow-1">
+      <div class="max-w-5xl mx-auto">
+        <div
+          class="backdrop-blur-sm bg-white/90 shadow-xl border border-slate-200/50 rounded-lg transition-all duration-300 hover:shadow-2xl"
+        >
+
+          <!-- Header -->
+          <div class="border-b border-slate-100 p-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-100 rounded-lg">
+                  <svg
+                    class="w-6 h-6 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+
+                  </svg>
+                </div>
+                <h1 class="text-xl text-slate-800 m-0">
+                  Edit Kesehatan Fisik
+                </h1>
+              </div>
+              <a
+                href="#"
+                onclick="history.back(); return false;"
+                class="inline-flex items-center gap-2 px-4 py-2 text-sm border border-slate-300 rounded-md bg-white hover:bg-slate-50 transition-colors duration-200"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+
+                </svg>
+                Kembali
+            </a>
+            </div>
           </div>
-          <a href="#" onclick="history.back(); return false;" class="btn btn-sm btn-outline-secondary ms-auto">            <i class="bi bi-arrow-left"></i>Kembali</a>
-        </div>
-        <div class="row g-3">
-          <div class="col-md-3">
-            <label class="form-label form-label-sm">Tinggi (cm)</label>            <input class="form-control form-control-sm" type="number" min="0" name="tinggi_cm" />
+
+          <!-- Content -->
+          <div class="p-6">
+            <form onsubmit="return handleSubmit(event)">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Tinggi -->
+                <div class="space-y-2">
+                  <label for="tinggi_cm" class="block text-sm text-slate-700">
+                    Tinggi (cm)
+                </label>
+                  <input
+                    id="tinggi_cm"
+                    name="tinggi_cm"
+                    type="number"
+                    min="0"
+                    placeholder="Tinggi"
+                    class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                  />
+                </div>
+
+                <!-- Berat -->
+                <div class="space-y-2">
+                  <label for="berat_kg" class="block text-sm text-slate-700">
+                    Berat (kg)
+                </label>
+                  <input
+                    id="berat_kg"
+                    name="berat_kg"
+                    type="number"
+                    min="0"
+                    placeholder="Berat"
+                    class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                  />
+                </div>
+
+                <!-- Golongan Darah -->
+                <div class="space-y-2">
+                  <label for="golongan_darah" class="block text-sm text-slate-700">
+                    Golongan Darah
+                </label>
+                  <select
+                    id="golongan_darah"
+                    name="golongan_darah"
+                    class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 bg-white"
+                  >
+                    <option value="">
+                      Pilih Golongan Darah
+                    </option>
+                    <option value="A">
+                      A
+                    </option>
+                    <option value="B">
+                      B
+                    </option>
+                    <option value="AB">
+                      AB
+                    </option>
+                    <option value="O">
+                      O
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Tekanan Darah -->
+                <div class="space-y-2">
+                  <label for="tekanan_darah" class="block text-sm text-slate-700">
+                    Tekanan Darah
+                </label>
+                  <input
+                    id="tekanan_darah"
+                    name="tekanan_darah"
+                    type="text"
+                    placeholder="Tekanan Darah"
+                    class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                  />
+                </div>
+
+                <!-- Alergi -->
+                <div class="space-y-2 md:col-span-2">
+                  <label for="alergi" class="block text-sm text-slate-700">
+                    Alergi
+                </label>
+                  <input
+                    id="alergi"
+                    name="alergi"
+                    type="text"
+                    placeholder="Alergi"
+                    class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                  />
+                </div>
+
+                <!-- Disabilitas -->
+                <div class="space-y-2 md:col-span-2">
+                  <label for="disabilitas" class="block text-sm text-slate-700">
+                    Disabilitas
+                </label>
+                  <input
+                    id="disabilitas"
+                    name="disabilitas"
+                    type="text"
+                    placeholder="Disabilitas"
+                    class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                  />
+                </div>
+
+                <!-- Catatan Kesehatan -->
+                <div class="space-y-2 md:col-span-2 lg:col-span-4">
+                  <label for="catatan_kesehatan" class="block text-sm text-slate-700">
+                    Catatan Kesehatan
+                </label>
+                  <textarea
+                    id="catatan_kesehatan"
+                    name="catatan_kesehatan"
+                    rows="3"
+                    placeholder="Catatan Kesehatan"
+                    class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 resize-none"
+                  ></textarea>
+                </div>
+
+              </div>
+
+              <!-- Buttons -->
+              <div class="flex gap-3 mt-8 pt-6 border-t border-slate-100">
+                <button
+                  type="submit"
+                  class="inline-flex items-center gap-2 px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors duration-200"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+                    />
+
+                  </svg>
+                  Simpan
+              </button>
+                <a
+                  href="#"
+                  onclick="history.back(); return false;"
+                  class="inline-flex items-center gap-2 px-4 py-2 text-sm border border-slate-300 rounded-md bg-white hover:bg-slate-50 transition-colors duration-200"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+
+                  </svg>
+                  Batal
+              </a>
+              </div>
+            </form>
           </div>
-          <div class="col-md-3">
-            <label class="form-label form-label-sm">Berat (kg)</label>            <input class="form-control form-control-sm" type="number" min="0" name="berat_kg"/>
-          </div>
-          <div class="col-md-3">
-            <label class="form-label form-label-sm">Golongan Darah</label>            <select class="form-select form-select-sm" name="golongan_darah">
-              <option>
-                A
-              </option>
-              <option>
-                B
-              </option>
-              <option>
-                AB
-              </option>
-              <option>
-                O
-              </option>
-            </select>
-          </div>
-          <div class="col-md-3">
-            <label class="form-label form-label-sm">Tekanan Darah</label>            <input class="form-control form-control-sm" type="text" placeholder="Tekanan Darah" name="tekanan_darah"/>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label form-label-sm">Alergi</label>            <input class="form-control form-control-sm" type="text" name="alergi"/>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label form-label-sm">Disabilitas</label>            <input class="form-control form-control-sm" type="text" name="disabilitas"/>
-          </div>
-          <div class="col-12">
-            <label class="form-label form-label-sm">Catatan Kesehatan</label>            <textarea class="form-control form-control-sm" rows="2" style="catatan_kesehatan"></textarea>
-          </div>
-        </div>
-        <div class="mt-3 d-flex gap-2">
-          <button class="btn btn-primary btn-sm">            <i class="bi bi-save"></i>Simpan</button>
-          <a class="btn btn-outline-secondary btn-sm" href="#" onclick="history.back(); return false;">            <i class="bi bi-arrow-left"></i>Batal</a>
+
         </div>
       </div>
     </main>
+    @include('components/pegawai-edit-styles')
   @endslot
 @end

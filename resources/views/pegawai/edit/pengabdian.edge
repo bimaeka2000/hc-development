@@ -1,50 +1,282 @@
 @layout.layout({title:'Edit Pengabdian'})
 
-@slot('meta')
-<meta name="description" content="Dashboard page for Human Capital Management System" />
-@endslot
-<main class="flex-grow-1 p-3 p-lg-4">
-  <div class="panel-soft glass-card card-hover">
-    <div class="d-flex align-items-center mb-2">
-      <i class="bi bi-people me-2 text-primary"></i>
-      <div class="mini-section-title mb-0">Pengabdian</div>
-      <a href="#" onclick="history.back(); return false;" class="btn btn-sm btn-outline-secondary ms-auto"><i
-          class="bi bi-arrow-left"></i> Kembali</a>
+  @slot('meta')
+    <meta name="description" content="Dashboard page for Human Capital Management System" />
+    <script src="https://cdn.tailwindcss.com">
+
+    </script>
+  @endslot
+  <main class="flex-grow-1">
+    <div class="max-w-[1400px] mx-auto">
+      <div
+        class="backdrop-blur-sm bg-white/90 shadow-xl border border-slate-200/50 rounded-lg transition-all duration-300 hover:shadow-2xl"
+      >
+
+        <!-- Header -->
+        <div class="border-b border-slate-100 p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="p-2 bg-blue-100 rounded-lg">
+                <svg
+                  class="w-6 h-6 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+
+                </svg>
+              </div>
+              <h1 class="text-xl text-slate-800 m-0">
+                Edit Pengabdian
+              </h1>
+            </div>
+            <a
+              href="#"
+              onclick="history.back(); return false;"
+              class="inline-flex items-center gap-2 px-4 py-2 text-sm border border-slate-300 rounded-md bg-white hover:bg-slate-50 transition-colors duration-200"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+
+              </svg>
+              Kembali
+            </a>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6">
+          <form onsubmit="return handleSubmit(event)">
+
+            <!-- Table Container -->
+            <div class="rounded-lg border border-slate-200 overflow-hidden">
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="bg-slate-50 border-b border-slate-200">
+                      <th class="px-4 py-3 text-left text-slate-700" style="width: 12%;">
+                        Judul Pengabdian
+                      </th>
+                      <th class="px-4 py-3 text-left text-slate-700" style="width: 18rem;">
+                        Peran
+                      </th>
+                      <th class="px-4 py-3 text-left text-slate-700" style="width: 8rem;">
+                        Tahun Mulai
+                      </th>
+                      <th class="px-4 py-3 text-left text-slate-700" style="width: 8rem;">
+                        Tahun Selesai
+                      </th>
+                      <th class="px-4 py-3 text-left text-slate-700" style="width: 10rem;">
+                        Dana
+                      </th>
+                      <th class="px-4 py-3 text-left text-slate-700" style="width: 18rem;">
+                        Sumber Dana
+                      </th>
+                      <th class="px-4 py-3 text-left text-slate-700">
+                        Keterangan
+                      </th>
+                      <th class="px-4 py-3" style="width: 6rem;">
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="serviceTableBody">
+                    <!-- Service Row Template -->
+                    <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+                      <td class="px-4 py-3">
+                        <input
+                          type="text"
+                          class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                          placeholder="Judul Pengabdian"
+                          name="judul"
+                        />
+                      </td>
+                      <td class="px-4 py-3">
+                        <input
+                          type="text"
+                          class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                          placeholder="Peran"
+                          name="peran"
+                        />
+                      </td>
+                      <td class="px-4 py-3">
+                        <input
+                          type="number"
+                          class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                          placeholder="Tahun Mulai"
+                          min="2000"
+                          max="2099"
+                          name="tahun_mulai"
+                        />
+                      </td>
+                      <td class="px-4 py-3">
+                        <input
+                          type="text"
+                          class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                          placeholder="Tahun Selesai"
+                          name="tahun_selesai"
+                        />
+                      </td>
+                      <td class="px-4 py-3">
+                        <input
+                          type="text"
+                          class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                          placeholder="Dana"
+                          name="dana"
+                        />
+                      </td>
+                      <td class="px-4 py-3">
+                        <input
+                          type="text"
+                          class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                          placeholder="Sumber Dana"
+                          name="sumber_dana"
+                        />
+                      </td>
+                      <td class="px-4 py-3">
+                        <input
+                          type="text"
+                          class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+                          placeholder="Keterangan"
+                          name="keterangan"
+                        />
+                      </td>
+                      <td class="px-4 py-3 text-right">
+                        <button
+                          type="button"
+                          onclick="removeRow(this)"
+                          class="inline-flex items-center justify-center px-3 py-2 text-sm border border-red-300 rounded-md bg-white text-red-600 hover:bg-red-50 transition-colors duration-200"
+                        >
+                          <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
+
+                          </svg>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex gap-3 mt-6 pt-6 border-t border-slate-100">
+              <button
+                type="button"
+                onclick="addRow()"
+                class="inline-flex items-center gap-2 px-4 py-2 text-sm border border-blue-300 rounded-md bg-white text-blue-600 hover:bg-blue-50 transition-colors duration-200"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+
+                </svg>
+                Tambah
+              </button>
+              <div class="flex gap-3 ml-auto">
+                <button
+                  type="submit"
+                  class="inline-flex items-center gap-2 px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors duration-200"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+                    />
+
+                  </svg>
+                  Simpan
+                </button>
+                <a
+                  href="#"
+                  onclick="history.back(); return false;"
+                  class="inline-flex items-center gap-2 px-4 py-2 text-sm border border-slate-300 rounded-md bg-white hover:bg-slate-50 transition-colors duration-200"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+
+                  </svg>
+                  Batal
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
     </div>
-    <div class="table-responsive">
-      <table class="table table-sm align-middle">
-        <thead>
-          <tr class="table-light">
-            <th style="width: 12%;">Judul Pengabdian</th>
-            <th style="width: 18rem;">Peran</th>
-            <th style="width: 8rem;">Tahun Mulai</th>
-            <th style="width: 8rem;">Tahun Selesai</th>
-            <th style="width: 10rem;">Dana</th>
-            <th style="width: 18rem;">Sumber Dana</th>
-            <th>Keterangan</th>
-            <th style="width: 6rem;"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="text" class="form-control form-control-sm" placeholder="Judul Pengabdian" name="judul"></td>
-            <td><input type="text" class="form-control form-control-sm" placeholder="Peran" name="peran"></td>
-            <td><input type="number" class="form-control form-control-sm" min="2000" max="2099" placeholder="Tahun Mulai" name="tahun_mulai"></td>
-            <td><input type="text" class="form-control form-control-sm" placeholder="Tahun Selesai" name="tahun_selesai"></td>
-            <td><input type="text" class="form-control form-control-sm" placeholder="Dana" name="dana"></td>
-            <td><input type="text" class="form-control form-control-sm" placeholder="Sumber Dana" name="sumber_dana"></td>
-            <td><input type="text" class="form-control form-control-sm" placeholder="Keterangan" name="keterangan"></td>
-            <td class="text-end"><button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="d-flex gap-2">
-      <button class="btn btn-outline-primary btn-sm"><i class="bi bi-plus-lg"></i> Tambah</button>
-      <button class="btn btn-primary btn-sm ms-auto"><i class="bi bi-save"></i> Simpan</button>
-      <a class="btn btn-outline-secondary btn-sm" href="#" onclick="history.back(); return false;"><i class="bi bi-arrow-left"></i>
-        Batal</a>
-    </div>
-  </div>
-</main>
+
+    <script>
+      function handleSubmit(event) {
+        event.preventDefault();
+        console.log("Form submitted");
+        return false;
+      }
+
+      function addRow() {
+        const tbody = document.getElementById("serviceTableBody");
+        const newRow = tbody.rows[0].cloneNode(true);
+        // Clear all input values
+        const inputs = newRow.querySelectorAll("input");
+        inputs.forEach(input => {
+          input.value = "";
+        });
+        tbody.appendChild(newRow);
+      }
+
+      function removeRow(button) {
+        const tbody = document.getElementById("serviceTableBody");
+        if (tbody.rows.length > 1) {
+          const row = button.closest("tr");
+          row.remove();
+        } else {
+          alert("Minimal harus ada satu baris pengabdian");
+        }
+      }
+    </script>
+
+    @include('components/pegawai-edit-styles')
+  </main>
 @end

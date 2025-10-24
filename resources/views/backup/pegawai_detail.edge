@@ -6,6 +6,7 @@
   @end
   @slot('meta')
     <meta name="description" content="Dashboard page for Human Capital Management System" />
+    <script src="https://cdn.tailwindcss.com"></script>
   @endslot
   
   @slot('main')
@@ -16,7 +17,7 @@
       style="display:none"
     >
     </div>
-    <main class="flex-grow-1 p-3 p-lg-4">
+    <main class="flex-grow-1">
       @!component('dashboard/components/profil_data_pegawai',
       {
       id: pegawaiData ? pegawaiData.id : "Belum Ada Data",

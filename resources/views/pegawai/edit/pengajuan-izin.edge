@@ -3,10 +3,11 @@
     <meta name="description" content="Dashboard page for Human Capital Management System" />
   @endslot
   @slot('main')
-    <main class="flex-grow-1 p-3 p-lg-4">
+    <main class="flex-grow-1">
       <h1>
         Edit Pengajuan Izin
       </h1>
     </main>
-  @endslot
-@end
+    @include('components/pegawai-edit-styles')
+      @endslot
+    @end

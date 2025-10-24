@@ -1,3 +1,4 @@
+
 <nav id="sidebar" class="sidebar bg-dark text-white">
   <div class="d-flex align-items-center p-3 border-bottom border-secondary">
     <i class="bi bi-grid-1x2-fill fs-4 me-2 text-primary"></i>
@@ -102,6 +103,14 @@
     /* Slightly offset link contents so icons/text look consistent */
     .nav-link.nav-active > i {
       color: #fff !important;
+    }
+
+    /* Force .text-primary icons inside the sidebar to show primary blue
+       even when the sidebar has .text-white on the root element. This is
+       inline here so the rule applies immediately on pages using the sidebar. */
+    #sidebar .bi.text-primary,
+    .sidebar .bi.text-primary {
+      color: var(--bs-primary, #0d6efd) !important;
     }
   </style>
 

@@ -7,3 +7,12 @@
 
 #TODO
 [] gunakan token belum ketemu caranya
+
+
+
+#TODO Jasswant :
+[] edit/kesehatan
+[] Fix Sidebar
+[] Fix Icons
+[] Fix edit button
+[] Improve Pegawai Pages
