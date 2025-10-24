@@ -1,14 +1,117 @@
 <nav class="top-navbar navbar navbar-expand-lg sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ route('/dashboard') }}">      <i class="bi bi-grid-1x2 text-primary"></i>Sistem HC</a>
+    <a class="navbar-brand" href="{{ route('/dashboard') }}"> <i class="bi bi-grid-1x2 text-primary"></i>Sistem HC</a>
     <div class="ms-auto d-flex align-items-center gap-3">
       <nav aria-label="breadcrumb" class="top-breadcrumb small">
-        <ol class="breadcrumb mb-0" id="appBreadcrumb">
-        </ol>
+        <div id="pv-breadcrumb" class="breadcrumb mb-0"></div>
       </nav>
-      <div id="pagePersonName" data-name="{{ nama_lengkap || 'Nama Pegawai' }}" style="display:none">
-      </div>
+      <style>
+        /* Breadcrumb default color: black; on hover it becomes primary */
+        #pv-breadcrumb,
+        #pv-breadcrumb .pi,
+        #pv-breadcrumb .pi-chevron-right,
+        #pv-breadcrumb .p-breadcrumb .p-breadcrumb-chevron,
+        #pv-breadcrumb .p-breadcrumb .p-menuitem-separator,
+        #pv-breadcrumb .breadcrumb-icon {
+          color: #000 !important;
+        }
+        /* Ensure link text inside breadcrumb is black by default */
+        #pv-breadcrumb a, #pv-breadcrumb span {
+          color: #000 !important;
+        }
+        /* Add larger symmetric horizontal spacing around breadcrumb separators */
+        /* Make left and right spacing equal and a bit larger for visual clarity */
+        #pv-breadcrumb .p-breadcrumb .p-breadcrumb-chevron,
+        #pv-breadcrumb .p-breadcrumb .p-menuitem-separator,
+        #pv-breadcrumb i.pi,
+        #pv-breadcrumb i.bi,
+        #pv-breadcrumb .breadcrumb-icon {
+          transition: transform .12s ease, opacity .12s ease;
+        }
+
+        /* Use flex+gap on the breadcrumb list to guarantee equal spacing between items */
+        #pv-breadcrumb .p-breadcrumb ul,
+        #pv-breadcrumb ul {
+          display: flex !important;
+          gap: 1rem; /* space between list items (controls left/right spacing around separators) */
+          align-items: center;
+          padding: 0;
+          margin: 0;
+        }
+
+        /* Ensure each list item is inline-flex so icons and text align nicely */
+        #pv-breadcrumb .p-breadcrumb ul li,
+        #pv-breadcrumb ul li {
+          display: inline-flex;
+          align-items: center;
+        }
+
+        /* Hover / focus styles for breadcrumb links */
+        #pv-breadcrumb a,
+        #pv-breadcrumb span {
+          transition: color .12s ease, text-decoration .12s ease, opacity .12s ease;
+        }
+
+        #pv-breadcrumb a {
+          cursor: pointer;
+        }
+
+        /* Hover/focus: turn text/icon to primary color */
+        #pv-breadcrumb a:hover,
+        #pv-breadcrumb a:focus,
+        #pv-breadcrumb li:hover a,
+        #pv-breadcrumb li:focus a,
+        /* also apply color to descendant elements (some PrimeVue versions wrap label in spans) */
+        #pv-breadcrumb a:hover *,
+        #pv-breadcrumb a:focus * {
+          color: var(--bs-primary) !important;
+        }
+
+        /* underline and opacity for hovered links */
+        #pv-breadcrumb a:hover,
+        #pv-breadcrumb a:focus {
+          text-decoration: underline;
+          opacity: 0.95;
+        }
+
+        /* Move only the text upward on hover (not the icon). Target common label containers used by PrimeVue */
+        #pv-breadcrumb a:hover span,
+        #pv-breadcrumb a:hover .p-menuitem-text,
+        #pv-breadcrumb a:hover .p-breadcrumb-link,
+        #pv-breadcrumb a:focus span,
+        #pv-breadcrumb a:focus .p-menuitem-text,
+        #pv-breadcrumb a:focus .p-breadcrumb-link {
+          transform: translateY(-2px);
+          display: inline-block; /* allow transform on inline text */
+        }
+
+        /* Slight lift for breadcrumb icons on hover */
+        #pv-breadcrumb a:hover .breadcrumb-icon,
+        #pv-breadcrumb a:focus .breadcrumb-icon {
+          transform: translateY(-2px);
+          opacity: 0.95;
+        }
+      </style>
 
     </div>
   </div>
 </nav>
+
+<!-- Provide breadcrumb data to the client module. The `breadcrumbs` variable can be passed from controllers. -->
+<script>
+  window.__PV_BREADCRUMBS = [];
+  @if(breadcrumbs && breadcrumbs.length > 0)
+    window.__PV_BREADCRUMBS = [
+    @each(crumb in breadcrumbs)
+      {
+        label: "{{ crumb.label }}"@if(crumb.href), href: "{{ crumb.href }}"@endif
+      }@if(!$loop.last),@endif
+    @endeach
+    ];
+  @else
+    window.__PV_BREADCRUMBS = [{ label: 'Dashboard', href: '{{ route('/dashboard') }}' }];
+  @endif
+</script>
+
+<!-- Mount the PrimeVue breadcrumb using the Vite dev server / built assets. This expects you to have a Vite entry that serves resources/js/pv-breadcrumb.js as an ESM module. -->
+<script type="module" src="/resources/js/pv-breadcrumb.js"></script>

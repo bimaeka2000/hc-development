@@ -5,6 +5,44 @@
   @endslot
   @slot('main')
     <main class="flex-grow-1 p-3 p-lg-4">
+      <style>
+        /* Table cosmetics */
+        .data-table {
+          border-collapse: separate;
+          border-spacing: 0 8px; /* vertical gap between rows */
+        }
+        .data-table thead th {
+          border-bottom: 0;
+          background: transparent;
+          color: #495057;
+          font-weight: 600;
+        }
+        .data-table tbody tr {
+          background: #fff;
+          box-shadow: 0 0 0 1px rgba(0,0,0,0.02);
+          transition: transform .12s ease, box-shadow .12s ease;
+        }
+        .data-table tbody tr:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 18px rgba(18,38,63,0.08);
+        }
+        .avatar-sm {
+          width: 38px;
+          height: 38px;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 2px solid rgba(0,0,0,0.04);
+        }
+        /* Rounded row cells for a card-like look */
+        .data-table tbody tr td:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+        .data-table tbody tr td:last-child { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+        .data-table tbody tr td { padding: .7rem .9rem; vertical-align: middle; }
+        /* Icon styling when using text-primary */
+        .cell-icon { font-size: 1.05rem; vertical-align: -2px; }
+        .name-cell { min-width: 220px; }
+        .cell-sub { display:block; font-size: .8rem; color: #6c757d; }
+        .action-btns .btn { min-width:36px; }
+      </style>
       <div class="d-flex align-items-center mb-4">
         <h4 class="mb-0">
           Data Pegawai
@@ -16,8 +54,8 @@
         </div>
       </div>
       <div class="filter-toolbar small mb-3">
-        <input id="pegSearch" class="form-control form-control-sm" placeholder="Cari nama / NIP" disabled />
-        <select id="pegUnit" class="form-select form-select-sm" disabled>
+        <input id="pegSearch" class="form-control form-control-sm" placeholder="Cari nama / NIP" />
+        <select id="pegUnit" class="form-select form-select-sm">
           <option value="">
             Semua Unit
           </option>
@@ -31,7 +69,7 @@
             Akademik
           </option>
         </select>
-        <select id="pegStatus" class="form-select form-select-sm" disabled>
+        <select id="pegStatus" class="form-select form-select-sm">
           <option value="">
             Semua Status
           </option>
@@ -47,74 +85,37 @@
         </select>
         <div class="toolbar-spacer">
         </div>
-        <button class="btn btn-sm btn-outline-secondary" id="pegReset" disabled>Reset</button>
-      </div>
-      <div class="row g-3 mb-4" id="pegCards">
-        @if(pegawais && pegawais.length > 0)
-          @each(pegawai in pegawais)
-            <div class="col-6 col-lg-3">
-              <div class="kpi-card h-100">
-                <a
-                  href="{{ route('pegawai.index',{id:pegawai.id}) }}"
-                  class="stretched-link"
-                  style="text-decoration:none;"
-                >
-                  <div class="kpi-icon kpi-accent-success mb-2">
-                    <i class="bi bi-person-vcard"></i>
-                  </div>
-                  <div class="fw-semibold small mb-1">
-                    {{ pegawai.nama_lengkap || 'Nama Pegawai' }}
-                  </div>
-                  <div class="small text-secondary">
-                    {{ pegawai.npy || '' }}
-                  </div>
-                  <div class="mt-2">
-                    <span class="badge text-bg-{{ (pegawai.status === 'aktif') ? 'success' : 'secondary' }}">{{ pegawai.status
-              || '—' }}</span>
-                  </div>
-                  <div class="mt-2 small text-secondary">
-                    <i class="bi bi-building me-1"></i>{{ pegawai.unit_kerja || '' }}
-                  </div>
-                </a>
-              </div>
-            </div>
-          @endeach
-        @else
-          <div class="col-12">
-            <div class="alert alert-info mb-0">
-              Belum ada data pegawai.
-            </div>
-          </div>
-        @endif
+        <button class="btn btn-sm btn-outline-secondary" id="pegReset">Reset</button>
       </div>
       <div class="card">
         <div class="card-header d-flex align-items-center">
           <span class="fw-semibold small">Daftar Pegawai</span>
           <div class="ms-auto d-flex gap-1">
-            <button class="btn btn-sm btn-outline-secondary" id="pegExport" disabled>              <i class="bi bi-download"></i></button>
+            <button class="btn btn-sm btn-outline-secondary" id="pegExport">              <i class="bi bi-download"></i></button>
           </div>
         </div>
         <div class="table-responsive">
-          <table class="table table-sm table-hover table-sticky-head align-middle mb-0 data-table">
+          <table class="table table-sm table-hover table-striped table-sticky-head align-middle mb-0 data-table">
             <thead>
               <tr>
+                <th style="width:48px;"></th>
                 <th>
-                  <i class="bi bi-person-vcard"></i>Nama
+                  <i class="bi bi-person-vcard ms-4 me-2 text-primary"></i><span class="text-primary">Nama</span>
                 </th>
                 <th>
-                  <i class="bi bi-upc"></i>NIP
+                  <i class="bi bi-upc ms-3 me-2 text-primary"></i><span class="text-primary">NIP</span>
                 </th>
                 <th>
-                  <i class="bi bi-building"></i>Unit
+                  <i class="bi bi-building ms-4 me-2 text-primary"></i><span class="text-primary">Unit</span>
                 </th>
                 <th>
-                  <i class="bi bi-person-badge"></i>Jabatan
+                  <i class="bi bi-person-badge ms-4 me-2 text-primary"></i><span class="text-primary">Jabatan</span>
                 </th>
                 <th>
-                  <i class="bi bi-activity"></i>Status
+                  <i class="bi bi-activity ms-1 me-2 text-primary"></i><span class="text-primary">Status</span>
                 </th>
                 <th>
-                  <i class="bi bi-gear"></i>Aksi
+                  <i class="bi bi-gear ms-3 me-2 text-primary"></i><span class="text-primary">Aksi</span>
                 </th>
               </tr>
             </thead>
@@ -122,24 +123,34 @@
               @if(pegawais && pegawais.length > 0)
                 @each(pegawai in pegawais)
                   <tr>
-                    <td>
+                    <td class="align-middle">
+                      <img src={{ pegawai.foto || 'https://static.wikitide.net/walawepediawiki/thumb/0/04/Tralalero_Tralala.jpeg/640px-Tralalero_Tralala.jpeg' }} class="avatar-sm" onerror="this.onerror=null;this.src='/images/avatar-default.png'" />
+                    </td>
+                    <td class="fw-semibold name-cell">
+                      <i class="bi bi-person-circle text-primary me-2 cell-icon"></i>
                       {{ pegawai.nama_lengkap || 'Nama Pegawai' }}
+                      <span class="cell-sub">{{ pegawai.jabatan || 'Tidak Ditemukan' }}</span>
+                    </td>
+                    <td class="text-muted" style="display:flex;height:70px;">
+                      <i class="bi bi-upc text-primary me-1 cell-icon" style="margin-top: 14px;"></i>
+                      <small class="cell-sub mt-3">{{ pegawai.npy || 'Tidak Ditemukan' }}</small>
                     </td>
                     <td>
-                      {{ pegawai.npy || '' }}
+                      <i class="bi bi-building text-primary me-1 cell-icon"></i>
+                      <small class="text-secondary">{{ pegawai.unit_kerja || 'Tidak Ditemukan' }}</small>
                     </td>
                     <td>
-                      {{ pegawai.unit_kerja || '' }}
+                      <i class="bi bi-person-badge text-primary me-1 cell-icon"></i>
+                      <small class="text-secondary">{{ pegawai.jabatan || 'Tidak Ditemukan' }}</small>
                     </td>
                     <td>
-                      {{ pegawai.jabatan || '' }}
+                      <span class="badge text-bg-{{ (pegawai.status === 'aktif') ? 'success' : 'secondary' }}" id="statusPegawai">{{ pegawai.status || '—' }}</span>
                     </td>
-                    <td>
-                      <span class="badge text-bg-{{ (pegawai.status === 'aktif') ? 'success' : 'secondary' }}">{{ pegawai.status
-                || '—' }}</span>
-                    </td>
-                    <td>
-                      <a class="btn btn-sm btn-outline-primary" href="{{ route('pegawai.show',{id:pegawai.id}) }}">                        <i class="bi bi-eye"></i></a>
+                    <td class="text-start">
+                      <div class="btn-group action-btns" role="group" aria-label="Aksi Pegawai">
+                        <a class="btn btn-sm btn-outline-primary" href="{{ route('pegawai.show',{id:pegawai.id}) }}" title="Lihat"> <i class="bi bi-eye"></i></a>
+                        <button type="button" class="btn btn-sm btn-outline-danger btn-delete" title="Hapus"> <i class="bi bi-trash"></i></button>
+                      </div>
                     </td>
                   </tr>
                 @endeach
@@ -154,6 +165,127 @@
           </table>
         </div>
       </div>
+
+      <!-- Delete confirmation modal -->
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body small">
+              Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
+              <form id="deleteForm" method="POST" class="d-inline">
+                <input type="hidden" name="_method" value="DELETE" />
+                <!-- Add CSRF token here if required by your framework: <input type="hidden" name="_csrf" value="{{ csrfToken }}"> -->
+                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('pegSearch');
+        const unitSelect = document.getElementById('pegUnit');
+        const statusSelect = document.getElementById('pegStatus');
+        const resetBtn = document.getElementById('pegReset');
+        const refreshBtn = document.getElementById('pegRefresh');
+        const cardsContainer = document.getElementById('pegCards');
+        const tableBody = document.getElementById('pegTbody');
+        const pegCount = document.getElementById('pegCount');
+
+        function normalize(s) { return (s || '').toString().toLowerCase().trim(); }
+
+        function filterAll() {
+          const q = normalize(searchInput.value);
+          const unit = normalize(unitSelect.value);
+          const status = normalize(statusSelect.value);
+
+          // Filter cards
+          let visibleCards = 0;
+          if (cardsContainer) {
+            const cols = cardsContainer.querySelectorAll('.col-6, .col-lg-3');
+            cols.forEach(col => {
+              const text = normalize(col.textContent);
+              const matchesQ = q === '' || text.indexOf(q) !== -1;
+              const matchesUnit = unit === '' || text.indexOf(unit) !== -1;
+              const matchesStatus = status === '' || text.indexOf(status) !== -1;
+              if (matchesQ && matchesUnit && matchesStatus) {
+                col.style.display = '';
+                visibleCards++;
+              } else {
+                col.style.display = 'none';
+              }
+            });
+          }
+
+          // Update pegCount badge if present
+          if (pegCount) pegCount.textContent = visibleCards;
+
+          // Filter table rows
+          if (tableBody) {
+            const rows = tableBody.querySelectorAll('tr');
+            rows.forEach(row => {
+              const text = normalize(row.textContent);
+              const matchesQ = q === '' || text.indexOf(q) !== -1;
+              const matchesUnit = unit === '' || text.indexOf(unit) !== -1;
+              const matchesStatus = status === '' || text.indexOf(status) !== -1;
+              if (matchesQ && matchesUnit && matchesStatus) {
+                row.style.display = '';
+              } else {
+                row.style.display = 'none';
+              }
+            });
+          }
+        }
+
+        // debounce for search
+        let timer = null;
+        if (searchInput) {
+          searchInput.addEventListener('input', function () {
+            clearTimeout(timer);
+            timer = setTimeout(filterAll, 200);
+          });
+        }
+
+        if (unitSelect) unitSelect.addEventListener('change', filterAll);
+        if (statusSelect) statusSelect.addEventListener('change', filterAll);
+
+        if (resetBtn) resetBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (searchInput) searchInput.value = '';
+          if (unitSelect) unitSelect.value = '';
+          if (statusSelect) statusSelect.value = '';
+          filterAll();
+        });
+
+        if (refreshBtn) refreshBtn.addEventListener('click', function () { location.reload(); });
+
+        // initialize on load
+        filterAll();
+
+        // Delete button click -> open modal and set form action
+        const deleteButtons = document.querySelectorAll('.btn-delete');
+        const deleteModalEl = document.getElementById('deleteModal');
+        let deleteModal = null;
+        if (deleteModalEl && window.bootstrap) {
+          deleteModal = new bootstrap.Modal(deleteModalEl);
+        }
+        const deleteForm = document.getElementById('deleteForm');
+        deleteButtons.forEach(btn => {
+          btn.addEventListener('click', function (e) {
+            const url = btn.getAttribute('data-delete-url');
+            if (deleteForm) deleteForm.setAttribute('action', url || '#');
+            if (deleteModal) deleteModal.show();
+          });
+        });
+      });
+    </script>
   @endslot
 @end

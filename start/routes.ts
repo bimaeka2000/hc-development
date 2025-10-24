@@ -65,6 +65,7 @@ router
     router.get('/sakit', [PagesController, 'Sakit'])
     router.get('/izin', [PagesController, 'Izin'])
     router.get('/pengabdian', [PagesController, 'Pengabdian'])
+    router.get('/logbook', [PagesController, 'Logbook'])
     // router.get('/dashboard/sakit', [PagesController, 'Users'])
     router
       .group(() => {
