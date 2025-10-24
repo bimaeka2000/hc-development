@@ -98,9 +98,8 @@ router
   .use(middleware.shareRole())
   .use(middleware.auth({ guards: ['web'] })) // gunakan session guard
 
-router.get('*', async ({ request, view, response }) => {
+router.any('*', async ({ request, view, response }) => {
   response.status(404)
-
   if (request.url().startsWith('/api/')) {
     return response.json({
       status: false,
@@ -111,3 +110,6 @@ router.get('*', async ({ request, view, response }) => {
 
   return view.render('errors/404')
 })
+
+
+

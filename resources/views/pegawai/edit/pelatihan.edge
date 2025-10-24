@@ -1,11 +1,42 @@
 @layout.layout({title:'Edit Pelatihan'})
-  @slot('meta')
-    <meta name="description" content="Dashboard page for Human Capital Management System" />
-  @endslot
-  <main class="flex-grow-1 p-3 p-lg-4">
-    <h1>
-      Edit Pelatihan
-    </h1>
-  </main>
+@slot('meta')
+<meta name="description" content="Dashboard page for Human Capital Management System" />
+@endslot
+<main class="flex-grow-1 p-3 p-lg-4">
+  <div class="panel-soft glass-card card-hover">
+    <div class="d-flex align-items-center mb-2">
+      <i class="bi bi-journal-text me-2 text-primary"></i>
+      <div class="mini-section-title mb-0">Pelatihan</div>
+      <a href="#" onclick="history.back(); return false;" class="btn btn-sm btn-outline-secondary ms-auto"><i
+          class="bi bi-arrow-left"></i> Kembali</a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-sm align-middle">
+        <thead>
+          <tr class="table-light">
+            <th style="width: 18rem;">Nama Pelatihan</th>
+            <th style="width: 12rem;">Penyelenggara</th>
+            <th style="width: 12rem;">Tahun</th>
+            <th style="width: 6rem;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" class="form-control form-control-sm" placeholder="Nama Pelatihan" name="name_pelatihan"></td>
+            <td><input type="text" class="form-control form-control-sm" placeholder="Penyelenggara" name="penyelenggara"></td>
+            <td><input type="number" class="form-control form-control-sm" placeholder="Tahun" min="2000" max="2099" name="tahun"></td>
+            <td class="text-end"><button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-outline-primary btn-sm"><i class="bi bi-plus-lg"></i> Tambah</button>
+      <button class="btn btn-primary btn-sm ms-auto"><i class="bi bi-save"></i> Simpan</button>
+      <a class="btn btn-outline-secondary btn-sm" href="#" onclick="history.back(); return false;"><i class="bi bi-arrow-left"></i>
+        Batal</a>
+    </div>
+  </div>
+</main>
 @endslot
 @end
