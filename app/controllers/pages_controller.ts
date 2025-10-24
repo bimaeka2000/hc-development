@@ -84,4 +84,7 @@ export default class PagesController {
   async Users({ view, session }: HttpContext) {
     return view.render('dashboard/users')
   }
+  async Logbook({ view }: HttpContext) {
+    return view.render('dashboard/logbook')
+  }
 }

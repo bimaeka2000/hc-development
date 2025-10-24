@@ -11,7 +11,7 @@
     </div>
     <ul class="nav nav-pills flex-column gap-1">
       <li class="nav-item">
-        <a class="nav-link text-white d-flex align-items-center active" href="{{ route('/dashboard') }}"> <i
+        <a class="nav-link text-white d-flex align-items-center" href="{{ route('/dashboard') }}"> <i
             class="bi bi-speedometer2 me-2"></i>Dashboard</a>
       </li>
       <li>
@@ -51,6 +51,7 @@
               <i class="bi bi-calendar-event me-2"></i>Pengajuan Izin</a>
           </li>
         </ul>
+
       </li>
     </ul>
     <hr class="border-secondary" />
@@ -93,7 +94,70 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   </div> --}}
+=======
+  </div>
+
+  <style>
+    /* Active nav style: dark blue background and white text */
+    .nav-active {
+      background-color: #08306b; /* dark blue */
+      color: #fff !important;
+      border-radius: 0.375rem;
+    }
+
+    /* Slightly offset link contents so icons/text look consistent */
+    .nav-link.nav-active > i {
+      color: #fff !important;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      try {
+        const currentPath = (location.pathname || '/').replace(/\/$/, '');
+  const navLinks = document.querySelectorAll('#sidebar .nav-link');
+
+        function normalizeHref(href) {
+          if (!href) return '';
+          const a = document.createElement('a');
+          a.href = href;
+          return (a.pathname || '').replace(/\/$/, '');
+        }
+
+        // Clear any previously-applied active classes so only the current page is highlighted
+        navLinks.forEach(link => link.classList.remove('nav-active', 'active'));
+
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (!href || href === '#') return;
+          const linkPath = normalizeHref(href);
+
+          // Only exact path matches should be highlighted. Avoid prefix matching so
+          // parent links (like Dashboard) don't get highlighted when visiting child pages.
+          if (linkPath && linkPath === currentPath) {
+            link.classList.add('nav-active');
+            // add .active for any existing styles that depend on it
+            link.classList.add('active');
+          }
+
+          // If a child inside a collapsed submenu matches the current path,
+          // open its parent submenu (but don't mark the parent link active).
+          const collapseParent = link.closest('.collapse');
+          if (collapseParent && linkPath && linkPath === currentPath) {
+            collapseParent.classList.add('show');
+            const toggleBtn = document.querySelector("[data-bs-target='#" + collapseParent.id + "']");
+            if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      } catch (err) {
+        // Fail silently; highlighting is non-critical
+        console.error('Nav highlight error:', err);
+      }
+    });
+  </script>
+>>>>>>> origin/jasswant-development
 </nav>
 
 @vite('resources/js/main/buttonLogout.js')
