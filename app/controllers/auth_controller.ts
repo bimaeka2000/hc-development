@@ -52,11 +52,19 @@ export default class AuthController {
     //   maxAge: 60 * 60 * 24 * 7, // 7 hari
     // })
 
+    // 📸 Tingkatkan resolusi gambar profil
+    let picture = payload.picture || ''
+    if (picture.includes('=s96-c')) {
+      picture = picture.replace('=s96-c', '=s400-c')
+    } else if (picture.includes('=s')) {
+      // fallback: ubah resolusi lain (misal s128, s256)
+      picture = picture.replace(/=s\d+-c/, '=s400-c')
+    }
     // await session.put('user_google', payload)
     await session.put('user_google', {
       email: payload.email,
       name: payload.name,
-      picture: payload.picture,
+      picture
     })
     return response.redirect('/checkuser')
   }

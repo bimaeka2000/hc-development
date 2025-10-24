@@ -75,7 +75,8 @@
     "openid-client": "^6.8.1",
     "primeicons": "^7.0.0",
     "primevue": "^4.4.1",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "vue-router": "^4.0.13"
   },
   "hotHook": {
     "boundaries": [

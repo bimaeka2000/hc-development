@@ -2,7 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user'
 
 export default class SessionController {
-  async store({ request, response, auth }: HttpContext) {
+  async store({ request, response, auth, session }: HttpContext) {
     const { email, password } = request.only(['email', 'password'])
 
     try {
@@ -13,6 +13,10 @@ export default class SessionController {
       })
       // const token = await auth.use('api').createToken(user)
       await auth.use('web').login(user) // return response.json(token)
+
+      await session.put('user_credentials', {
+        id: user.id,
+      })
       await response.redirect().toRoute('dashboard.index')
     } catch (error) {
       console.log(error.message)
@@ -28,7 +32,7 @@ export default class SessionController {
     // this.destroy
     session.forget('user_google')
     session.forget('user')
-
+    session.forget('user_credentials')
     response.clearCookie('state')
     response.clearCookie('google_token')
     response.clearCookie('user')

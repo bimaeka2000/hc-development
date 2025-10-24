@@ -1,7 +1,9 @@
 @layout.layout({title:'Edit Pelatihan'})
+
 @slot('meta')
 <meta name="description" content="Dashboard page for Human Capital Management System" />
 @endslot
+@slot('main')
 <main class="flex-grow-1 p-3 p-lg-4">
   <div class="panel-soft glass-card card-hover">
     <div class="d-flex align-items-center mb-2">
@@ -22,9 +24,12 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" class="form-control form-control-sm" placeholder="Nama Pelatihan" name="name_pelatihan"></td>
-            <td><input type="text" class="form-control form-control-sm" placeholder="Penyelenggara" name="penyelenggara"></td>
-            <td><input type="number" class="form-control form-control-sm" placeholder="Tahun" min="2000" max="2099" name="tahun"></td>
+            <td><input type="text" class="form-control form-control-sm" placeholder="Nama Pelatihan"
+                name="name_pelatihan"></td>
+            <td><input type="text" class="form-control form-control-sm" placeholder="Penyelenggara"
+                name="penyelenggara"></td>
+            <td><input type="number" class="form-control form-control-sm" placeholder="Tahun" min="2000" max="2099"
+                name="tahun"></td>
             <td class="text-end"><button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button></td>
           </tr>
         </tbody>
@@ -33,7 +38,8 @@
     <div class="d-flex gap-2">
       <button class="btn btn-outline-primary btn-sm"><i class="bi bi-plus-lg"></i> Tambah</button>
       <button class="btn btn-primary btn-sm ms-auto"><i class="bi bi-save"></i> Simpan</button>
-      <a class="btn btn-outline-secondary btn-sm" href="#" onclick="history.back(); return false;"><i class="bi bi-arrow-left"></i>
+      <a class="btn btn-outline-secondary btn-sm" href="#" onclick="history.back(); return false;"><i
+          class="bi bi-arrow-left"></i>
         Batal</a>
     </div>
   </div>

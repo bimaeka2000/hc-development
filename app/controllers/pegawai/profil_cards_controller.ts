@@ -27,7 +27,7 @@ export default class ProfilCardsController {
         [] simpan data disini
         [] tambah data untuk status perkawinan di card profil
     */
-    session.flash('success', 'profil card berhasil disimpan!')
+    session.flash('success', 'profil berhasil diubah!')
 
     const allowedFields = [
       'agama_id',
@@ -58,6 +58,7 @@ export default class ProfilCardsController {
       Object.entries(data).filter(([_, v]) => v !== undefined && v !== '' && v !== null)
     )
 
+    return response.json(cleanData)
     return response.redirect().back()
     await Pegawai.query().where('id', params.id).update(cleanData)
   }
@@ -87,7 +88,7 @@ export default class ProfilCardsController {
       .preload('suku')
       .preload('agama')
       .firstOrFail()
-    // return response.json(pegawaiData)
+
     return view.render('pegawai/edit/profil', {
       pegawaiData,
       suku,

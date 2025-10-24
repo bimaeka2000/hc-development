@@ -4,6 +4,7 @@ import User from '#models/user'
 import Pegawai from '#models/pegawai'
 import * as crypto from 'node:crypto'
 import Hash from '@adonisjs/core/services/hash'
+
 export default class DashboardController {
   async checkUser({ request, response, session, auth }: HttpContext) {
     const userGoogle = session.get('user_google')
@@ -28,7 +29,6 @@ export default class DashboardController {
           },
           { client: trx }
         )
-
         // buat baru
         await User.create(
           {
@@ -41,6 +41,7 @@ export default class DashboardController {
           },
           { client: trx }
         )
+
       } else {
         // update data kalau berubah
         user.name = userGoogle.name
@@ -48,10 +49,21 @@ export default class DashboardController {
         await user.useTransaction(trx).save()
       }
 
+      if (user) {
+        await session.put('user_credentials', {
+          // Gunakan pegawaiId dari instance User yang sudah ada/dibuat
+          id: user.id,
+        })
+      }
+
       await trx.commit()
       // 🔁 Ambil ulang user supaya jadi instance model aktif
       user = await User.findByOrFail('email', userGoogle.email)
 
+      if (!user) {
+        // Harus gagal di sini jika ada masalah besar
+        throw new Error('User instance not found after transaction.')
+      }
       await User.accessTokens.create(user, ['*'], {
         name: 'bearer-token',
         expiresIn: '30 days',

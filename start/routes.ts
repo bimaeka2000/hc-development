@@ -94,9 +94,10 @@ router
       })
       .prefix('dashboard')
   })
+  .use(middleware.auth({ guards: ['web'] })) // gunakan session guard
   .use(middleware.authView())
   .use(middleware.shareRole())
-  .use(middleware.auth({ guards: ['web'] })) // gunakan session guard
+// .use(middleware.shareUser())
 
 router.any('*', async ({ request, view, response }) => {
   response.status(404)

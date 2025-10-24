@@ -1,186 +1,191 @@
 @layout.layout({title:'Pegawai Detail'})
 
-  @pushOnceTo('style-pegawai-detail')
-    @vite(['resources/css/pegawai-detail.css'])
+@pushOnceTo('style-pegawai-detail')
+@vite(['resources/css/pegawai-detail.css'])
 
-  @end
-  @slot('meta')
-    <meta name="description" content="Dashboard page for Human Capital Management System" />
-  @endslot
-  
-  @slot('main')
+@end
+@slot('meta')
+<meta name="description" content="Dashboard page for Human Capital Management System" />
+@endslot
 
-    <div
-      id="namaLengkap"
-      data-name="{{ pegawaiData && pegawaiData.nama_lengkap ? pegawaiData.nama_lengkap : 'Nama Pegawai' }}"
-      style="display:none"
-    >
-    </div>
-    <main class="flex-grow-1 p-3 p-lg-4">
-      @!component('pegawai/components/profil_data_pegawai', {
-      id: pegawaiData.id || "Belum Ada Data",
-      nama_lengkap: pegawaiData.nama_lengkap || "Belum Ada Data",
-      npy: pegawaiData.npy || "Belum Ada Data",
-      nik: pegawaiData.nik || "Belum Ada Data",
-      npwp: pegawaiData.npwp || "Belum Ada Data",
-      tempat_lahir: pegawaiData.tempat_lahir || "Belum Ada Data",
-      tanggal_lahir:pegawaiData.tanggal_lahir ? pegawaiData.tanggal_lahir.toLocaleString() : "Belum Ada Data",
-      jenis_kelamin: pegawaiData.jenis_kelamin || "Belum Ada Data",
-      unit_kerja: pegawaiData.unit_kerja?.unit_kerja || "Belum Ada Data",
-      jabatan: pegawaiData.role?.nama_role || "Belum Ada Data",
-      status_kepegawaian: pegawaiData.status_kepegawaian?.statusKepegawaian || "Belum Ada Data",
-      alamat: pegawaiData.alamat || "Belum Ada Data",
-      status_perkawinan: pegawaiData.status_perkawinan || "Belum Ada Data",
-      suku: pegawaiData.suku?.suku || "Belum Ada Data",
-      agama: pegawaiData.agama?.agama || "Belum Ada Data",
-      })
-      <div class="bento-layout mb-2 mt-2">
-        @if(pegawaiData.role_id === 5)
-          {{-- Dosen --}}
-          @!component('pegawai/components/atribut_akademik', {
-          nidn: pegawaiData?.dosen?.nidn || "Belum Ada Data",
-          nuptk: pegawaiData?.dosen?.nuptk || "Belum Ada Data",
-          prodi: pegawaiData?.dosen?.prodi || "Belum Ada Data",
-          fakultas: pegawaiData?.dosen?.fakultas || "Belum Ada Data",
-          })
-        @else
-          {{-- Pegawai Non-Dosen --}}
-          @!component('pegawai/components/atribut_lain', {
-          id: pegawaiData.id,
-          jabatanPegawaiLain: pegawaiData?.unitKerja?.unit_kerja || "Belum Ada Data",
-          })
-        @endif
-      </div>
+@slot('main')
 
-      <div class="bento-layout mb-2 mt-2">
-        {{-- Data Keluarga --}}
-        @!component('pegawai/components/keluarga', {
-        id: pegawaiData.id,
-        namaKeluarga: pegawaiData?.keluarga?.nama_keluarga || "Belum Ada Data",
-        hubunganKeluarga: pegawaiData?.keluarga?.hubungan || "Belum Ada Data",
-        tanggalLahir: pegawaiData?.keluarga?.tanggalLahir || "Belum Ada Data",
-        pekerjaan: pegawaiData?.keluarga?.pekerjaan || "Belum Ada Data",
-        })
-      </div>
+<div id="namaLengkap"
+  data-name="{{ pegawaiData && pegawaiData.nama_lengkap ? pegawaiData.nama_lengkap : 'Nama Pegawai' }}"
+  style="display:none">
+</div>
+<main class="flex-grow-1 p-3 p-lg-4">
+  @!component('pegawai/components/profil_data_pegawai', {
+  id: pegawaiData.id || "Belum Ada Data",
+  nama_lengkap: pegawaiData.nama_lengkap || "Belum Ada Data",
+  npy: pegawaiData.npy || "Belum Ada Data",
+  nik: pegawaiData.nik || "Belum Ada Data",
+  npwp: pegawaiData.npwp || "Belum Ada Data",
+  tempat_lahir: pegawaiData.tempat_lahir || "Belum Ada Data",
+  tanggal_lahir:pegawaiData.tanggal_lahir ? pegawaiData.tanggal_lahir.toLocaleString() : "Belum Ada Data",
+  jenis_kelamin: pegawaiData.jenis_kelamin || "Belum Ada Data",
+  unit_kerja: pegawaiData.unitKerja?.unit_kerja || "Belum Ada Data",
+  jabatan: pegawaiData.role?.nama_role || "Belum Ada Data",
+  status_kepegawaian: pegawaiData.status_kepegawaian?.statusKepegawaian || "Belum Ada Data",
+  alamat: pegawaiData.alamat || "Belum Ada Data",
+  status_perkawinan: pegawaiData.status_perkawinan || "Belum Ada Data",
+  suku: pegawaiData.suku?.suku || "Belum Ada Data",
+  agama: pegawaiData.agama?.agama || "Belum Ada Data",
+  })
+  <div class="bento-layout mb-2 mt-2">
+    @if(pegawaiData.role_id === 5)
+    {{-- Dosen --}}
+    @!component('pegawai/components/atribut_akademik', {
+    nidn: pegawaiData?.dosen?.nidn || "Belum Ada Data",
+    nuptk: pegawaiData?.dosen?.nuptk || "Belum Ada Data",
+    prodi: pegawaiData?.dosen?.prodi || "Belum Ada Data",
+    fakultas: pegawaiData?.dosen?.fakultas || "Belum Ada Data",
+    })
+    @else
+    {{-- Pegawai Non-Dosen --}}
+    @!component('pegawai/components/atribut_lain', {
+    id: pegawaiData.id,
+    jabatanPegawaiLain: pegawaiData?.unitKerja?.unit_kerja || "Belum Ada Data",
+    })
+    @endif
+    @!component('pegawai/components/keluarga', {
+    id: pegawaiData.id,
+    namaKeluarga: pegawaiData?.keluarga?.nama_keluarga || "Belum Ada Data",
+    hubunganKeluarga: pegawaiData?.keluarga?.hubungan || "Belum Ada Data",
+    tanggalLahir: pegawaiData?.keluarga?.tanggalLahir || "Belum Ada Data",
+    pekerjaan: pegawaiData?.keluarga?.pekerjaan || "Belum Ada Data",
+    })
+  </div>
 
-      <div class="bento-layout mb-2 mt-2">
-        {{-- Data Kesehatan Fisik --}}
-        @!component('pegawai/components/kesehatan_fisik', {
-        id: pegawaiData.id,
-        tinggi: pegawaiData?.dataKesehatanFisik?.tinggi_cm || "Belum Ada Data",
-        berat: pegawaiData?.dataKesehatanFisik?.berat_kg || "Belum Ada Data",
-        golonganDarah: pegawaiData?.dataKesehatanFisik?.golongan_darah || "Belum Ada Data",
-        tekananDarah: pegawaiData?.dataKesehatanFisik?.tekanan_darah || "Belum Ada Data",
-        alergi: pegawaiData?.dataKesehatanFisik?.alergi || "Belum Ada Data",
-        disabilitas: pegawaiData?.dataKesehatanFisik?.disabilitas || "Belum Ada Data",
-        catatanKesehatan: pegawaiData?.dataKesehatanFisik?.catatan_kesehatan || "Belum Ada Data",
-        })
-      </div>
+  {{-- <div class="bento-layout mb-2 mt-2">
+    {{-- Data Keluarga --}}
+    @!component('pegawai/components/keluarga', {
+    id: pegawaiData.id,
+    namaKeluarga: pegawaiData?.keluarga?.nama_keluarga || "Belum Ada Data",
+    hubunganKeluarga: pegawaiData?.keluarga?.hubungan || "Belum Ada Data",
+    tanggalLahir: pegawaiData?.keluarga?.tanggalLahir || "Belum Ada Data",
+    pekerjaan: pegawaiData?.keluarga?.pekerjaan || "Belum Ada Data",
+    })
+  </div> --}}
 
-      <div class="bento-layout mb-2 mt-2">
-        {{-- Dokumen dan Pendidikan --}}
-        @!component('pegawai/components/dokumen', {
-        id: pegawaiData.id,
-        dokumen: pegawaiData?.dokumen?.jenisDokumen?.jenis_dokumen || "Belum Ada Data",
-        jenisDokumen: pegawaiData?.dokumen?.jenisDokumen?.jenis_dokumen || "Belum Ada Data",
-        tanggalUpload: pegawaiData?.dokumen?.tanggalUpload || "Belum Ada Data",
-        })
+  <div class="bento-layout mb-2 mt-2">
+    {{-- Data Kesehatan Fisik --}}
+    @!component('pegawai/components/kesehatan_fisik', {
+    id: pegawaiData.id,
+    tinggi: pegawaiData?.dataKesehatanFisik?.tinggi_cm || "Belum Ada Data",
+    berat: pegawaiData?.dataKesehatanFisik?.berat_kg || "Belum Ada Data",
+    golonganDarah: pegawaiData?.dataKesehatanFisik?.golongan_darah || "Belum Ada Data",
+    tekananDarah: pegawaiData?.dataKesehatanFisik?.tekanan_darah || "Belum Ada Data",
+    alergi: pegawaiData?.dataKesehatanFisik?.alergi || "Belum Ada Data",
+    disabilitas: pegawaiData?.dataKesehatanFisik?.disabilitas || "Belum Ada Data",
+    catatanKesehatan: pegawaiData?.dataKesehatanFisik?.catatan_kesehatan || "Belum Ada Data",
+    })
+  </div>
 
-        @!component('pegawai/components/pendidikan', {
-        id: pegawaiData.id,
-        jenjangPendidikan: pegawaiData?.pendidikan?.jenjangPendidikan?.jenjang_pendidikan || "Belum Ada Data",
-        namaUniversitas: pegawaiData?.pendidikan?.nama_instansi || "Belum Ada Data",
-        jurusan: pegawaiData?.pendidikan?.jurusan || "Belum Ada Data",
-        tahunMasuk: pegawaiData?.pendidikan?.tahun_masuk || "Belum Ada Data",
-        tahunLulus: pegawaiData?.pendidikan?.tahun_lulus || "Belum Ada Data",
-        gelar: pegawaiData?.pendidikan?.gelar || "Belum Ada Data",
-        })
-      </div>
-      {{-- ===================== RIWAYAT CUTI & IZIN ===================== --}}
-      @if(pegawaiData?.riwayat_cuti || pegawaiData?.pengajuan_izin)
-        <div class="bento-layout mb-2 mt-2">
+  <div class="bento-layout mb-2 mt-2">
+    {{-- Dokumen dan Pendidikan --}}
+    @!component('pegawai/components/dokumen', {
+    id: pegawaiData.id,
+    dokumen: pegawaiData?.dokumen?.jenisDokumen?.jenis_dokumen || "Belum Ada Data",
+    jenisDokumen: pegawaiData?.dokumen?.jenisDokumen?.jenis_dokumen || "Belum Ada Data",
+    tanggalUpload: pegawaiData?.dokumen?.tanggalUpload || "Belum Ada Data",
+    })
 
-          {{-- Tampilkan Riwayat Cuti jika ADA --}}
-          @if(pegawaiData?.riwayat_cuti)
-            @!component('pegawai/components/riwayat_cuti', {
-            id: pegawaiData.id,
-            keterangan_cuti: pegawaiData.riwayat_cuti.keterangan || "Belum Ada Data",
-            durasi_cuti: pegawaiData.riwayat_cuti.lama_cuti || "Belum Ada Data"
-            })
-          @endif
-          
-          {{-- Tampilkan Pengajuan Izin jika ADA --}}
-          @if(pegawaiData?.pengajuan_izin)
-            @!component('pegawai/components/pengajuan_izin', {
-            id: pegawaiData.id,
-            file_pengajuan: pegawaiData.pengajuan_izin.file || "Belum Ada Data",
-            tanggal_pengajuan: pegawaiData.pengajuan_izin.created_at || "Belum Ada Data"
-            })
-          @endif
-        </div>
-      @endif
-      {{-- ===================== RIWAYAT GAJI & PELATIHAN ===================== --}}
-      <div class="bento-layout mb-2 mt-2">
-        @!component('pegawai/components/riwayat_gaji', {
-        id: pegawaiData.id,
-        periodeGaji: pegawaiData?.riwayatGaji?.periode || "Belum Ada Data",
-        jumlahGaji: pegawaiData?.riwayatGaji?.gaji_pokok || "Belum Ada Data",
-        })
+    @!component('pegawai/components/pendidikan', {
+    id: pegawaiData.id,
+    jenjangPendidikan: pegawaiData?.pendidikan?.jenjangPendidikan?.jenjang_pendidikan || "Belum Ada Data",
+    namaUniversitas: pegawaiData?.pendidikan?.nama_instansi || "Belum Ada Data",
+    jurusan: pegawaiData?.pendidikan?.jurusan || "Belum Ada Data",
+    tahunMasuk: pegawaiData?.pendidikan?.tahun_masuk || "Belum Ada Data",
+    tahunLulus: pegawaiData?.pendidikan?.tahun_lulus || "Belum Ada Data",
+    gelar: pegawaiData?.pendidikan?.gelar || "Belum Ada Data",
+    })
+  </div>
+  {{-- ===================== RIWAYAT CUTI & IZIN ===================== --}}
+  @if(pegawaiData?.riwayat_cuti || pegawaiData?.pengajuan_izin)
+  <div class="bento-layout mb-2 mt-2">
 
-        @!component('pegawai/components/pelatihan', {
-        id: pegawaiData.id,
-        pelatihan: pegawaiData?.pelatihan?.nama_pelatihan || "Belum Ada Data",
-        tahunPelatihan: pegawaiData?.pelatihan?.tahun || "Belum Ada Data",
-        })
-      </div>
+    {{-- Tampilkan Riwayat Cuti jika ADA --}}
+    @if(pegawaiData?.riwayat_cuti)
+    @!component('pegawai/components/riwayat_cuti', {
+    id: pegawaiData.id,
+    keterangan_cuti: pegawaiData.riwayat_cuti.keterangan || "Belum Ada Data",
+    durasi_cuti: pegawaiData.riwayat_cuti.lama_cuti || "Belum Ada Data"
+    })
+    @endif
 
-      {{-- ===================== PENGHARGAAN & PENELITIAN ===================== --}}
-      <div class="bento-layout mb-2 mt-2">
-        @!component('pegawai/components/penghargaan', {
-        id: pegawaiData.id,
-        penghargaan: pegawaiData?.penghargaan?.nama_penghargaan || "Belum Ada Data",
-        tahunPenghargaan: pegawaiData?.penghargaan?.tahun || "Belum Ada Data",
-        instansi: pegawaiData?.penghargaan?.instansi || "Belum Ada Data",
-        })
+    {{-- Tampilkan Pengajuan Izin jika ADA --}}
+    @if(pegawaiData?.pengajuan_izin)
+    @!component('pegawai/components/pengajuan_izin', {
+    id: pegawaiData.id,
+    file_pengajuan: pegawaiData.pengajuan_izin.file || "Belum Ada Data",
+    tanggal_pengajuan: pegawaiData.pengajuan_izin.created_at || "Belum Ada Data"
+    })
+    @endif
+  </div>
+  @endif
+  {{-- ===================== RIWAYAT GAJI & PELATIHAN ===================== --}}
+  <div class="bento-layout mb-2 mt-2">
+    @!component('pegawai/components/riwayat_gaji', {
+    id: pegawaiData.id,
+    periodeGaji: pegawaiData?.riwayatGaji?.periode || "Belum Ada Data",
+    jumlahGaji: pegawaiData?.riwayatGaji?.gaji_pokok || "Belum Ada Data",
+    })
 
-        @!component('pegawai/components/penelitian', {
-        id: pegawaiData.id,
-        items: pegawaiData?.dosen?.penelitian || []
-        })
-      </div>
+    @!component('pegawai/components/pelatihan', {
+    id: pegawaiData.id,
+    pelatihan: pegawaiData?.pelatihan?.nama_pelatihan || "Belum Ada Data",
+    tahunPelatihan: pegawaiData?.pelatihan?.tahun || "Belum Ada Data",
+    })
+  </div>
 
-      {{-- ===================== PENGABDIAN & PUBLIKASI ===================== --}}
+  {{-- ===================== PENGHARGAAN & PENELITIAN ===================== --}}
+  <div class="bento-layout mb-2 mt-2">
+    @!component('pegawai/components/penghargaan', {
+    id: pegawaiData.id,
+    penghargaan: pegawaiData?.penghargaan?.nama_penghargaan || "Belum Ada Data",
+    tahunPenghargaan: pegawaiData?.penghargaan?.tahun || "Belum Ada Data",
+    instansi: pegawaiData?.penghargaan?.instansi || "Belum Ada Data",
+    })
 
-      <div class="bento-layout mb-2 mt-2">
+    @!component('pegawai/components/penelitian', {
+    id: pegawaiData.id,
+    items: pegawaiData?.dosen?.penelitian || []
+    })
+  </div>
 
-        @!component('pegawai/components/pengabdian', {
-        id: pegawaiData.id,
-        items: pegawaiData?.dosen?.pengabdian || []
-        
-        })
+  {{-- ===================== PENGABDIAN & PUBLIKASI ===================== --}}
 
-        @!component('pegawai/components/publikasi', {
-        id: pegawaiData.id,
-        items: pegawaiData?.dosen?.publikasi || []
-        })
-      </div>
+  <div class="bento-layout mb-2 mt-2">
 
-      {{-- ===================== RINGKASAN & CATATAN ===================== --}}
-      <div class="bento-layout mb-2 mt-2">
-        @!component('pegawai/components/ringkasan', {
-        id: pegawaiData.id,
-        jabatan: pegawaiData?.role?.namaRole || "Belum Ada Data",
-        unitKerja: pegawaiData?.unitKerja?.unit_kerja || "Belum Ada Data",
-        statusKepegawaian: pegawaiData?.statusKepegawaian?.status_kepegawaian || "Belum Ada Data",
-        })
+    @!component('pegawai/components/pengabdian', {
+    id: pegawaiData.id,
+    items: pegawaiData?.dosen?.pengabdian || []
 
-        @!component('pegawai/components/catatan', {
-        id: pegawaiData.id,
-        catatan: pegawaiData?.catatan || "Belum Ada Data",
-        })
-      </div>
-    </div>
+    })
 
-  </main>
+    @!component('pegawai/components/publikasi', {
+    id: pegawaiData.id,
+    items: pegawaiData?.dosen?.publikasi || []
+    })
+  </div>
+
+  {{-- ===================== RINGKASAN & CATATAN ===================== --}}
+  <div class="bento-layout mb-2 mt-2">
+    @!component('pegawai/components/ringkasan', {
+    id: pegawaiData.id,
+    jabatan: pegawaiData?.role?.namaRole || "Belum Ada Data",
+    unitKerja: pegawaiData?.unitKerja?.unit_kerja || "Belum Ada Data",
+    statusKepegawaian: pegawaiData?.statusKepegawaian?.status_kepegawaian || "Belum Ada Data",
+    })
+
+    @!component('pegawai/components/catatan', {
+    id: pegawaiData.id,
+    catatan: pegawaiData?.catatan || "Belum Ada Data",
+    })
+  </div>
+  </div>
+
+</main>
 @endslot
 @end

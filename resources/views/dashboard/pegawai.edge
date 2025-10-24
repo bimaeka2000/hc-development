@@ -1,159 +1,158 @@
 @layout.layout({title:'Dashboard'})
 
-  @slot('meta')
-    <meta name="description" content="Dashboard page for Human Capital Management System" />
-  @endslot
-  @slot('main')
-    <main class="flex-grow-1 p-3 p-lg-4">
-      <div class="d-flex align-items-center mb-4">
-        <h4 class="mb-0">
-          Data Pegawai
-        </h4>
-        <span class="badge rounded-pill text-bg-primary ms-2" id="pegCount">{{ (pegawais && pegawais.length) ?
+@slot('meta')
+<meta name="description" content="Dashboard page for Human Capital Management System" />
+@endslot
+@slot('main')
+<main class="flex-grow-1 p-3 p-lg-4">
+  <div class="d-flex align-items-center mb-4">
+    <h4 class="mb-0">
+      Data Pegawai
+    </h4>
+    <span class="badge rounded-pill text-bg-primary ms-2" id="pegCount">{{ (pegawais && pegawais.length) ?
       pegawais.length : 0 }}</span>
-        <div class="ms-auto d-flex gap-2">
-          <button class="btn btn-sm btn-outline-secondary" id="pegRefresh" disabled>            <i class="bi bi-arrow-repeat"></i></button>
-        </div>
-      </div>
-      <div class="filter-toolbar small mb-3">
-        <input id="pegSearch" class="form-control form-control-sm" placeholder="Cari nama / NIP" disabled />
-        <select id="pegUnit" class="form-select form-select-sm" disabled>
-          <option value="">
-            Semua Unit
-          </option>
-          <option>
-            Teknik
-          </option>
-          <option>
-            Keuangan
-          </option>
-          <option>
-            Akademik
-          </option>
-        </select>
-        <select id="pegStatus" class="form-select form-select-sm" disabled>
-          <option value="">
-            Semua Status
-          </option>
-          <option>
-            Aktif
-          </option>
-          <option>
-            Cuti
-          </option>
-          <option>
-            Kontrak
-          </option>
-        </select>
-        <div class="toolbar-spacer">
-        </div>
-        <button class="btn btn-sm btn-outline-secondary" id="pegReset" disabled>Reset</button>
-      </div>
-      <div class="row g-3 mb-4" id="pegCards">
-        @if(pegawais && pegawais.length > 0)
-          @each(pegawai in pegawais)
-            <div class="col-6 col-lg-3">
-              <div class="kpi-card h-100">
-                <a
-                  href="{{ route('pegawai.index',{id:pegawai.id}) }}"
-                  class="stretched-link"
-                  style="text-decoration:none;"
-                >
-                  <div class="kpi-icon kpi-accent-success mb-2">
-                    <i class="bi bi-person-vcard"></i>
-                  </div>
-                  <div class="fw-semibold small mb-1">
-                    {{ pegawai.nama_lengkap || 'Nama Pegawai' }}
-                  </div>
-                  <div class="small text-secondary">
-                    {{ pegawai.npy || '' }}
-                  </div>
-                  <div class="mt-2">
-                    <span class="badge text-bg-{{ (pegawai.status === 'aktif') ? 'success' : 'secondary' }}">{{ pegawai.status
+    <div class="ms-auto d-flex gap-2">
+      <button class="btn btn-sm btn-outline-secondary" id="pegRefresh" disabled> <i
+          class="bi bi-arrow-repeat"></i></button>
+    </div>
+  </div>
+  <div class="filter-toolbar small mb-3">
+    <input id="pegSearch" class="form-control form-control-sm" placeholder="Cari nama / NIP" disabled />
+    <select id="pegUnit" class="form-select form-select-sm" disabled>
+      <option value="">
+        Semua Unit
+      </option>
+      <option>
+        Teknik
+      </option>
+      <option>
+        Keuangan
+      </option>
+      <option>
+        Akademik
+      </option>
+    </select>
+    <select id="pegStatus" class="form-select form-select-sm" disabled>
+      <option value="">
+        Semua Status
+      </option>
+      <option>
+        Aktif
+      </option>
+      <option>
+        Cuti
+      </option>
+      <option>
+        Kontrak
+      </option>
+    </select>
+    <div class="toolbar-spacer">
+    </div>
+    <button class="btn btn-sm btn-outline-secondary" id="pegReset" disabled>Reset</button>
+  </div>
+  <div class="row g-3 mb-4" id="pegCards">
+    @if(pegawais && pegawais.length > 0)
+    @each(pegawai in pegawais)
+    <div class="col-6 col-lg-3">
+      <div class="kpi-card h-100">
+        <a href="{{ route('pegawai.index',{id:pegawai.id}) }}" class="stretched-link" style="text-decoration:none;">
+          <div class="kpi-icon kpi-accent-success mb-2">
+            <i class="bi bi-person-vcard"></i>
+          </div>
+          <div class="fw-semibold small mb-1">
+            {{ pegawai.nama_lengkap || 'Nama Pegawai' }}
+          </div>
+          <div class="small text-secondary">
+            {{ pegawai.npy || '' }}
+          </div>
+          <div class="mt-2">
+            <span class="badge text-bg-{{ (pegawai.status === 'aktif') ? 'success' : 'secondary' }}">{{ pegawai.status
               || '—' }}</span>
-                  </div>
-                  <div class="mt-2 small text-secondary">
-                    <i class="bi bi-building me-1"></i>{{ pegawai.unit_kerja || '' }}
-                  </div>
-                </a>
-              </div>
-            </div>
-          @endeach
-        @else
-          <div class="col-12">
-            <div class="alert alert-info mb-0">
-              Belum ada data pegawai.
-            </div>
           </div>
-        @endif
+          <div class="mt-2 small text-secondary">
+            <i class="bi bi-building me-1"></i>{{ pegawai.unit_kerja || '' }}
+          </div>
+        </a>
       </div>
-      <div class="card">
-        <div class="card-header d-flex align-items-center">
-          <span class="fw-semibold small">Daftar Pegawai</span>
-          <div class="ms-auto d-flex gap-1">
-            <button class="btn btn-sm btn-outline-secondary" id="pegExport" disabled>              <i class="bi bi-download"></i></button>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <table class="table table-sm table-hover table-sticky-head align-middle mb-0 data-table">
-            <thead>
-              <tr>
-                <th>
-                  <i class="bi bi-person-vcard"></i>Nama
-                </th>
-                <th>
-                  <i class="bi bi-upc"></i>NIP
-                </th>
-                <th>
-                  <i class="bi bi-building"></i>Unit
-                </th>
-                <th>
-                  <i class="bi bi-person-badge"></i>Jabatan
-                </th>
-                <th>
-                  <i class="bi bi-activity"></i>Status
-                </th>
-                <th>
-                  <i class="bi bi-gear"></i>Aksi
-                </th>
-              </tr>
-            </thead>
-            <tbody id="pegTbody">
-              @if(pegawais && pegawais.length > 0)
-                @each(pegawai in pegawais)
-                  <tr>
-                    <td>
-                      {{ pegawai.nama_lengkap || 'Nama Pegawai' }}
-                    </td>
-                    <td>
-                      {{ pegawai.npy || '' }}
-                    </td>
-                    <td>
-                      {{ pegawai.unit_kerja || '' }}
-                    </td>
-                    <td>
-                      {{ pegawai.jabatan || '' }}
-                    </td>
-                    <td>
-                      <span class="badge text-bg-{{ (pegawai.status === 'aktif') ? 'success' : 'secondary' }}">{{ pegawai.status
+    </div>
+    @endeach
+    @else
+    <div class="col-12">
+      <div class="alert alert-info mb-0">
+        Belum ada data pegawai.
+      </div>
+    </div>
+    @endif
+  </div>
+  <div class="card">
+    <div class="card-header d-flex align-items-center">
+      <span class="fw-semibold small">Daftar Pegawai</span>
+      <div class="ms-auto d-flex gap-1">
+        <button class="btn btn-sm btn-outline-secondary" id="pegExport" disabled> <i
+            class="bi bi-download"></i></button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-sm table-hover table-sticky-head align-middle mb-0 data-table">
+        <thead>
+          <tr>
+            <th>
+              <i class="bi bi-person-vcard"></i>Nama
+            </th>
+            <th>
+              <i class="bi bi-upc"></i>NIP
+            </th>
+            <th>
+              <i class="bi bi-building"></i>Unit
+            </th>
+            <th>
+              <i class="bi bi-person-badge"></i>Jabatan
+            </th>
+            <th>
+              <i class="bi bi-activity"></i>Status
+            </th>
+            <th>
+              <i class="bi bi-gear"></i>Aksi
+            </th>
+          </tr>
+        </thead>
+        <tbody id="pegTbody">
+          @if(pegawais && pegawais.length > 0)
+          @each(pegawai in pegawais)
+          <tr>
+            <td>
+              {{ pegawai.nama_lengkap || 'Nama Pegawai' }}
+            </td>
+            <td>
+              {{ pegawai.npy || '' }}
+            </td>
+            <td>
+              {{ pegawai.unit_kerja || '' }}
+            </td>
+            <td>
+              {{ pegawai.jabatan || '' }}
+            </td>
+            <td>
+              <span class="badge text-bg-{{ (pegawai.status === 'aktif') ? 'success' : 'secondary' }}">{{ pegawai.status
                 || '—' }}</span>
-                    </td>
-                    <td>
-                      <a class="btn btn-sm btn-outline-primary" href="{{ route('pegawai.show',{id:pegawai.id}) }}">                        <i class="bi bi-eye"></i></a>
-                    </td>
-                  </tr>
-                @endeach
-              @else
-                <tr>
-                  <td colspan="6" class="text-center small text-muted">
-                    Belum ada data pegawai.
-                  </td>
-                </tr>
-              @endif
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </main>
-  @endslot
+            </td>
+            <td>
+              <a class="btn btn-sm btn-outline-primary" href="{{ route('pegawai.show',{id:pegawai.id}) }}"> <i
+                  class="bi bi-eye"></i></a>
+            </td>
+          </tr>
+          @endeach
+          @else
+          <tr>
+            <td colspan="6" class="text-center small text-muted">
+              Belum ada data pegawai.
+            </td>
+          </tr>
+          @endif
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+@endslot
 @end

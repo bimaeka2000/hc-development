@@ -15,9 +15,9 @@
             class="bi bi-speedometer2 me-2"></i>Dashboard</a>
       </li>
       <li>
-        <a class="nav-link text-white d-flex align-items-center" href="{{ route('user.index') }}"> <i
+        <a class="nav-link text-white d-flex align-items-center" href="{{ route('pegawai.show',{id:user.id}) }}"> <i
             class="bi bi-people me-2"></i>
-          Users</a>
+          Profil</a>
       </li>
       <li>
         <a class="nav-link text-white d-flex align-items-center" href="{{ route('/dashboard/pegawai') }}"> <i
@@ -80,7 +80,7 @@
 
   {{-- #NOTE ambil data user. [picture,name,email] --}}
 
-  <div class="p-3 border-top border-secondary small">
+  {{-- <div class="p-3 border-top border-secondary small">
     <div class="d-flex align-items-center">
 
       <img src="{{ user?.picture }}" alt=" avatar" class="avatar me-2" />
@@ -93,10 +93,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 </nav>
-<<<<<<< HEAD
 
 @vite('resources/js/main/buttonLogout.js')
-=======
->>>>>>> origin/development

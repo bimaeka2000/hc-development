@@ -47,8 +47,8 @@ export default class PagesController {
       pegawaiData,
       keluarga,
       role,
-      unitKerja,
-      statusKepegawaian,
+      // unitKerja,
+      // statusKepegawaian,
       dosen,
       dataKesehatanFisik,
       riwayatKesehatan,
@@ -56,8 +56,8 @@ export default class PagesController {
       dokumen,
       pendidikan,
       jenisDokumen,
-      suku,
-      agama,
+      // suku,
+      // agama,
     })
   }
 

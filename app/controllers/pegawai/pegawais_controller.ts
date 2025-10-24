@@ -18,12 +18,12 @@ export default class PegawaisController {
   /**
    * Display form to create a new record
    */
-  async create({}: HttpContext) {}
+  async create({ }: HttpContext) { }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request, response, session }: HttpContext) {}
+  async store({ request, response, session }: HttpContext) { }
 
   /**
    * Show individual record
@@ -53,7 +53,6 @@ export default class PegawaisController {
       .preload('pelatihan')
       .preload('penghargaan')
       .firstOrFail()
-
     // return response.json(pegawaiData)
     const suku = await Suku.all()
     const agama = await Agama.all()
@@ -73,15 +72,15 @@ export default class PegawaisController {
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  async edit({ params }: HttpContext) { }
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ params, request }: HttpContext) { }
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params }: HttpContext) { }
 }
