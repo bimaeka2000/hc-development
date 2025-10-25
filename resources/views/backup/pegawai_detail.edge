@@ -1,184 +1,1763 @@
-@layout.layout({title:'Pegawai Detail'})
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Pegawai Akademik - Dr. Siti Nurhaliza, M.Kom</title>
 
-  @pushOnceTo('style-pegawai-detail')
-    @vite(['resources/css/pegawai-detail.css'])
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-  @end
-  @slot('meta')
-    <meta name="description" content="Dashboard page for Human Capital Management System" />
-    <script src="https://cdn.tailwindcss.com"></script>
-  @endslot
-  
-  @slot('main')
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+              font-family: 'Inter', sans-serif;
+        }
 
-    <div
-      id="namaLengkap"
-      data-name="{{ pegawaiData && pegawaiData.nama_lengkap ? pegawaiData.nama_lengkap : 'Nama Pegawai' }}"
-      style="display:none"
-    >
-    </div>
-    <main class="flex-grow-1">
-      @!component('dashboard/components/profil_data_pegawai',
-      {
-      id: pegawaiData ? pegawaiData.id : "Belum Ada Data",
-      nama_lengkap: pegawaiData ? pegawaiData.nama_lengkap : "Belum Ada Data",
-      npy: pegawaiData ? pegawaiData.npy : "Belum Ada Data",
-      nik: pegawaiData ? pegawaiData.nik : "Belum Ada Data",
-      npwp: pegawaiData ? pegawaiData.npwp : "Belum Ada Data",
-      tempat_lahir: pegawaiData ? pegawaiData.tempat_lahir : "Belum Ada Data",
-      tanggal_lahir: pegawaiData ? pegawaiData.tanggal_lahir : "Belum Ada Data",
-      jenis_kelamin: pegawaiData ? pegawaiData.jenis_kelamin : "Belum Ada Data",
-      unitKerja: unitKerja ? unitKerja.unit_kerja : "Belum Ada Data",
-      jabatan: role ? role.nama_role : "Belum Ada Data",
-      statusKepegawaian: statusKepegawaian ? statusKepegawaian.status_kepegawaian : "Belum Ada Data",
-      alamat: pegawaiData ? pegawaiData.alamat : "Belum Ada Data",
-      statusPerkawinan: pegawaiData ? pegawaiData.status_perkawinan : "Belum Ada Data",
-      suku: suku ? suku.suku : "Belum Ada Data",
-      agama: agama ? agama.agama : "Belum Ada Data",
-      })
-      <div class="bento-layout mb-2 mt-2">
-        @if(pegawaiData.role_id === 5)
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #eff6ff;
+            color: #1e293b;
+            line-height: 1.6;
+        }
 
-          @!component('dashboard/components/atribut_akademik', {
-          id: pegawaiData ? pegawaiData.id : "Belum Ada Data",
-          nidn: dosen?.nidn || "Belum Ada Data" ,
-          nuptk: dosen?.nuptk || "Belum Ada Data",
-          programStudi: dosen?.program_studi || "Belum Ada Data",
-          fakultas: dosen?.fakultas || "Belum Ada Data",
-          jenjang: dosen?.jenjang || "Belum Ada Data"
-          })
-        @else
-          @!component('dashboard/components/atribut_lain', {
-          id:pegawaiData.id,
-          jabatanPegawaiLain: unitKerja?.unit_kerja || "Belum Ada Data" ,
-          })
-        @endif
-      </div>
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
 
-      <div class="bento-layout mb-2 mt-2">
+        /* Sidebar Styles */
+        .sidebar {
+            width: 320px;
+            background: white;
+            border-right: 1px solid #e2e8f0;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
 
-        @!component('dashboard/components/keluarga', {
-        id:pegawaiData.id,
-        namaKeluarga: keluarga ? keluarga.nama_keluarga : "Belum Ada Data" ,
-        hubunganKeluarga: keluarga ? keluarga.hubungan : "Belum Ada Data"
-        })
+        .sidebar-header {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            padding: 24px;
+            color: white;
+            text-align: center;
+        }
 
-        <div class="bento-layout mb-2 mt-2">
+        .sidebar-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+        }
 
-          @!component('dashboard/components/kesehatan_fisik', {
-          id:pegawaiData.id,
-          tinggi: dataKesehatanFisik?.tinggi_cm || "Belum Ada Data",
-          berat: dataKesehatanFisik?.berat_kg || "Belum Ada Data",
-          golonganDarah: dataKesehatanFisik?.golongan_darah || "Belum Ada Data",
-          tekananDarah: dataKesehatanFisik?.tekanan_darah || "Belum Ada Data",
-          alergi: dataKesehatanFisik?.alergi || "Belum Ada Data",
-          disabilitas: dataKesehatanFisik?.disabilitas || "Belum Ada Data",
-          catatanKesehatan: dataKesehatanFisik?.catatan_kesehatan || "Belum Ada Data",
-          
-          })
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 12px;
+        }
+
+        .nav-collapsible {
+            margin-bottom: 8px;
+        }
+
+        .nav-trigger {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 15px;
+
+        }
+
+        .nav-trigger:hover {
+            background: #e2e8f0;
+        }
+
+        .nav-trigger-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-trigger-icon {
+            color: #2563eb;
+            width: 20px;
+            height: 20px;
+        }
+
+        .nav-trigger-text {
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        .nav-chevron {
+            color: #64748b;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.2s;
+        }
+
+        .nav-chevron.open {
+            transform: rotate(0deg);
+        }
+
+        .nav-chevron.closed {
+            transform: rotate(-90deg);
+        }
+
+        .nav-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.25s ease-out;
+            opacity: 0;
+        }
+
+        .nav-content.open {
+            max-height: 1000px;
+            opacity: 1;
+            margin-top: 4px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            margin-left: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: transparent;
+            width: calc(100% - 16px);
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .nav-item:hover {
+            background: #f1f5f9;
+        }
+
+        .nav-item.active {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        }
+
+        .nav-item-icon {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .nav-item.active .nav-item-icon {
+            color: white;
+        }
+
+        .sidebar-footer {
+            padding: 16px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 320px;
+            flex: 1;
+            padding: 32px;
+            overflow-y: auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            border-radius: 12px;
+            padding: 32px;
+            color: white;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .avatar {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .profile-info h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .profile-info p {
+            font-size: 18px;
+            color: #dbeafe;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: white;
+            color: #2563eb;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #2563eb;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title-icon {
+            background: #eff6ff;
+            padding: 8px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: #f1f5f9;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 16px;
+        }
+
+        .info-icon {
+            background: #2563eb;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .info-content {
+            flex: 1;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: #0f172a;
+            font-weight: 500;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px;
+            background: #f8fafc;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 600;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #1e293b;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .modal-header {
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .modal-description {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .modal-body {
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .separator {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 24px 0;
+        }
+
+        /* Expertise Tags */
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .status-warning {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status-info {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Profil Pegawai Akademik</h2>
+            </div>
+
+            <div class="sidebar-nav">
+                <div class="nav-collapsible">
+                    <button class="nav-trigger" onclick="toggleProfileMenu()">
+                        <div class="nav-trigger-left">
+                            <i data-lucide="user-cog" class="nav-trigger-icon"></i>
+                            <span class="nav-trigger-text">Profile</span>
+                        </div>
+                        <i data-lucide="chevron-down" class="nav-chevron" id="navChevron"></i>
+                    </button>
+
+                    <div class="nav-content open" id="navContent">
+                        <div class="nav-menu">
+                            <button class="nav-item active" onclick="showSection('personal')" data-section="personal">
+                                <i data-lucide="user" class="nav-item-icon"></i>
+                                <span>Data Pribadi</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('academic')" data-section="academic">
+                                <i data-lucide="graduation-cap" class="nav-item-icon"></i>
+                                <span>Atribut Akademik</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('education')" data-section="education">
+                                <i data-lucide="book-open" class="nav-item-icon"></i>
+                                <span>Pendidikan</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('family')" data-section="family">
+                                <i data-lucide="users" class="nav-item-icon"></i>
+                                <span>Keluarga</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('research')" data-section="research">
+                                <i data-lucide="flask-conical" class="nav-item-icon"></i>
+                                <span>Penelitian</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('publications')" data-section="publications">
+                                <i data-lucide="book-marked" class="nav-item-icon"></i>
+                                <span>Publikasi</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('community')" data-section="community">
+                                <i data-lucide="hand-heart" class="nav-item-icon"></i>
+                                <span>Pengabdian</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('training')" data-section="training">
+                                <i data-lucide="award" class="nav-item-icon"></i>
+                                <span>Pelatihan</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('awards')" data-section="awards">
+                                <i data-lucide="medal" class="nav-item-icon"></i>
+                                <span>Penghargaan</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('documents')" data-section="documents">
+                                <i data-lucide="file-text" class="nav-item-icon"></i>
+                                <span>Dokumen</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('health')" data-section="health">
+                                <i data-lucide="activity" class="nav-item-icon"></i>
+                                <span>Kesehatan Fisik</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('healthHistory')" data-section="healthHistory">
+                                <i data-lucide="stethoscope" class="nav-item-icon"></i>
+                                <span>Riwayat Kesehatan</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('leave')" data-section="leave">
+                                <i data-lucide="plane" class="nav-item-icon"></i>
+                                <span>Riwayat Cuti</span>
+                            </button>
+                            <button class="nav-item" onclick="showSection('salary')" data-section="salary">
+                                <i data-lucide="dollar-sign" class="nav-item-icon"></i>
+                                <span>Riwayat Gaji</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                Data Terakhir Diperbarui:<br>25 Oktober 2025
+            </div>
         </div>
 
-      </div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Data Pribadi Section -->
+            <div id="section-personal" class="section-content">
+                <div class="card">
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" alt="Dr. Siti Nurhaliza" class="avatar">
+                        <div class="profile-info">
+                            <h1>Dr. Siti Nurhaliza, M.Kom</h1>
+                            <p>Lektor Kepala</p>
+                            <span class="badge">Dosen Tetap</span>
+                        </div>
+                    </div>
 
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/dokumen', {
-        id:pegawaiData.id,
-        dokumen: dokumen?.nama_file || "Belum Ada Data" ,
-        jenisDokumen: jenisDokumen?.jenis_dokumen || "Belum Ada Data" ,
-        statusDokumen: dokumen?.status_dokumen || "Belum Ada Data"
-        })
-        @!component('dashboard/components/pendidikan', {
-        id:pegawaiData.id,
-        jenjangPendidikan: jenjangPendidikan ? jenjangPendidikan.jenjang_pendidikan : "Belum Ada Data",
-        namaUniversitas: pendidikan ? pendidikan.nama_instansi : "Belum Ada Data",
-        tahunLulus: pendidikan ? pendidikan.tahun_lulus : "Belum Ada Data"
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/aktivitas',{
-        id:pegawaiData.id,
-        aktivitas : aktivitas?.aktivitas || "Belum Ada Data",
-        tanggalAktifitas : tanggalAktifitas?.tanggalAktifitas || 'Belum Ada Data'
-        })
-        @!component('dashboard/components/kuota_cuti',{
-        id:pegawaiData.id,
-        jenisCuti : jenisCuti?.jenis_cuti || "Belum Ada Data",
-        jumlahCuti :jumlahCuti?.jumlah_cuti || "Belum Ada Data"
-        })
+                    <div class="separator"></div>
 
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/riwayat_cuti',{
-        id:pegawaiData.id,
-        keteranganCuti : keteranganCuti?.keterangan || "Belum Ada Data",
-        durasiCuti : durasiCuti?.lama_cuti || "Belum Ada Data"
-        })
-        @!component('dashboard/components/pengajuan_cuti',{
-        id:pegawaiData.id,
-        filePengajuan : filePengajuan?.file || "Belum Ada Data",
-        tanggalPengajuan : tanggalPengajuan?.created_at || "Belum Ada Data",
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="user" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Informasi Pribadi
+                        </h2>
+                        <button class="btn" onclick="openEditModal('personal')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
 
-        @!component('dashboard/components/pengajuan_izin',{
-        id:pegawaiData.id,
-        filePengajuan : filePengajuan?.file || "Belum Ada Data",
-        tanggalPengajuan : tanggalPengajuan?.created_at || "Belum Ada Data",
-        })
-        @!component('dashboard/components/riwayat_gaji',{
-        id:pegawaiData.id,
-        periodeGaji : periodeGaji?.tahun || "Belum Ada Data",
-        jumlahGaji : jumlahGaji?.tahun || "Belum Ada Data"
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/riwayat_kepangkatan',{
-        id:pegawaiData.id,
-        golonganRuangJabatan : golonganRuangJabatan?.golongan || "Belum Ada Data",
-        tmt : tmt?.tmt || "Belum Ada Data",
-        })
-        @!component('dashboard/components/pelatihan',{
-        id:pegawaiData.id,
-        pelatihan:pelatihan?.pelatihan ||"Belum Ada Data",
-        tahunPelatihan:tahunPelatihan?.tahun ||"Belum Ada Data",
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/penghargaan',{
-        id:pegawaiData.id,
-        penghargaan : penghargaan?.penghargaan || "Belum Data Data",
-        tahunPenghargaan : tahunPenghargaan?.tahun || "Belum Data Data",
-        })
-        @!component('dashboard/components/penelitian',{
-        id:pegawaiData.id,
-        judulPenelitian:judulPenelitian?.judul_penelitian || "Belum Ada Data",
-        tahunPenelitian:tahunPenelitian?.tahun || "Belum Ada Data",
-        })
-      </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="id-card" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">NIK</div>
+                                <div class="info-value">3171055985051002</div>
+                            </div>
+                        </div>
 
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/pengabdian',{
-        id:pegawaiData.id,
-        judulPengabdian:judulPengabdian?.judul_pengabdian || "Belum Ada Data",
-        tahunPengabdian:tahunPengabdian?.tahun || "Belum Ada Data",
-        })
-        @!component('dashboard/components/publikasi',{
-        id:pegawaiData.id,
-        judulPublikasi:judulPublikasi?.judul_publikasi || "Belum Ada Data",
-        tahunPublikasi:tahunPublikasi?.tahun || "Belum Ada Data",
-        })
-      </div>
-      <div class="bento-layout mb-2 mt-2">
-        @!component('dashboard/components/ringkasan',{
-        id:pegawaiData.id,
-        jabatan:jabatan?.jabatan || "Belum Ada Data",
-        unitKerja:unitKerja?.unit_kerja || "Belum Ada Data",
-        statusKepegawaian:statusKepegawaian?.status || "Belum Ada Data",
-        })
-        @!component('dashboard/components/catatan')
-      </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="map-pin" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Tempat, Tanggal Lahir</div>
+                                <div class="info-value">Bandung, 15 Mei 1985</div>
+                            </div>
+                        </div>
 
-    </main>
-  @endslot
-@end
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="user" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Jenis Kelamin</div>
+                                <div class="info-value">Perempuan</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="landmark" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Agama</div>
+                                <div class="info-value">Islam</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="heart" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Status Pernikahan</div>
+                                <div class="info-value">Menikah</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="mail" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Email</div>
+                                <div class="info-value">siti.nurhaliza@university.ac.id</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="phone" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Telepon</div>
+                                <div class="info-value">+62 812-3456-7890</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="map-pin" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Alamat</div>
+                                <div class="info-value">Jl. Ganesha No. 10, Bandung, Jawa Barat 40132</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="briefcase" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">NIP</div>
+                                <div class="info-value">198505152010012001</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="user-circle" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">NIDN</div>
+                                <div class="info-value">0015058501</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="building-2" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Fakultas</div>
+                                <div class="info-value">Fakultas Teknik</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="briefcase" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Departemen</div>
+                                <div class="info-value">Teknik Informatika</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Atribut Akademik Section -->
+            <div id="section-academic" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="graduation-cap" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Atribut Akademik
+                        </h2>
+                        <button class="btn" onclick="openEditModal('academic')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="award" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Jabatan Fungsional</div>
+                                <div class="info-value">Lektor Kepala</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="briefcase" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Jabatan Struktural</div>
+                                <div class="info-value">Kepala Laboratorium AI</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="trending-up" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Scopus H-Index</div>
+                                <div class="info-value">12</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="trending-up" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Google Scholar H-Index</div>
+                                <div class="info-value">15</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="book-marked" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Total Publikasi</div>
+                                <div class="info-value">45</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="quote" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Total Sitasi</div>
+                                <div class="info-value">350</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item" style="grid-column: 1 / -1;">
+                            <div class="info-icon">
+                                <i data-lucide="users" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Kelompok Riset</div>
+                                <div class="info-value">Artificial Intelligence & Data Science</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item" style="grid-column: 1 / -1;">
+                            <div class="info-icon">
+                                <i data-lucide="cpu" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Keahlian</div>
+                                <div class="expertise-tags">
+                                    <span class="tag">Machine Learning</span>
+                                    <span class="tag">Deep Learning</span>
+                                    <span class="tag">Computer Vision</span>
+                                    <span class="tag">Natural Language Processing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pendidikan Section -->
+            <div id="section-education" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="book-open" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Riwayat Pendidikan
+                        </h2>
+                        <button class="btn" onclick="openEditModal('education')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jenjang</th>
+                                <th>Institusi</th>
+                                <th>Tahun</th>
+                                <th>Jurusan</th>
+                                <th>IPK</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>S3 - Doktor Ilmu Komputer</td>
+                                <td>Institut Teknologi Bandung</td>
+                                <td>2015 - 2019</td>
+                                <td>Artificial Intelligence</td>
+                                <td>3.92</td>
+                            </tr>
+                            <tr>
+                                <td>S2 - Magister Komputer</td>
+                                <td>Institut Teknologi Bandung</td>
+                                <td>2008 - 2010</td>
+                                <td>Sistem Informasi</td>
+                                <td>3.85</td>
+                            </tr>
+                            <tr>
+                                <td>S1 - Sarjana Komputer</td>
+                                <td>Universitas Padjadjaran</td>
+                                <td>2003 - 2007</td>
+                                <td>Teknik Informatika</td>
+                                <td>3.78</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Keluarga Section -->
+            <div id="section-family" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="users" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Data Keluarga
+                        </h2>
+                        <button class="btn" onclick="openEditModal('family')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <h3 style="color: #2563eb; margin-bottom: 16px;">Pasangan</h3>
+                    <div class="info-grid" style="margin-bottom: 32px;">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="user" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Nama</div>
+                                <div class="info-value">Dr. Ahmad Hidayat, M.T.</div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="calendar" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Tanggal Lahir</div>
+                                <div class="info-value">10 Agustus 1983</div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="briefcase" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Pekerjaan</div>
+                                <div class="info-value">Dosen Teknik Elektro</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #2563eb; margin-bottom: 16px;">Anak</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Pendidikan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Aisha Zahra Hidayat</td>
+                                <td>12 Maret 2012</td>
+                                <td>Perempuan</td>
+                                <td>SMP</td>
+                            </tr>
+                            <tr>
+                                <td>Muhammad Rizki Hidayat</td>
+                                <td>20 Agustus 2015</td>
+                                <td>Laki-laki</td>
+                                <td>SD</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: #2563eb; margin: 32px 0 16px;">Orang Tua</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="user" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Ayah</div>
+                                <div class="info-value">Prof. Dr. Bambang Santoso (Alm.)</div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="user" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Ibu</div>
+                                <div class="info-value">Dr. Rina Wati</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Penelitian Section -->
+            <div id="section-research" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="flask-conical" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Riwayat Penelitian
+                        </h2>
+                        <button class="btn" onclick="openEditModal('research')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Judul Penelitian</th>
+                                <th>Peran</th>
+                                <th>Sumber Dana</th>
+                                <th>Tahun</th>
+                                <th>Anggaran</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Implementasi Deep Learning untuk Deteksi Dini Penyakit Diabetes</td>
+                                <td>Ketua Peneliti</td>
+                                <td>Kemenristek/BRIN</td>
+                                <td>2024</td>
+                                <td>Rp 150.000.000</td>
+                                <td><span class="status-badge status-warning">Sedang Berjalan</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sistem Rekomendasi Berbasis AI untuk E-Commerce</td>
+                                <td>Ketua Peneliti</td>
+                                <td>Hibah Internal</td>
+                                <td>2023</td>
+                                <td>Rp 50.000.000</td>
+                                <td><span class="status-badge status-success">Selesai</span></td>
+                            </tr>
+                            <tr>
+                                <td>Analisis Sentimen Media Sosial dengan NLP</td>
+                                <td>Anggota Peneliti</td>
+                                <td>Kemenristek/BRIN</td>
+                                <td>2022</td>
+                                <td>Rp 200.000.000</td>
+                                <td><span class="status-badge status-success">Selesai</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Publikasi Section -->
+            <div id="section-publications" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="book-marked" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Publikasi Ilmiah
+                        </h2>
+                        <button class="btn" onclick="openEditModal('publications')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Penulis</th>
+                                <th>Jurnal</th>
+                                <th>Tahun</th>
+                                <th>Indeksasi</th>
+                                <th>Sitasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Deep Learning Approach for Early Detection of Diabetic Retinopathy</td>
+                                <td>Nurhaliza, S., Hidayat, A., Wijaya, B.</td>
+                                <td>IEEE Transactions on Medical Imaging</td>
+                                <td>2024</td>
+                                <td><span class="status-badge status-info">Scopus Q1</span></td>
+                                <td>25</td>
+                            </tr>
+                            <tr>
+                                <td>Sentiment Analysis on Indonesian Social Media using BERT</td>
+                                <td>Nurhaliza, S., Rahman, F.</td>
+                                <td>Journal of Information Processing Systems</td>
+                                <td>2023</td>
+                                <td><span class="status-badge status-info">Scopus Q2</span></td>
+                                <td>42</td>
+                            </tr>
+                            <tr>
+                                <td>CNN-based Image Classification for Medical Diagnosis</td>
+                                <td>Nurhaliza, S., et al.</td>
+                                <td>International Journal of AI Research</td>
+                                <td>2022</td>
+                                <td><span class="status-badge status-info">Scopus Q1</span></td>
+                                <td>67</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pengabdian Section -->
+            <div id="section-community" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="hand-heart" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Pengabdian Masyarakat
+                        </h2>
+                        <button class="btn" onclick="openEditModal('community')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Judul Kegiatan</th>
+                                <th>Peran</th>
+                                <th>Lokasi</th>
+                                <th>Tahun</th>
+                                <th>Peserta</th>
+                                <th>Deskripsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pelatihan AI untuk UMKM di Bandung</td>
+                                <td>Ketua</td>
+                                <td>Bandung, Jawa Barat</td>
+                                <td>2024</td>
+                                <td>50</td>
+                                <td>Melatih pelaku UMKM dalam menggunakan teknologi AI untuk bisnis</td>
+                            </tr>
+                            <tr>
+                                <td>Workshop Python untuk Guru SMA</td>
+                                <td>Narasumber</td>
+                                <td>Bandung, Jawa Barat</td>
+                                <td>2023</td>
+                                <td>30</td>
+                                <td>Memberikan pelatihan dasar pemrograman Python untuk guru-guru</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pelatihan Section -->
+            <div id="section-training" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="award" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Riwayat Pelatihan
+                        </h2>
+                        <button class="btn" onclick="openEditModal('training')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Pelatihan</th>
+                                <th>Penyelenggara</th>
+                                <th>Tahun</th>
+                                <th>Durasi</th>
+                                <th>Sertifikat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Advanced Deep Learning & Neural Networks</td>
+                                <td>Stanford University Online</td>
+                                <td>2024</td>
+                                <td>3 Bulan</td>
+                                <td><span class="status-badge status-success">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>Google Cloud Professional Machine Learning Engineer</td>
+                                <td>Google Cloud</td>
+                                <td>2023</td>
+                                <td>2 Bulan</td>
+                                <td><span class="status-badge status-success">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>Certified Kubernetes Administrator</td>
+                                <td>Cloud Native Computing Foundation</td>
+                                <td>2023</td>
+                                <td>1 Bulan</td>
+                                <td><span class="status-badge status-success">Valid</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Penghargaan Section -->
+            <div id="section-awards" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="medal" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Penghargaan
+                        </h2>
+                        <button class="btn" onclick="openEditModal('awards')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Penghargaan</th>
+                                <th>Organisasi</th>
+                                <th>Tahun</th>
+                                <th>Tingkat</th>
+                                <th>Deskripsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Best Researcher Award</td>
+                                <td>Universitas ABC</td>
+                                <td>2024</td>
+                                <td><span class="status-badge status-info">Universitas</span></td>
+                                <td>Atas kontribusi penelitian terbaik tahun 2024</td>
+                            </tr>
+                            <tr>
+                                <td>Outstanding Publication Award</td>
+                                <td>IEEE Indonesia Section</td>
+                                <td>2023</td>
+                                <td><span class="status-badge status-success">Nasional</span></td>
+                                <td>Publikasi terbaik di bidang AI & Machine Learning</td>
+                            </tr>
+                            <tr>
+                                <td>Best Paper Award</td>
+                                <td>International Conference on AI</td>
+                                <td>2022</td>
+                                <td><span class="status-badge status-warning">Internasional</span></td>
+                                <td>Paper terbaik pada konferensi AI internasional</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Dokumen Section -->
+            <div id="section-documents" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="file-text" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Dokumen
+                        </h2>
+                        <button class="btn" onclick="openEditModal('documents')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Dokumen</th>
+                                <th>Nomor</th>
+                                <th>Tanggal Terbit</th>
+                                <th>Masa Berlaku</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>KTP</td>
+                                <td>3171055985051002</td>
+                                <td>15 Mei 2020</td>
+                                <td>Seumur Hidup</td>
+                                <td><span class="status-badge status-success">Aktif</span></td>
+                            </tr>
+                            <tr>
+                                <td>NPWP</td>
+                                <td>12.345.678.9-012.000</td>
+                                <td>10 Januari 2010</td>
+                                <td>-</td>
+                                <td><span class="status-badge status-success">Aktif</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sertifikat Dosen</td>
+                                <td>SD-2010-12345</td>
+                                <td>15 Maret 2010</td>
+                                <td>-</td>
+                                <td><span class="status-badge status-success">Aktif</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Kesehatan Fisik Section -->
+            <div id="section-health" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="activity" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Kesehatan Fisik
+                        </h2>
+                        <button class="btn" onclick="openEditModal('health')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="droplet" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Golongan Darah</div>
+                                <div class="info-value">A</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="ruler" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Tinggi Badan</div>
+                                <div class="info-value">160 cm</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="weight" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Berat Badan</div>
+                                <div class="info-value">55 kg</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="calendar" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Medical Checkup Terakhir</div>
+                                <div class="info-value">15 Januari 2024</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="heart-pulse" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Kondisi Kesehatan</div>
+                                <div class="info-value">Sehat</div>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="alert-circle" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Alergi</div>
+                                <div class="info-value">Tidak ada</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Riwayat Kesehatan Section -->
+            <div id="section-healthHistory" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="stethoscope" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Riwayat Kesehatan
+                        </h2>
+                        <button class="btn" onclick="openEditModal('healthHistory')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Jenis Pemeriksaan</th>
+                                <th>Hasil</th>
+                                <th>Catatan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>15 Januari 2024</td>
+                                <td>Medical Checkup Rutin</td>
+                                <td><span class="status-badge status-success">Sehat</span></td>
+                                <td>Semua parameter kesehatan normal</td>
+                            </tr>
+                            <tr>
+                                <td>20 Juli 2023</td>
+                                <td>Pemeriksaan Lab</td>
+                                <td><span class="status-badge status-success">Normal</span></td>
+                                <td>Gula darah dan kolesterol normal</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Riwayat Cuti Section -->
+            <div id="section-leave" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="plane" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Riwayat Cuti
+                        </h2>
+                        <button class="btn" onclick="openEditModal('leave')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jenis Cuti</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Selesai</th>
+                                <th>Durasi</th>
+                                <th>Alasan</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cuti Tahunan</td>
+                                <td>1 Juli 2024</td>
+                                <td>7 Juli 2024</td>
+                                <td>7 hari</td>
+                                <td>Liburan keluarga</td>
+                                <td><span class="status-badge status-success">Disetujui</span></td>
+                            </tr>
+                            <tr>
+                                <td>Cuti Sakit</td>
+                                <td>15 Maret 2024</td>
+                                <td>17 Maret 2024</td>
+                                <td>3 hari</td>
+                                <td>Flu</td>
+                                <td><span class="status-badge status-success">Disetujui</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Riwayat Gaji Section -->
+            <div id="section-salary" class="section-content hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-title-icon">
+                                <i data-lucide="dollar-sign" style="width: 24px; height: 24px; color: #2563eb;"></i>
+                            </span>
+                            Riwayat Gaji
+                        </h2>
+                        <button class="btn" onclick="openEditModal('salary')">
+                            <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                            Edit
+                        </button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Periode</th>
+                                <th>Gaji Pokok</th>
+                                <th>Tunjangan</th>
+                                <th>Total Kotor</th>
+                                <th>Potongan</th>
+                                <th>Gaji Bersih</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Januari 2024</td>
+                                <td>Rp 8.500.000</td>
+                                <td>Rp 3.500.000</td>
+                                <td>Rp 12.000.000</td>
+                                <td>Rp 1.200.000</td>
+                                <td style="color: #2563eb; font-weight: 600;">Rp 10.800.000</td>
+                            </tr>
+                            <tr>
+                                <td>Desember 2023</td>
+                                <td>Rp 8.500.000</td>
+                                <td>Rp 3.500.000</td>
+                                <td>Rp 12.000.000</td>
+                                <td>Rp 1.200.000</td>
+                                <td style="color: #2563eb; font-weight: 600;">Rp 10.800.000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Edit Data</h3>
+                <p class="modal-description">Ubah informasi data Anda di sini. Klik simpan setelah selesai.</p>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Form fields will be dynamically inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeEditModal()">Batal</button>
+                <button class="btn btn-primary" onclick="saveEdit()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Navigation functions
+        function toggleProfileMenu() {
+            const navContent = document.getElementById('navContent');
+            const navChevron = document.getElementById('navChevron');
+
+            navContent.classList.toggle('open');
+            navChevron.classList.toggle('open');
+            navChevron.classList.toggle('closed');
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const allSections = document.querySelectorAll('.section-content');
+            allSections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show selected section
+            const selectedSection = document.getElementById('section-' + sectionId);
+            if (selectedSection) {
+                selectedSection.classList.remove('hidden');
+            }
+
+            // Update active nav item
+            const allNavItems = document.querySelectorAll('.nav-item');
+            allNavItems.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            const activeNavItem = document.querySelector(`[data-section="${sectionId}"]`);
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+
+            // Re-initialize Lucide icons for the newly displayed section
+            lucide.createIcons();
+        }
+
+        // Modal functions
+        function openEditModal(section) {
+            const modal = document.getElementById('editModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            // Set modal title
+            const titles = {
+                'personal': 'Edit Data Pribadi',
+                'academic': 'Edit Atribut Akademik',
+                'education': 'Edit Pendidikan',
+                'family': 'Edit Data Keluarga',
+                'research': 'Edit Penelitian',
+                'publications': 'Edit Publikasi',
+                'community': 'Edit Pengabdian',
+                'training': 'Edit Pelatihan',
+                'awards': 'Edit Penghargaan',
+                'documents': 'Edit Dokumen',
+                'health': 'Edit Kesehatan Fisik',
+                'healthHistory': 'Edit Riwayat Kesehatan',
+                'leave': 'Edit Riwayat Cuti',
+                'salary': 'Edit Riwayat Gaji'
+            };
+
+            modalTitle.textContent = titles[section] || 'Edit Data';
+
+            // Generate form based on section
+            let formHTML = '';
+
+            switch(section) {
+                case 'personal':
+                    formHTML = `
+                        <div class="form-group">
+                            <label class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-input" value="Dr. Siti Nurhaliza, M.Kom">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">NIK</label>
+                                <input type="text" class="form-input" value="3171055985051002">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tempat Lahir</label>
+                                <input type="text" class="form-input" value="Bandung">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Alamat</label>
+                            <textarea class="form-textarea">Jl. Ganesha No. 10, Bandung, Jawa Barat 40132</textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" value="siti.nurhaliza@university.ac.id">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Telepon</label>
+                                <input type="tel" class="form-input" value="+62 812-3456-7890">
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'academic':
+                    formHTML = `
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Jabatan Fungsional</label>
+                                <input type="text" class="form-input" value="Lektor Kepala">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Jabatan Struktural</label>
+                                <input type="text" class="form-input" value="Kepala Laboratorium AI">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Scopus H-Index</label>
+                                <input type="number" class="form-input" value="12">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Google Scholar H-Index</label>
+                                <input type="number" class="form-input" value="15">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Kelompok Riset</label>
+                            <input type="text" class="form-input" value="Artificial Intelligence & Data Science">
+                        </div>
+                    `;
+                    break;
+
+                case 'health':
+                    formHTML = `
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Golongan Darah</label>
+                                <input type="text" class="form-input" value="A">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tinggi Badan (cm)</label>
+                                <input type="number" class="form-input" value="160">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Berat Badan (kg)</label>
+                                <input type="number" class="form-input" value="55">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Medical Checkup Terakhir</label>
+                                <input type="date" class="form-input" value="2024-01-15">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Alergi</label>
+                            <textarea class="form-textarea">Tidak ada</textarea>
+                        </div>
+                    `;
+                    break;
+
+                default:
+                    formHTML = `
+                        <div class="form-group">
+                            <label class="form-label">Data</label>
+                            <textarea class="form-textarea" rows="5">Masukkan data yang ingin diubah...</textarea>
+                        </div>
+                    `;
+            }
+
+            modalBody.innerHTML = formHTML;
+            modal.classList.add('active');
+        }
+
+        function closeEditModal() {
+            const modal = document.getElementById('editModal');
+            modal.classList.remove('active');
+        }
+
+        function saveEdit() {
+            // In a real application, this would save the data to a backend
+            alert('Data berhasil disimpan! (Demo mode - perubahan tidak tersimpan)');
+            closeEditModal();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('editModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEditModal();
+            }
+        });
+
+        // Initialize icons on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

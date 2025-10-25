@@ -57,6 +57,10 @@ body {
 .sidebar .nav .collapse {
   border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.sidebar .nav .bi {
+  color: white !important;
+}
 .sidebar .nav-caret-btn {
   width: 1.5rem;
   display: flex;
@@ -878,7 +882,6 @@ body.theme-light-blue {
 .sidebar .nav .collapsing {
   /* fase animasi */
   display: block !important; /* bootstrap set height inline */
-  overflow: hidden !important;
   flex-direction: column;
   gap: 0.15rem;
   transition: height 0.28s ease;
