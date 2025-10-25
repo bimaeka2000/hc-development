@@ -41,16 +41,14 @@ router.get('/', async ({ view }) => {
   return view.render('login')
 })
 
-router.get('/welcome', async ({ view }) => {
-  return view.render('welcome')
-})
+router.post('/login', [SessionController, 'store']).as('login.manual')
+
 // #NOTE Login manual
 
 // #NOTE SSO Goolgle OAuth2
 router.get('/auth/google/redirect', [AuthController, 'redirectToGoogle']).as('google.redirect')
 router.get('/auth/google/callback', [AuthController, 'googleCallback'])
 router.get('/checkuser', [DashboardController, 'checkUser'])
-router.post('/login', [SessionController, 'store']).as('login.manual')
 
 // #NOTE Session routes
 router.post('session', [SessionController, 'store'])
@@ -72,6 +70,7 @@ router
         router.resource('/user', UsersController)
         router.resource('/pegawai', PegawaisController)
         router.resource('/profil', ProfilCardsController)
+        router.post('/profil/:id/sync', [ProfilCardsController, 'sync']).as('profil.sync')
         router.resource('/atribut-akademik', AtributAkademikCardsController)
         router.resource('/atribut-lain', AtributLainCardsController)
         router.resource('/dokumen', DokumenCardsController)
@@ -96,9 +95,10 @@ router
       .prefix('dashboard')
   })
   .use(middleware.auth({ guards: ['web'] })) // gunakan session guard
-  .use(middleware.authView())
+  .use(middleware.shareUser())
   .use(middleware.shareRole())
-// .use(middleware.shareUser())
+  .use(middleware.authView())
+
 
 router.any('*', async ({ request, view, response }) => {
   response.status(404)

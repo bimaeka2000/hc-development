@@ -11,7 +11,7 @@
   <main class="flex-grow-1 p-3 p-lg-4">
 
     <div class="bento-layout">
-      <form action="{{ route('profil.store') }}" method="POST">
+      <form action="{{ route('profil.sync',{id:auth.user.id}) }}" method="POST">
         {{ csrfField() }}
         <input type="hidden" name="_method" value="PUT" />
 
@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-md-6" style="border: none;">
                   <label class="form-label form-label-sm">Tanggal Lahir</label>
-                  <div id="date-picker" name="tanggal_lahir" style="border: none;">
+                  <div id="date-picker" style="border: none;">
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -92,7 +92,7 @@
                       Pilih Agama
                     </option>
                     @each(data in agama)
-                    <option value=data.id>
+                    <option value={{data.id}}>
                       {{ data.agama }}
                     </option>
                     @end
@@ -106,7 +106,7 @@
                       Pilih Suku
                     </option>
                     @each(data in suku)
-                    <option value=data.id>
+                    <option value={{data.id}}>
                       {{ data.suku }}
                     </option>
                     @end
@@ -151,7 +151,7 @@
                   Pilih Unit Kerja
                 </option>
                 @each(data in unitKerja)
-                <option value=data.id>
+                <option value={{data.id}}>
                   {{ data.unit_kerja }}
                 </option>
                 @end
@@ -168,7 +168,7 @@
                   Pilih Status Kepegawaian
                 </option>
                 @each(data in statusKepegawaian)
-                <option value=data.id>
+                <option value={{data.id}}>
                   {{ data.status_kepegawaian }}
                 </option>
                 @end

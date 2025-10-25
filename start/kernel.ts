@@ -52,4 +52,5 @@ export const middleware = router.named({
   shareRole: () => import('#middleware/share_role_middleware'),
   authApi: () => import('#middleware/auth_api_middleware'),
   authView: () => import('#middleware/auth_view_middleware'),
+  guest: () => import('#middleware/guest_middleware'),
 })

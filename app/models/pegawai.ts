@@ -45,8 +45,8 @@ export default class Pegawai extends BaseModel {
   @column()
   declare tempat_lahir: string | null
 
-  @column()
-  declare tanggal_lahir: Date | null
+  @column.date()
+  declare tanggal_lahir: DateTime | null
 
   @column()
   declare agama_id: number | null
@@ -167,6 +167,11 @@ export default class Pegawai extends BaseModel {
   @hasOne(() => RiwayatGaji, { foreignKey: 'pegawai_id' })
   declare riwayatGaji: HasOne<typeof RiwayatGaji>
 
+  @belongsTo(() => UnitKerja, {
+    foreignKey: 'unit_kerja_id', // kolom di Pegawai
+  })
+
+  declare unitkerja: BelongsTo<typeof UnitKerja>
   @hasOne(() => Pelatihan, { foreignKey: 'pegawai_id' })
   declare pelatihan: HasOne<typeof Pelatihan>
 

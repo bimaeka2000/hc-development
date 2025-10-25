@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,21 +83,27 @@
         }
 
         /* Epic entrance perspective to enhance 3D transforms on entry */
-        #app { perspective: 1400px; transform-style: preserve-3d; }
+        #app {
+            perspective: 1400px;
+            transform-style: preserve-3d;
+        }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <div id="app" class="min-h-screen w-full flex items-center justify-center p-4 relative overflow-hidden">
         <!-- Animated Background Circles -->
         <div id="circle1" class="absolute top-20 left-10 w-64 h-64 bg-blue-200 opacity-20 rounded-full blur-3xl"></div>
-        <div id="circle2" class="absolute bottom-20 right-10 w-96 h-96 bg-purple-200 opacity-20 rounded-full blur-3xl"></div>
+        <div id="circle2" class="absolute bottom-20 right-10 w-96 h-96 bg-purple-200 opacity-20 rounded-full blur-3xl">
+        </div>
 
         <div class="container max-w-4xl relative z-10">
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <!-- Left Side -->
                 <div id="leftSide" class="text-center md:text-left">
                     <!-- Badge -->
-                    <div id="badge" class="inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-3 py-1 rounded mb-6">
+                    <div id="badge"
+                        class="inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-3 py-1 rounded mb-6">
                         <svg id="searchIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <circle cx="11" cy="11" r="8"></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -107,7 +114,8 @@
 
                     <!-- Error Number -->
                     <div id="errorNumber" class="mb-6">
-                        <h1 id="number404" class="text-blue-600 mb-4" style="font-size: clamp(5rem, 12vw, 8rem); line-height: 1; font-weight: 700;">
+                        <h1 id="number404" class="text-blue-600 mb-4"
+                            style="font-size: clamp(5rem, 12vw, 8rem); line-height: 1; font-weight: 700;">
                             404
                         </h1>
                         <h2 id="title" class="text-gray-800 text-3xl md:text-4xl font-semibold mb-4">
@@ -120,13 +128,15 @@
 
                     <!-- Alert -->
                     <div id="alertBox" class="alert mb-6">
-                        <svg id="infoIcon" class="h-4 w-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg id="infoIcon" class="h-4 w-4 shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="12" y1="16" x2="12" y2="12"></line>
                             <line x1="12" y1="8" x2="12.01" y2="8"></line>
                         </svg>
                         <div class="text-sm">
-                            URL yang Anda masukkan mungkin salah ketik atau halaman telah dihapus. Silakan periksa kembali URL atau kembali ke beranda.
+                            URL yang Anda masukkan mungkin salah ketik atau halaman telah dihapus. Silakan periksa
+                            kembali URL atau kembali ke beranda.
                         </div>
                     </div>
 
@@ -139,13 +149,13 @@
                             </svg>
                             Kembali ke Beranda
                         </button>
-                        <button class="btn btn-outline" onclick="window.history.back()">
+                        <a class="btn btn-outline" onclick="window.history.back()">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <line x1="19" y1="12" x2="5" y2="12"></line>
                                 <polyline points="12 19 5 12 12 5"></polyline>
                             </svg>
                             Kembali
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -158,39 +168,48 @@
                         </div>
                         <div class="card-content">
                             <div class="space-y-4">
-                                <div id="suggestion1" class="flex gap-3 p-3 rounded-lg bg-gray-50 border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors cursor-pointer">
+                                <div id="suggestion1"
+                                    class="flex gap-3 p-3 rounded-lg bg-gray-50 border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors cursor-pointer">
                                     <div class="shrink-0 mt-0.5">
-                                        <div class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-sm font-medium">
+                                        <div
+                                            class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-sm font-medium">
                                             1
                                         </div>
                                     </div>
                                     <div>
                                         <h4 class="text-gray-900 font-medium mb-1">Periksa URL</h4>
-                                        <p class="text-gray-600 text-sm">Pastikan alamat yang Anda masukkan sudah benar dan tidak ada kesalahan ketik.</p>
+                                        <p class="text-gray-600 text-sm">Pastikan alamat yang Anda masukkan sudah benar
+                                            dan tidak ada kesalahan ketik.</p>
                                     </div>
                                 </div>
 
-                                <div id="suggestion2" class="flex gap-3 p-3 rounded-lg bg-gray-50 border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors cursor-pointer">
+                                <div id="suggestion2"
+                                    class="flex gap-3 p-3 rounded-lg bg-gray-50 border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors cursor-pointer">
                                     <div class="shrink-0 mt-0.5">
-                                        <div class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-sm font-medium">
+                                        <div
+                                            class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-sm font-medium">
                                             2
                                         </div>
                                     </div>
                                     <div>
                                         <h4 class="text-gray-900 font-medium mb-1">Gunakan Navigasi</h4>
-                                        <p class="text-gray-600 text-sm">Gunakan menu navigasi atau tombol kembali untuk menemukan halaman yang Anda cari.</p>
+                                        <p class="text-gray-600 text-sm">Gunakan menu navigasi atau tombol kembali untuk
+                                            menemukan halaman yang Anda cari.</p>
                                     </div>
                                 </div>
 
-                                <div id="suggestion3" class="flex gap-3 p-3 rounded-lg bg-gray-50 border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors cursor-pointer">
+                                <div id="suggestion3"
+                                    class="flex gap-3 p-3 rounded-lg bg-gray-50 border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors cursor-pointer">
                                     <div class="shrink-0 mt-0.5">
-                                        <div class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-sm font-medium">
+                                        <div
+                                            class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-sm font-medium">
                                             3
                                         </div>
                                     </div>
                                     <div>
                                         <h4 class="text-gray-900 font-medium mb-1">Halaman Utama</h4>
-                                        <p class="text-gray-600 text-sm">Kembali ke halaman utama dan mulai dari awal untuk menemukan konten yang Anda inginkan.</p>
+                                        <p class="text-gray-600 text-sm">Kembali ke halaman utama dan mulai dari awal
+                                            untuk menemukan konten yang Anda inginkan.</p>
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +217,8 @@
                         <div class="card-footer">
                             <p class="text-sm text-gray-600">
                                 <strong>Masih butuh bantuan?</strong> Hubungi kami di
-                                <a href="mailto:support@example.com" class="text-blue-600 hover:underline">support@example.com</a>
+                                <a href="mailto:support@example.com"
+                                    class="text-blue-600 hover:underline">support@example.com</a>
                             </p>
                         </div>
                     </div>
@@ -207,7 +227,8 @@
 
             <!-- Bottom Info -->
             <div id="bottomInfo" class="mt-12 text-center">
-                <div class="inline-flex items-center gap-2 text-sm text-gray-500 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+                <div
+                    class="inline-flex items-center gap-2 text-sm text-gray-500 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm">
                     <span>Kode Kesalahan:</span>
                     <code id="errorCode" class="bg-gray-100 px-2 py-0.5 rounded text-gray-700">404_NOT_FOUND</code>
                     <span>|</span>
@@ -328,4 +349,5 @@
         animate('#rightSide', { opacity: [0, 1], x: [30, 0], scale: [0.98, 1] }, { duration: 0.6, delay: 0.25, ease: "easeOut" });
     </script>
 </body>
+
 </html>

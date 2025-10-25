@@ -15,8 +15,8 @@
             class="bi bi-speedometer2 me-2"></i>Dashboard</a>
       </li>
       <li>
-        <a class="nav-link text-white d-flex align-items-center" href="{{ route('pegawai.show',{id:user.id}) }}"> <i
-            class="bi bi-people me-2"></i>
+        <a class="nav-link text-white d-flex align-items-center" href="{{ route('pegawai.show',{id:auth.user.id}) }}">
+          <i class="bi bi-people me-2"></i>
           Profil</a>
       </li>
       <li>
@@ -76,21 +76,6 @@
     </ul>
   </div>
   {{-- #NOTE ambil data user. [picture,name,email] --}}
-
-  <div class="p-3 border-top border-secondary small">
-    <div class="d-flex align-items-center">
-
-      <img src="{{ user?.picture || '/images/default-avatar.png' }}" alt=" avatar" class="avatar me-2" />
-      <div>
-        <div class="fw-semibold">
-          {{ user?.name }}
-        </div>
-        <div class="small opacity-75">
-          {{ user?.email }}
-        </div>
-      </div>
-    </div>
-  </div>
 
   <style>
     /* Active nav style: dark blue background and white text */

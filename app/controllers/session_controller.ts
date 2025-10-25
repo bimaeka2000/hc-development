@@ -14,13 +14,13 @@ export default class SessionController {
       // const token = await auth.use('api').createToken(user)
       await auth.use('web').login(user) // return response.json(token)
 
-      await session.put('user_credentials', {
-        id: user.id,
-      })
+      // await session.put('user_credentials', {
+      //   id.id,
+      // })
       await response.redirect().toRoute('dashboard.index')
     } catch (error) {
       console.log(error.message)
-      return response.redirect('/login')
+      return response.redirect('/')
     }
   }
 
@@ -37,7 +37,6 @@ export default class SessionController {
     response.clearCookie('google_token')
     response.clearCookie('user')
     response.clearCookie('adonis-session') // tambahkan ini kalau pakai session cookie
-
     await auth.use('web').logout()
     return response.redirect('/')
   }
