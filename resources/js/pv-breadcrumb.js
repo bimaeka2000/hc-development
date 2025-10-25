@@ -92,6 +92,7 @@ if (!container) {
         'cuti': 'bi bi-calendar-check',
         'sakit': 'bi bi-emoji-dizzy',
         'izin': 'bi bi-calendar-event',
+        'logbook': 'bi bi-journal-text',
         'sistem': 'bi bi-gear',
         'akses': 'bi bi-shield-lock',
         'keluar': 'bi bi-box-arrow-right'
